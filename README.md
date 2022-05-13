@@ -1,4 +1,4 @@
-# PW-Gruppo2-LovelyCommy
+# PW-Gruppo2-LovelyCommit
 Project Work 2022 Group 2 Corso Diqu
 Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
