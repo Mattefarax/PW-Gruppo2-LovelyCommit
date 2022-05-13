@@ -50,7 +50,9 @@ Campi da gestire:
         </task>
         <task id="3" name="Creazione Lista Componenti" color="#8cb6ce" meeting="false" start="2022-05-13" duration="1" complete="0" thirdDate="2022-05-06" thirdDate-constraint="0" expand="true" cost-manual-value="50.0" cost-calculated="true"/>
         <task id="25" name="Studio Struttura" color="#8cb6ce" meeting="false" start="2022-05-13" duration="1" complete="0" thirdDate="2022-05-12" thirdDate-constraint="0" expand="true">
-            <notes><![CDATA[Put dati:
+            <notes><![CDATA[Aggiunta schema strutturale a GitHub
+
+Put dati:
 	Stato porte e stato bagni: on change
 	Temperature e umidità
 
