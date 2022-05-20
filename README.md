@@ -19,7 +19,7 @@ The payloads will be sent in this (static) order:
 
 #### Payload Commands
 |1° e 2° Byte|3° Byte 2° bit|3° Byte 1° bit|
-|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|
 |Target temperature|Status back door|Status front door|
 
 #### CRC Calc
