@@ -4,7 +4,7 @@ Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
 To be able to view any .drowio file open [this](https://draw.io), than open the file from the repository
 
-### Protocol Structure
+## Protocol PIC-RPI Structure
 |- |PIC|RaspberryPI|
 |:-------------:|:-------------:|:-----:|
 |Data sent from PIC to a RPI|id(RPI)_Payload()_CRC|id(PIC)_OK_CRC|
@@ -19,8 +19,12 @@ The payloads will be sent in this (static) order:
 
 #### Payload Commands
 |1° e 2° Byte|3° Byte 2° bit|3° Byte 1° bit|
-|:---:|:---:|:---:|:---:|:---:|
+|:---:|:---:|:---:|
 |Target temperature|Status back door|Status front door|
 
 #### CRC Calc
 Library?
+
+## AMQP RPI
+
+## Mqtt RPI-Azure
