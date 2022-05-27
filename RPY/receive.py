@@ -8,11 +8,11 @@ def main():
     channel = connection.channel()
 
     channel.queue_declare(queue='hello')
-
+    client=Client(client_id="client_1")
+    client.connect('test.mosquitto.org') #broker a cui si deve connettere il client
+        
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % body)
-        client=Client(client_id="client_1")
-        client.connect('test.mosquitto.org') #broker a cui si deve connettere il client
         client.subscribe('topic_1',2)
         client.publish(topic = "topic_2", payload = body) 
         print("Successfully published on MQTT body"%body)
