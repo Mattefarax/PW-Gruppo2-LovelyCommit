@@ -1,10 +1,24 @@
 # PW-Gruppo2-LovelyCommit
+<div align="center">  
+<h4>
+    <a href="# project-trace"> Project Trace </a>
+  | <a href="#schemas"> Schemas </a>
+  | <a href="#hardware-component"> Hardware component</a>
+  | <a href="#protocol-pic-rpi-structure"> Protocol PIC-RPI Structure </a>
+  | <a href="#amqp-rpi"> AMQP RPI </a>
+  | <a href="#mqtt-rpi-azure"> Mqtt RPI-Azure </a>
+</h4>
+</div>
 Project Work 2022 Group 2 Corso Diqu
 Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
+## Project Trace
+
+## Schemas
+
 To be able to view any .drowio file open [this](https://draw.io), than open the file from the repository
 
-|![Flow schema of the system](./Images/FlowSchema.jpg)|
+|![Flow schema of the system](../_resources/FlowSchema-1.jpg)|
 |-|
 
 ## Hardware component
