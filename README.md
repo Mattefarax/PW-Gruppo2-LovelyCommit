@@ -1,4 +1,4 @@
-# PW-Gruppo2-LovelyCommit
+# **PW-Gruppo2-LovelyCommit**
 
 <div align="center">  
 <h4>
@@ -13,7 +13,7 @@
 Project Work 2022 Group 2 Corso Diqu
 Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
-## Project Trace
+## **Project Trace**
 
 ***
 The **UAR**, Upper Adriatic Railroad, requires the creation of a system to monitor the status of the wagons and to be able to control their behavior both from a booth inside the train and remotely.
@@ -25,7 +25,8 @@ An information queue must also be provided if the connection with the cloud fail
 
 Additional features may be proposed by individual groups.
 
-## Schemas
+## **Schemas**
+
 ***
 
 To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository
@@ -39,7 +40,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
      height="auto" />
 </div>  
 
-## Hardware component
+## **Hardware component**
 
 ***
 **Elements on the list supplied**:
@@ -56,7 +57,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 * 24V bulb with power supply etc (provided you mount the relays)
 
-## Protocol PIC-RPI Structure
+## **Protocol PIC-RPI Structure**
 
 ***
 <table>
@@ -156,10 +157,10 @@ The payloads will be sent in this (static) order:
 
 Library?
 
-## AMQP RPI
+## **AMQP RPI**
 
 ***
 
-## Mqtt RPI-Azure
+## **Mqtt RPI-Azure**
 
 ***
