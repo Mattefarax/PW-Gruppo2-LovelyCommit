@@ -164,3 +164,8 @@ Library?
 ## **Mqtt RPI-Azure**
 
 ***
+
+## **LICENSE**
+
+***
+LovelyCommit is provided under the [GNU General Public License Version 3](./License)
