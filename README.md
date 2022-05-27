@@ -26,7 +26,7 @@ Additional features may be proposed by individual groups.
 
 To be able to view any .drowio file open [this](https://draw.io), than open the file from the repository
 
-|![Flow schema of the system](../_resources/FlowSchema-1.jpg)|
+|![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|
 
 ## Hardware component
