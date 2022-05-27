@@ -131,6 +131,8 @@ The payloads will be sent in this (static) order:
 <th style="text-align:center">5° Byte</th>
 <th style="text-align:center">X° Byte</th>
 </tr>
+</thead>
+<tbody>
 <tr>
 <th style="text-align:center"></th>
 <th style="text-align:center"></th>
@@ -140,8 +142,6 @@ The payloads will be sent in this (static) order:
 <th style="text-align:center"></th>
 <th style="text-align:center"></th>
 </tr>
-</thead>
-<tbody>
 <tr>
 <td colspan="2" style="text-align:center">Target temperature</td>
 <td style="text-align:center">Status back door</td>
