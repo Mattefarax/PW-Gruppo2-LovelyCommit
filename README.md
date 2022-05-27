@@ -13,6 +13,14 @@ Project Work 2022 Group 2 Corso Diqu
 Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
 ## Project Trace
+The **UAR**, Upper Adriatic Railroad, requires the creation of a system to monitor the status of the wagons and to be able to control their behavior both from a booth inside the train and remotely.
+It was decided to implement an RS485 BUS system that connects each carriage, in which there is a custom uC card capable of detecting **temperature**, **humidity**, and **door closing status**, in addition to verifying if someone's in the **toilet** compartment.
+In addition, the microcontroller can **independently control the air conditioning** for each wagon, the **opening of the doors** and the **emergency signals**. An LCD display is also required for each wagon, it must be capable of displaying messages sent by the remote controller, reading the sensors and modifying the operating parameters.
+
+All this information then is sent and received with a proprietary protocol by an RPI that acts as a Gateway connected to a network with internet access, then it will publish it. Publishing it will allow a remote operator to check the status and possibly modify the states of the actuators.
+An information queue must also be provided if the connection with the cloud fails while crossing tunnels.
+
+Additional features may be proposed by individual groups.
 
 ## Schemas
 
