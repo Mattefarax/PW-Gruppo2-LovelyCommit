@@ -1,13 +1,17 @@
 # **PW-Gruppo2-LovelyCommit**
 
+<p align="center">
+    <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
+</p>
+
 <div align="center">  
 <h4>
     <a href="#project-trace"> Project Trace </a>
   | <a href="#schemas"> Schemas </a>
-  | <a href="#hardware-component"> Hardware component</a>
-  | <a href="#protocol-pic-rpi-structure"> Protocol PIC-RPI Structure </a>
-  | <a href="#amqp-rpi"> AMQP RPI </a>
-  | <a href="#mqtt-rpi-azure"> Mqtt RPI-Azure </a>
+  | <a href="#ucontroller"> uController</a>
+  | <a href="#raspberrypi"> RaspberryPi </a>
+  | <a href="#cloud"> Cloud </a>
+  | <a href="#documents"> Documents </a>
 </h4>
 </div>
 Project Work 2022 Group 2 Corso Diqu
@@ -38,28 +42,28 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
      alt="Flow Schema"
      width="400" 
      height="auto" />
-</div>  
+</div>
 
-## **Hardware component**
+## **uController**
 
 ***
-**Elements on the list supplied**:
+
+### **Hardware component**
+
+*Elements on the list supplied*:
 
 * GY-BME280 barometric sensor for temperature, humidity and air pressure
 
 * Motion sensor HC-SR501 PIR motion detection module
  `Used for automatic presence detection in bathrooms` 
 
-**External element**:
+*External element*:
 
 * 20 microswitches with debouncing pullup components
  `Used for open/closed detection of all the doors in the wagon`
 
 * 24V bulb with power supply etc (provided you mount the relays)
 
-## **uController**
-
-***
 ### **Protocol PIC-RPI Structure**
 
 <table>
