@@ -4,7 +4,7 @@ Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
 
 To be able to view any .drowio file open [this](https://draw.io), than open the file from the repository
 
-|![Flow schema of the system](:/Images/FlowSchema.jpg)|
+|![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|
 
 ## Hardware component
