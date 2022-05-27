@@ -29,7 +29,8 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 <!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|-->
 <div align="center">  
-<img src="./Images/FlowSchema.jpg" 
+<img src="./Images/FlowSchema.jpg " 
+     alt="Flow Schema"
      width="400" 
      height="auto" />
 </div>  
