@@ -57,9 +57,11 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 * 24V bulb with power supply etc (provided you mount the relays)
 
-## **Protocol PIC-RPI Structure**
+## **uController**
 
 ***
+### **Protocol PIC-RPI Structure**
+
 <table>
 <thead>
 <tr>
@@ -87,7 +89,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 </tbody>
 </table>
 
-### **Payload Telemetry**
+#### **Payload Telemetry**
 
 The payloads will be sent in this (static) order: 
 <table>
@@ -120,7 +122,7 @@ The payloads will be sent in this (static) order:
 </tbody>
 </table>
 
-### **Payload Commands**
+#### **Payload Commands**
 
 <table>
 <thead>
@@ -153,17 +155,28 @@ The payloads will be sent in this (static) order:
 </tbody>
 </table>
 
-### **CRC Calc**
+#### **CRC Calc**
 
 Library?
 
-## **AMQP RPI**
+## **RaspberryPi**
 
 ***
 
-## **Mqtt RPI-Azure**
+### **AMQP RPI**
+
+### **Mqtt RPI-Azure**
+
+## **Cloud**
 
 ***
+
+## **Documents**
+
+***
+* [uController section](./PIC/)
+* [RaspberryPi section](./RPI/)
+* [Cloud section](./Cloud/)
 
 ## **LICENSE**
 
