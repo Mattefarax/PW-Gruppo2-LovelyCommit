@@ -25,7 +25,6 @@ Project Work 2022 Group 2 Corso Diqu
 
 ## **Project Trace**
 
-***
 The **UAR**, Upper Adriatic Railroad, requires the creation of a system to monitor the status of the wagons and to be able to control their behavior both from a booth inside the train and remotely.
 It was decided to implement an RS485 BUS system that connects each carriage, in which there is a custom uC card capable of detecting **temperature**, **humidity**, and **door closing status**, in addition to verifying if someone's in the **toilet** compartment.
 In addition, the microcontroller can **independently control the air conditioning** for each wagon, the **opening of the doors** and the **emergency signals**. An LCD display is also required for each wagon, it must be capable of displaying messages sent by the remote controller, reading the sensors and modifying the operating parameters.
@@ -36,8 +35,6 @@ An information queue must also be provided if the connection with the cloud fail
 Additional features may be proposed by individual groups.
 
 ## **Schemas**
-
-***
 
 To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository
 
@@ -51,8 +48,6 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 </div>
 
 ## **uController**
-
-***
 
 ### **Hardware component**
 
@@ -171,19 +166,13 @@ Library?
 
 ## **RaspberryPi**
 
-***
-
 ### **AMQP RPI**
 
 ### **Mqtt RPI-Azure**
 
 ## **Cloud**
 
-***
-
 ## **Documents**
-
-***
 
 * [uController section](./PIC/)
 * [RaspberryPi section](./RPI/)
@@ -191,5 +180,4 @@ Library?
 
 ## **LICENSE**
 
-***
 LovelyCommit is provided under the [GNU General Public License Version 3](./LICENSE)
