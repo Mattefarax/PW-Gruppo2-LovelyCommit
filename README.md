@@ -15,7 +15,13 @@
 </h4>
 </div>
 Project Work 2022 Group 2 Corso Diqu
-Faraoni Matteo, Gatto Alessandro, Pizzato Davide, Scapolan Davide
+
+| Name | E-mail |
+|:-:|:-:|
+|Faraoni Matteo|matteo.faraoni@stud.tecnicosuperiorekennedy.it|
+|Gatto Alessandro|alessandro.gatto@stud.tecnicosuperiorekennedy.it|
+|Pizzato Davide|davide.pizzato@stud.tecnicosuperiorekennedy.it|
+|Scapolan Davide|davide.scapolan@stud.tecnicosuperiorekennedy.it|
 
 ## **Project Trace**
 
@@ -54,12 +60,12 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 * GY-BME280 barometric sensor for temperature, humidity and air pressure
 
-* Motion sensor HC-SR501 PIR motion detection module
+* Motion sensor HC-SR501 PIR motion detection module  
  `Used for automatic presence detection in bathrooms` 
 
 *External element*:
 
-* 20 microswitches with debouncing pullup components
+* 20 microswitches with debouncing pullup components  
  `Used for open/closed detection of all the doors in the wagon`
 
 * 24V bulb with power supply etc (provided you mount the relays)
