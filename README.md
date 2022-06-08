@@ -3,7 +3,8 @@
 [<p align="right">uController ></p>](./PIC/README.md)
 
 <!--![Train gif](./Images/train.gif)-->
-<img scr="./Images/train.gif" alt="Train gif" width="400" height="auto" />
+<p align="center"><img src="Images/train.gif" alt="Train gif" width="400" height="auto"/></p>
+
 **<h1 align="center">PW-Gruppo2-LovelyCommit</h1>**
 
 <p align="center">
