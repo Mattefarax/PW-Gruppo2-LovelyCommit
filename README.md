@@ -23,12 +23,49 @@
 </div>
 Project Work 2022 Group 2 Corso Diqu
 
+<div  align="center">
+<table>
+<thead>
+
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">E-mail</th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td style="text-align:center">Faraoni Matteo</td>
+<td style="text-align:center">matteo.faraoni@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+<tr>
+<td style="text-align:center">Gatto Alessandro</td>
+<td style="text-align:center">alessandro.gatto@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+<tr>
+<td style="text-align:center">Pizzato Davide</td>
+<td style="text-align:center">davide.pizzato@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+   
+<tr>
+<td style="text-align:center">Scapolan Davide</td>
+<td style="text-align:center">davide.scapolan@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+</table>
+</div>
+
+<!--
 | Name | E-mail |
 |:-:|:-:|
 |Faraoni Matteo|matteo.faraoni@stud.tecnicosuperiorekennedy.it|
 |Gatto Alessandro|alessandro.gatto@stud.tecnicosuperiorekennedy.it|
 |Pizzato Davide|davide.pizzato@stud.tecnicosuperiorekennedy.it|
 |Scapolan Davide|davide.scapolan@stud.tecnicosuperiorekennedy.it|
+-->
 
 ## **Project Trace**
 
