@@ -78,7 +78,8 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 ### **Protocol PIC-RPI Structure**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -116,6 +117,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 </tbody>
 </table>
+</div>
 
 [Here](./Protocol/README.md) you can finde more specification about how does this protocl works and wor does it has been developped
 

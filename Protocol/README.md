@@ -6,7 +6,8 @@
 
 ## **Message Exchange**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -44,11 +45,14 @@
 
 </tbody>
 </table>
+</div>
 
 #### **Payload Telemetry**
 
 The payloads will be sent in this (static) order:
-<table align="center">
+
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -87,10 +91,12 @@ The payloads will be sent in this (static) order:
 </tr>
 </tbody>
 </table>
+</div>
 
 #### **Handshake Request**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -108,10 +114,12 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 
 #### **Payload Commands**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -144,10 +152,12 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 
 #### **Text Message**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -167,10 +177,12 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 
 #### **Address Response**
 
-<table align="center">
+<div  align="center">
+<table>
 <thead>
 
 <tr>
@@ -190,6 +202,7 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 
 #### **CRC Calc**
 
