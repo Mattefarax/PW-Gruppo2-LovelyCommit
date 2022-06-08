@@ -1,12 +1,5 @@
-<div style="float:left">
-<a href="../"><p style="text-align:center"><</p>Home</a>
-</div>
+[< Home](../)
 
-<div style="float:right">
-<a href="../RPI/"><p style="text-align:center">></p>Raspberry Pi</a>
-</div>
-
-<div style="clear:both">
-</div>
+[<p style="text-align:right">Raspberry Pi ></p>](../RPI/)
 
 <h1 style="font-weight: bold; text-align:center">PIC Program Specification</h1>

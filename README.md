@@ -1,13 +1,6 @@
-<div style="float:left">
-<a href=""><p style="text-align:center"><</p>Home</a>
-</div>
+[< Home](./)
 
-<div style="float:right">
-<a href="./PIC/"><p style="text-align:center">></p>uController</a>
-</div>
-
-<div style="clear:both">
-</div>
+[<p style="text-align:right">uController ></p>](./PIC/)
 
 <h1 style="font-weight: bold; text-align:center">PW-Gruppo2-LovelyCommit</h1>
 
