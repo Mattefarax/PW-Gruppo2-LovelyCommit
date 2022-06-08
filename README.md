@@ -3,7 +3,7 @@
 [<p align="right">uController ></p>](./PIC/README.md)
 
 <!--![Train gif](./Images/train.gif)-->
-<p align="center"><img src="Images/train.gif" alt="Train gif" width="400" height="auto"/></p>
+<p align="center"><img src="Images/train.gif" alt="Train gif" width="500" height="auto"/></p>
 
 **<h1 align="center">PW-Gruppo2-LovelyCommit</h1>**
 
@@ -78,7 +78,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 ### **Protocol PIC-RPI Structure**
 
-<table style='margin:0 auto'>
+<table align="center">
 <thead>
 
 <tr>
