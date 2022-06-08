@@ -2,7 +2,7 @@
 
 <p align="right">Protocol ></p>
 
-<h1 style="font-weight: bold; text-align:center">Protocol Specification</h1>
+**<h1 align="center">Protocol Specification</h1>**
 
 ## **Message Exchange**
 

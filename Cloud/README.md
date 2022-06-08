@@ -2,4 +2,4 @@
 
 [<p align="right">Protocol ></p>](../Protocol/README.md)
 
-<h1 style="font-weight: bold; text-align:center">Cloud Programs Specification</h1>
+**<h1 align="center">Cloud Programs Specification</h1>**

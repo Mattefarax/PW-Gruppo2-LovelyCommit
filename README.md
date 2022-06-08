@@ -2,7 +2,7 @@
 
 [<p align="right">uController ></p>](./PIC/README.md)
 
-<h1 style="font-weight: bold; text-align:center">PW-Gruppo2-LovelyCommit</h1>
+**<h1 align="center">PW-Gruppo2-LovelyCommit</h1>**
 
 <p align="center">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
