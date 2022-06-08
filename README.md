@@ -1,4 +1,15 @@
-# **PW-Gruppo2-LovelyCommit**
+<div style="float:left">
+<a href=""><p style="text-align:center"><</p>Home</a>
+</div>
+
+<div style="float:right">
+<a href="./PIC/"><p style="text-align:center">></p>uController</a>
+</div>
+
+<div style="clear:both">
+</div>
+
+<h1 style="font-weight: bold; text-align:center">PW-Gruppo2-LovelyCommit</h1>
 
 <p align="center">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
