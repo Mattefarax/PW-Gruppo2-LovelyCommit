@@ -1,6 +1,6 @@
 < Home
 
-[<p style="text-align:right">uController ></p>](./PIC/README.md)
+[<p align="right">uController ></p>](./PIC/README.md)
 
 <h1 style="font-weight: bold; text-align:center">PW-Gruppo2-LovelyCommit</h1>
 

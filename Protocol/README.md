@@ -1,6 +1,6 @@
 [< Home](../README.md)
 
-<p style="text-align:right">Protocol ></p>
+<p align="right">Protocol ></p>
 
 <h1 style="font-weight: bold; text-align:center">Protocol Specification</h1>
 
