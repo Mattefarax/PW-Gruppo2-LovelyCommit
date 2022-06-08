@@ -1,4 +1,4 @@
-[< Home](../)
+[< Home](../README.md)
 
 [<p style="text-align:right">Raspberry Pi ></p>](../RPI/)
 
