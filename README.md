@@ -58,15 +58,6 @@ Project Work 2022 Group 2 Corso Diqu
 </table>
 </div>
 
-<!--
-| Name | E-mail |
-|:-:|:-:|
-|Faraoni Matteo|matteo.faraoni@stud.tecnicosuperiorekennedy.it|
-|Gatto Alessandro|alessandro.gatto@stud.tecnicosuperiorekennedy.it|
-|Pizzato Davide|davide.pizzato@stud.tecnicosuperiorekennedy.it|
-|Scapolan Davide|davide.scapolan@stud.tecnicosuperiorekennedy.it|
--->
-
 ## **Project Trace**
 
 The **UAR**, Upper Adriatic Railroad, requires the creation of a system to monitor the status of the wagons and to be able to control their behavior both from a booth inside the train and remotely.
@@ -80,13 +71,17 @@ Additional features may be proposed by individual groups.
 
 ## **Schemas**
 
-To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository
+'To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository'
 
 <!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|-->
 <div align="center">  
 <img src="./Images/FlowSchema.jpg " 
      alt="Flow Schema"
+     width="400" 
+     height="auto" />
+<img src="./Images/StructureSchema.jpg " 
+     alt="Structure Schema"
      width="400" 
      height="auto" />
 </div>
@@ -109,7 +104,7 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 * led 3.3V
 
-*External element*:
+*Already in our possession*:
 
 * 
 
