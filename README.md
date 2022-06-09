@@ -75,9 +75,8 @@ Additional features may be proposed by individual groups.
 
 <!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|-->
-<Table>  
-<tbody>
-
+<table>
+    
 <tr>
 <td style="text-align:center" valign="center">
 <img src="./Images/FlowSchema.jpg " 
@@ -93,9 +92,8 @@ width="400"
 height="auto" />
 </td>
 </tr>
-
-</tbody>
-</div>
+    
+</table>
 
 ## **uController**
 
