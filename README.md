@@ -76,25 +76,25 @@ Additional features may be proposed by individual groups.
 <!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|-->
 <Table>  
-    <tbody>
+<tbody>
 
-        <tr>
-            <td style="text-align:center" valign="center">
-                <img src="./Images/FlowSchema.jpg " 
-                alt="Flow Schema"
-                width="400" 
-                height="auto" />
-            </td>
+<tr>
+<td style="text-align:center" valign="center">
+<img src="./Images/FlowSchema.jpg " 
+alt="Flow Schema"
+width="400" 
+height="auto" />
+</td>
 
-            <td style="text-align:center" valign="center">
-                <img src="./Images/StructureSchema.jpg " 
-                alt="Structure Schema"
-                width="400" 
-                height="auto" />
-            </td>
-        </tr>
-        
-    </tbody>
+<td style="text-align:center" valign="center">
+<img src="./Images/StructureSchema.jpg " 
+alt="Structure Schema"
+width="400" 
+height="auto" />
+</td>
+</tr>
+
+</tbody>
 </div>
 
 ## **uController**
