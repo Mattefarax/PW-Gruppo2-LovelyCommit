@@ -71,10 +71,8 @@ Additional features may be proposed by individual groups.
 
 ## **Schemas**
 
-'To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository'
+`To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository`
 
-<!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
-|-|-->
 <table>
     
 <tr>
