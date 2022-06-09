@@ -75,7 +75,7 @@ Additional features may be proposed by individual groups.
 
 <!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
 |-|-->
-<div align="center">  
+<div align="center" vertical-align="middle">  
 <img src="./Images/FlowSchema.jpg " 
      alt="Flow Schema"
      width="400" 
