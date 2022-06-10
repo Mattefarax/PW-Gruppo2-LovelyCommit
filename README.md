@@ -113,7 +113,11 @@ height="auto" />
 
 *Already in our possession*:
 
-* 
+* 4 2004 LCD Display
+
+* 2 servomotor
+
+* 4 rotary encoder
 
 ### **Protocol PIC-RPI Structure**
 
