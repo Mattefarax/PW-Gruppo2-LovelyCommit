@@ -149,9 +149,9 @@ The payloads will be sent in this (static) order:
 <td align="center">id(RPI)</th>
 <td align="center">10</th>
 <td colspan="2" align="center">Target temperature</td>
+<td align="center">Emergency status</td>
 <td align="center">Toggle back door</td>
 <td align="center">Toggle front door</td>
-<td align="center">Emergency status</td>
 </tr>
 
 </tbody>
