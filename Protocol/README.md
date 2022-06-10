@@ -1,6 +1,6 @@
 [< Home](../README.md)
 
-<p align="right">Protocol ></p>
+[<p align="right">Raspberry Pi ></p>](../RPI/README.md)
 
 **<h1 align="center">Protocol Specification</h1>**
 
@@ -62,7 +62,7 @@ The payloads will be sent in this (static) order:
 <th align="center">4° Byte</th>
 <th align="center">5° Byte</th>
 <th align="center">6° Byte</th>
-<th colspan="3"align="center">7° Byte</th>
+<th colspan="4"align="center">7° Byte</th>
 </tr>
 
 </thead>
@@ -75,6 +75,7 @@ The payloads will be sent in this (static) order:
 <th align="center"></th>
 <th align="center"></th>
 <th align="center"></th>
+<th align="center">4° bit</th>
 <th align="center">3° bit</th>
 <th align="center">2° bit</th>
 <th align="center">1° bit</th>
@@ -85,6 +86,7 @@ The payloads will be sent in this (static) order:
 <td align="center">20</td>
 <td colspan="2"align="center">Temperature</td>
 <td colspan="2"align="center">Humidity</td>
+<td align="center">Emergency status</td>
 <td align="center">Status back door</td>
 <td align="center">Status front door</td>
 <td align="center">Status bathroom</td>
@@ -127,7 +129,7 @@ The payloads will be sent in this (static) order:
 <th align="center">2° Byte</th>
 <th align="center">3° Byte</th>
 <th align="center">4° Byte</th>
-<th colspan="2" align="center">5° Byte</th>
+<th colspan="3" align="center">5° Byte</th>
 </tr>
 
 </thead>
@@ -138,6 +140,7 @@ The payloads will be sent in this (static) order:
 <th align="center"></th>
 <th align="center"></th>
 <th align="center"></th>
+<th align="center">3° bit</th>
 <th align="center">2° bit</th>
 <th align="center">1° bit</th>
 </tr>
@@ -148,6 +151,7 @@ The payloads will be sent in this (static) order:
 <td colspan="2" align="center">Target temperature</td>
 <td align="center">Toggle back door</td>
 <td align="center">Toggle front door</td>
+<td align="center">Emergency status</td>
 </tr>
 
 </tbody>
