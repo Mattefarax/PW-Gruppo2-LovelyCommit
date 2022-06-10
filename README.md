@@ -177,7 +177,7 @@ height="auto" />
 * [uController section](./PIC/)
 * [Protocol section](./Protocol/)
 * [RaspberryPi section](./RPI/)
-* [MQTTl section](./MQTT/)
+* [MQTT section](./MQTT/)
 * [Cloud section](./Cloud/)
 
 ## **LICENSE**
