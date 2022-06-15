@@ -104,22 +104,12 @@ The payloads will be sent in this (static) order:
 <tr>
 <th align="center">1° Byte</th>
 <th align="center">2° Byte</th>
-<th align="center">3° Byte</th>
-<th align="center">4° Byte</th>
-<th align="center">5° Byte</th>
-<th align="center">6° Byte</th>
-<th align="center">7° Byte</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
 <td align="center">255</td>
 <td align="center">00</td>
 </tr>
@@ -139,9 +129,9 @@ The payloads will be sent in this (static) order:
 <th align="center">2° Byte</th>
 <th align="center">3° Byte</th>
 <th align="center">4° Byte</th>
-<th align="center">5° Byte</th>
+<th colspan="3" align="center">5° Byte</th>
 <th align="center">6° Byte</th>
-<th colspan="3" align="center">7° Byte</th>
+<th align="center">7° Byte</th>
 </tr>
 
 </thead>
@@ -152,22 +142,22 @@ The payloads will be sent in this (static) order:
 <th align="center"></th>
 <th align="center"></th>
 <th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
 <th align="center">3° bit</th>
 <th align="center">2° bit</th>
 <th align="center">1° bit</th>
+<th align="center"></th>
+<th align="center"></th>
 </tr>
 
 <tr>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
 <td align="center">id(RPI)</th>
 <td align="center">10</th>
 <td colspan="2" align="center">Target temperature</td>
 <td align="center">Emergency status</td>
 <td align="center">Toggle back door</td>
 <td align="center">Toggle front door</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
 </tr>
 
 </tbody>
@@ -196,13 +186,13 @@ To send the text message we decided to send 20 comands formatted in the followin
 <tbody>
 
 <tr>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
 <td align="center">id(RPI)</th>
 <td align="center">11</th>
 <td align="center">Character</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
 </tr>
 
 </tbody>
@@ -231,13 +221,13 @@ Every comand contains a single character that will be added to the buffer of the
 <tbody>
 
 <tr>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
-<td align="center">n/c</td>
 <td align="center">id(RPI)</th>
 <td align="center">01</th>
-<td colspan="2" align="center">new id(PIC)</td>
+<td align="center">new id(PIC)</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
 </tr>
 
 </tbody>
