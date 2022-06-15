@@ -221,12 +221,20 @@ Every comand contains a single character that will be added to the buffer of the
 <th align="center">1° Byte</th>
 <th align="center">2° Byte</th>
 <th align="center">3° Byte</th>
+<th align="center">4° Byte</th>
+<th align="center">5° Byte</th>
+<th align="center">6° Byte</th>
+<th align="center">7° Byte</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
+<td align="center">n/c</td>
 <td align="center">id(RPI)</th>
 <td align="center">01</th>
 <td colspan="2" align="center">new id(PIC)</td>
