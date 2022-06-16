@@ -40,7 +40,7 @@
 <tr>
 <td align="center">Handshake</td>
 <td align="center">id(RPI)_<a href='#handshake-request'>Payload</a>_CRC</td>
-<td align="center">id(RPI)_<a href='#address-response'>Payload</a>_CRC</td>
+<td align="center">id(Broadcast)_<a href='#address-response'>Payload</a>_CRC</td>
 </tr>
 
 </tbody>
