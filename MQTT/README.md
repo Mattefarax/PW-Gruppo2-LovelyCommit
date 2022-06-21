@@ -28,19 +28,19 @@
 <tr>
 <td align="center">commands</td>
 <td align="center"></td>
-<td align="center"><a href="#comand">lovelyCommit/idTrain/wagon/cmd</a></td>
+<td align="center"><a href="#comand">lovelyCommit/idTrain/wagon/cmd or lovelyCommit/idTrain/all/cmd</a></td>
 </tr>
 
 <tr>
 <td align="center">Text message</td>
 <td align="center"></td>
-<td align="center"><a href="#message">lovelyCommit/idTrain/wagon/msg</a></td>
+<td align="center"><a href="#message">lovelyCommit/idTrain/wagon/msg or lovelyCommit/idTrain/all/msg</a></td>
 </tr>
 
 <tr>
 <td align="center">Emergency</td>
-<td align="center"><a href="#emergency">lovelyCommit/idTrain/wagon/emergency</a></td>
-<td align="center"><a href="#emergency">lovelyCommit/idTrain/wagon/emergency</a></td>
+<td align="center"><a href="#emergency">lovelyCommit/idTrain/emergency</a></td>
+<td align="center"><a href="#emergency">lovelyCommit/idTrain/emergency</a></td>
 </tr>
 
 </tbody>
@@ -66,8 +66,10 @@
 <td>
 
     {
-        'Temperature': Decimal value,
-        'Humidity': Decimal value
+        'Timestamp': String value,
+        'Current Temperature': Decimal value,
+        'Set Temperature': Decimal value,
+        'Current Humidity': Decimal value
     }
 
 </td>
@@ -78,6 +80,7 @@
 <td>
 
     {
+        'Timestamp': String value,
         'FrontDoor': Bool value,
         'BackDoor': Bool value
     }
@@ -90,6 +93,7 @@
 <td>
 
     {
+        'Timestamp': String value,
         'Status': Bool value
     }
 
@@ -191,7 +195,8 @@ anything
 <td>
 
     {
-        'EmergencyMessage': String value
+        'Timestamp': String value,
+        'EmergencyMessage': String value,
         'Sender': IdSender
     }
 
@@ -199,15 +204,12 @@ anything
 </tr>
 
 <tr>
-<td align="center">Reset</td>
-<td align="center">anything</td>
-</tr>
-
-<tr>
 <td align="center">Status</td>
 <td>
 
     {
+        'Timestamp': String value,
+        'Sender': IdSender,
         'EmergencyStatus': Bool value
     }
 
