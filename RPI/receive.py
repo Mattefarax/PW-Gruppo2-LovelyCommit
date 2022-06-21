@@ -9,7 +9,8 @@ def main():
 
     channel.queue_declare(queue='hello')
     client=Client(client_id="client_1")
-    client.connect('test.mosquitto.org') #broker a cui si deve connettere il client
+    client.connect('192.168.101.111',port=1883) #broker a cui si deve connettere il client
+    #client.connect('test.mosquitto.org')
         
     def callback(ch, method, properties, body):
         print(" [x] Received %r" % body)
