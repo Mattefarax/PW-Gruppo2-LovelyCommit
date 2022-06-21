@@ -1,11 +1,6 @@
 #include "PROTO.h"
 #include "UART.h"
 #include "QUEUE.h"
-//Da togliere
-#include "LCD.h"
-
-char *CharToLCD (char num);
-unsigned long Power(char num, char times);
 
 void PROTO_HandshakeReq()
 {
@@ -17,7 +12,14 @@ void PROTO_HandshakeReq()
 
 void PROTO_SendPayload()
 {
-    
+    UART_Send(0x00); //ID RPI
+    UART_Send(addr); //ID PIC
+    UART_Send(0x20); //Code
+    UART_Send(27); //Temp_1_2
+    UART_Send(15); //Temp_2_2
+    UART_Send(0x00); //Humidity_1_2
+    UART_Send(0x00); //Humidity_2_2
+    UART_Send(0x07); //8th
 }
 
 void PROTO_QueueChecker()
@@ -28,42 +30,20 @@ void PROTO_QueueChecker()
         {
             addr = queue[3];
             addrRequested = 0;
-            LCD_Write(CharToLCD(addr));
         }
-        else if (queue[0] == addr)
+        else if ((queue[0] == addr)||(queue[0] == 0xff))
         {
             if (queue[2] == 0x10)
             {
                 //CMD
-                LCD_Write("cmd");
             }
             else if (queue[2] == 0x11)
             {
                 //TEXT
-                LCD_Write("text");
 
             }
         }
     }
-    queueElement = 0; //Da togliere!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    queueElement = 0;
 }
-
-char *CharToLCD (char num)
-{
-    char res[4];
-    for (char i = 0; i < 3; i++) 
-    {
-        res[3 - i - 1] = (num / Power(10, i)) % 10 + '0';
-    }
-    res[4] = "\0";
-    return res;
-}
-unsigned long Power(char num, char times) {
-    unsigned long result = 1;
-    for (char i = 0; i < times; i++) {
-        result *= num;
-    }
-    return result;
-}
-
 

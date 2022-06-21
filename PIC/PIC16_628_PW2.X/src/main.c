@@ -20,12 +20,14 @@
 #include "UART.h"
 #include "QUEUE.h"
 #include "PROTO.h"
-#include <string.h>
 
 
 char UARTRead;
 int baudRate = 115200;
 char stringa[20];
+
+char *CharToLCD (char num);
+unsigned long Power(char num, char times);
 
 
 void main(void) {
@@ -36,7 +38,6 @@ void main(void) {
     UART_Init(baudRate);
     LCD_Init();
     PROTO_HandshakeReq();
-    
     while(1)
     {
         if (queueElement >= queueLenght)
@@ -44,14 +45,31 @@ void main(void) {
             if (addrRequested == 1)
             {
                 LCD_Write("ID:");
+                PROTO_QueueChecker();
+                LCD_Write(CharToLCD(addr));
+                PROTO_SendPayload();
             }
-            PROTO_QueueChecker();
-
-            //0xff 0x00 0x01 0x07 0x00 0x00 0x00 0x00
-            //0x07 0x00 0x10 0x00 0x00 0x00 0x00 0x00
         }
     }
     return;
+}
+
+char *CharToLCD (char num)
+{
+    char res[4];
+    for (char i = 0; i < 3; i++) 
+    {
+        res[3 - i - 1] = (num / Power(10, i)) % 10 + '0';
+    }
+    res[4] = "\0";
+    return res;
+}
+unsigned long Power(char num, char times) {
+    unsigned long result = 1;
+    for (char i = 0; i < times; i++) {
+        result *= num;
+    }
+    return result;
 }
 
 
@@ -62,6 +80,7 @@ void __interrupt() ISR()
 {
     if(PIR1 & 0x20)
     {
+
         UARTRead = RCREG;
         //PIR1 &= ~0x20;
         if ((queueElement < queueLenght) )
@@ -70,13 +89,3 @@ void __interrupt() ISR()
         }
     }
 }
-
-/*
-if( (UARTRead != ' ') & (!mem_r))
-{
-    LCD_Send(UARTRead, 0);
-    sendUart(UARTRead);
-    mem_r = 1;
-}
-//sendUart('d');
-*/
