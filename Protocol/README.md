@@ -235,21 +235,15 @@ The payloads will be sent in this (static) order:
 <th align="center">1° Byte</th>
 <th align="center">2° Byte</th>
 <th align="center">3° Byte</th>
-<th align="center">4° Byte</th>
+<th colspan="2" align="center">4° Byte</th>
 <th align="center">5° Byte</th>
-<th colspan="4" align="center">6° Byte</th>
-<th align="center">7° Byte</th>
-<th align="center">8° Byte</th>
+<th align="center">6° Byte</th>
 </tr>
 
 <tr>
 <th align="center"></th>
 <th align="center"></th>
 <th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center">4° bit</th>
-<th align="center">3° bit</th>
 <th align="center">2° bit</th>
 <th align="center">1° bit</th>
 <th align="center"></th>
@@ -263,11 +257,8 @@ The payloads will be sent in this (static) order:
 <td align="center">id(PIC)</td>
 <td align="center">id(RPI)</td>
 <td align="center">code</td>
-<td colspan="2" align="center">Target temperature</td>
 <td align="center">Emergency reset</td>
 <td align="center">Emergency set</td>
-<td align="center">Toggle back door</td>
-<td align="center">Toggle front door</td>
 <td colspan="2" align="center">CRC</td>
 </tr>
 
@@ -279,6 +270,86 @@ The payloads will be sent in this (static) order:
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
+</tr>
+
+</tbody>
+</table>
+<!--=========================================-->
+<table>
+<thead>
+
+<tr>
+<th align="center">1° Byte</th>
+<th align="center">2° Byte</th>
+<th align="center">3° Byte</th>
+<th align="center">4° Byte</th>
+<th align="center">5° Byte</th>
+<th align="center">6° Byte</th>
+<th align="center">7° Byte</th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td align="center">id(PIC)</td>
+<td align="center">id(RPI)</td>
+<td align="center">code</td>
+<td colspan="2" align="center">Target temperature</td>
+<td colspan="2" align="center">CRC</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center">00</td>
+<td align="center">11</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+
+</tbody>
+</table>
+<!--=========================================-->
+<table>
+<thead>
+
+<tr>
+<th align="center">1° Byte</th>
+<th align="center">2° Byte</th>
+<th align="center">3° Byte</th>
+<th colspan="2" align="center">4° Byte</th>
+<th align="center">5° Byte</th>
+<th align="center">6° Byte</th>
+</tr>
+
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">2° bit</th>
+<th align="center">1° bit</th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td align="center">id(PIC)</td>
+<td align="center">id(RPI)</td>
+<td align="center">code</td>
+<td align="center">Toggle back door</td>
+<td align="center">Toggle front door</td>
+<td colspan="2" align="center">CRC</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center">00</td>
+<td align="center">12</td>
 <td align="center"></td>
 <td align="center"></td>
 <td align="center"></td>
