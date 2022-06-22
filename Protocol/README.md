@@ -6,6 +6,8 @@
 
 ## **Addressing**
 
+As message structure we decided to use a common structure designed as follows:
+
 <div  align="center">
 <table>
 <thead>
@@ -14,7 +16,7 @@
 <th align="center">Id Reciver</th>
 <th align="center">Id Sender</th>
 <th align="center">Payload</th>
-<th align="center">CRC</th>
+<th align="center"><a href='#crc-calc'>CRC</a></th>
 </tr>
 
 </thead>
@@ -22,6 +24,10 @@
 </div>
 
 ## **Addresses**
+
+
+
+We decided to inspire our serial network to the tcp/ip's one, so we gave to the RPI the available first id and use the very last one for the broadcast address to send to all the uC the same message. In this way the uCs are going to have 254 available address.
 
 <div  align="center">
 <table>
@@ -61,6 +67,8 @@
 
 ## **Transmission Code**
 
+To simplify the parsing of the messages we decided to place as the very first Byte of the message's payload a code that describes the message type and the meaning of it
+
 <div  align="center">
 <table>
 <thead>
@@ -83,13 +91,13 @@
 
 <tr>
 <td align="center">Comands</td>
-<td align="center">10</td>
+<td align="center">10-12</td>
 <td align="center">RPI</td>
 </tr>
 
 <tr>
 <td align="center">Text</td>
-<td align="center">11</td>
+<td align="center">13</td>
 <td align="center">RPI</td>
 </tr>
 
@@ -110,6 +118,8 @@
 </div>
 
 ## **Protocol Summary**
+
+Here you can finde some link to fastly navigate to the section you need:
 
 <div  align="center">
 <table>
@@ -154,7 +164,9 @@
 
 #### **Payload Telemetry**
 
-The payloads will be sent in this (static) order:
+For the telemetry message we agreed on sending all the rading in the same message as we will send them periodicaly decreasing the ammount of cyclic message to send per uC.
+
+This message will be sent every 10 seconds in every uC.
 
 <div  align="center">
 <table>
@@ -223,6 +235,16 @@ The payloads will be sent in this (static) order:
 
 #### **Payload Commands**
 
+At firt we thought it would have been a good idea to have all the comands on the same message using a unique code: 0x10.
+
+Working our way to the interpreter of the messages and the sender of the comands we found out that we were forcing the RPI to send a bunch of Byte with no sense:
+
+    ex. We would have needed to finde a way to discriminate wather the target temp needed to stay the same as before or needed to change in response of the comands with target temp's bytes set to 0, for example.
+
+So we decided to split the old monolithic comand messages in  different comand messages per macro-topics:
+
+***Emergencies***
+
 <div  align="center">
 <table>
 <thead>
@@ -268,7 +290,12 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 <!--=========================================-->
+
+***Target Temp***
+
+<div  align="center">
 <table>
 <thead>
 
@@ -303,7 +330,12 @@ The payloads will be sent in this (static) order:
 
 </tbody>
 </table>
+</div>
 <!--=========================================-->
+
+***Doors***
+
+<div  align="center">
 <table>
 <thead>
 
@@ -351,7 +383,9 @@ The payloads will be sent in this (static) order:
 
 #### **Text Message**
 
-To send the text message we decided to send 20 comands formatted in the following manner:
+In the first iteration of our protocol we thought it would be a nice idea to have the the text message inside the comand pyload.
+
+As soon as we did it we discovered it was a bad decision so we decided to have a message code and also a message type specific for the text message.
 
 <div  align="center">
 <table>
@@ -373,14 +407,14 @@ To send the text message we decided to send 20 comands formatted in the followin
 <td align="center">id(PIC/broadcast)</td>
 <td align="center">id(RPI)</td>
 <td align="center">code</td>
-<td align="center">Character</td>
+<td align="center">Characters</td>
 <td  colspan="2" align="center">CRC</td>
 </tr>
 
 <tr>
 <td align="center"></td>
 <td align="center">00</td>
-<td align="center">11</td>
+<td align="center">13</td>
 <td align="center"></td>
 <td colspan="2" align="center"></td>
 </tr>
@@ -389,9 +423,11 @@ To send the text message we decided to send 20 comands formatted in the followin
 </table>
 </div>
 
-Every comand contains a single character that will be added to the buffer of the message in the uC . When the buffer for the 20 character is full and is sent a new character the buffer will be wyped and repopulated with the next 20 character.
-
 #### **Handshake Request**
+
+When an uC is newly connected to the network and turned on it will not have any address so here comes in heand the Handshake request.
+
+This request will be performed as broadcast impersonification and after this request the uC will wait for a response to get an address.
 
 <div  align="center">
 <table>
@@ -427,6 +463,8 @@ Every comand contains a single character that will be added to the buffer of the
 </div>
 
 #### **Handshake Response**
+
+When the RPI recives an Handshake request it will supply an available address to the uC listenning addressing the reciver as broadcast building the message as follow:
 
 <div  align="center">
 <table>
@@ -466,4 +504,19 @@ Every comand contains a single character that will be added to the buffer of the
 
 #### **CRC Calc**
 
-Library?
+We decided to use the same crc used in Modbus protocol, which is a 16 bit crc, with the Big Endian standard: haveing so the less significant byte first than the most significant one.
+
+<div  align="center">
+<table>
+    
+<tr>
+<td align="center" valign="center">
+<img src="../Images/crcModbus.png"
+alt="Structure Schema"
+width="400"
+height="auto"/>
+</td>
+</tr>
+
+</table>
+</div>

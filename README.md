@@ -28,31 +28,31 @@ Project Work 2022 Group 2 Corso Diqu
 <thead>
 
 <tr>
-<th style="text-align:center">Name</th>
-<th style="text-align:center">E-mail</th>
+<th align="center">Name</th>
+<th align="center">E-mail</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-<td style="text-align:center">Faraoni Matteo</td>
-<td style="text-align:center">matteo.faraoni@stud.tecnicosuperiorekennedy.it</td>
+<td align="center">Faraoni Matteo</td>
+<td align="center">matteo.faraoni@stud.tecnicosuperiorekennedy.it</td>
 </tr>
     
 <tr>
-<td style="text-align:center">Gatto Alessandro</td>
-<td style="text-align:center">alessandro.gatto@stud.tecnicosuperiorekennedy.it</td>
+<td align="center">Gatto Alessandro</td>
+<td align="center">alessandro.gatto@stud.tecnicosuperiorekennedy.it</td>
 </tr>
     
 <tr>
-<td style="text-align:center">Pizzato Davide</td>
-<td style="text-align:center">davide.pizzato@stud.tecnicosuperiorekennedy.it</td>
+<td align="center">Pizzato Davide</td>
+<td align="center">davide.pizzato@stud.tecnicosuperiorekennedy.it</td>
 </tr>
    
 <tr>
-<td style="text-align:center">Scapolan Davide</td>
-<td style="text-align:center">davide.scapolan@stud.tecnicosuperiorekennedy.it</td>
+<td align="center">Scapolan Davide</td>
+<td align="center">davide.scapolan@stud.tecnicosuperiorekennedy.it</td>
 </tr>
     
 </table>
@@ -73,17 +73,18 @@ Additional features may be proposed by individual groups.
 
 `To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository`
 
+<div  align="center">
 <table>
     
 <tr>
-<td style="text-align:center" valign="center">
+<td align="center" valign="center">
 <img src="./Images/FlowSchema.jpg " 
 alt="Flow Schema"
 width="400" 
 height="auto" />
 </td>
 
-<td style="text-align:center" valign="center">
+<td align="center" valign="center">
 <img src="./Images/StructureSchema.jpg " 
 alt="Structure Schema"
 width="400" 
@@ -92,6 +93,7 @@ height="auto" />
 </tr>
     
 </table>
+</div>
 
 ## **uController**
 
@@ -126,36 +128,36 @@ height="auto" />
 <thead>
 
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">PIC</th>
-<th style="text-align:center">RaspberryPI</th>
+<th align="center"></th>
+<th align="center">PIC</th>
+<th align="center">RaspberryPI</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-<td style="text-align:center">Telemetry</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
-<td style="text-align:center"></td>
+<td align="center">Telemetry</td>
+<td align="center">id(RPI)_Payload_CRC</td>
+<td align="center"></td>
 </tr>
 
 <tr>
-<td style="text-align:center">Commands</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">id(PIC/Broadcast)_Payload_CRC</td>
+<td align="center">Commands</td>
+<td align="center"></td>
+<td align="center">id(PIC/Broadcast)_Payload_CRC</td>
 </tr>
 
 <tr>
-<td style="text-align:center">Text message</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">id(PIC/Broadcast)_Payload_CRC</td>
+<td align="center">Text message</td>
+<td align="center"></td>
+<td align="center">id(PIC/Broadcast)_Payload_CRC</td>
 </tr>
 
 <tr>
-<td style="text-align:center">Handshake</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
+<td align="center">Handshake</td>
+<td align="center">id(RPI)_Payload_CRC</td>
+<td align="center">id(RPI)_Payload_CRC</td>
 </tr>
 
 </tbody>
