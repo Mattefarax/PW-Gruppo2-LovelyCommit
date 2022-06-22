@@ -239,7 +239,7 @@ At firt we thought it would have been a good idea to have all the comands on the
 
 Working our way to the interpreter of the messages and the sender of the comands we found out that we were forcing the RPI to send a bunch of Byte with no sense:
 
-    ex. We would have needed to finde a way to discriminate wather the target temp needed to stay the same as before or needed to change in response of the comands with target temp's bytes set to 0, for example.
+ex. We would have needed to finde a way to discriminate wather the target temp needed to stay the same as before or needed to change in response of the comands with target temp's bytes set to 0, for example.
 
 So we decided to split the old monolithic comand messages in  different comand messages per macro-topics:
 
