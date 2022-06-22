@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Gatto Alessandro">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elux RoadMap</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="interface_style.css" rel="stylesheet" type="text/css">
+</head>
+
+<header>
+    <nav class=" p-1 ps-4 text-white fixed-top " id="navbar">
+        <div class="container-fluid">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="login.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="Trenitalia_Logo.png" alt="" width="300" height="auto" class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
+                </a>
+
+                <ul class="ps-4 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="login.html" class="pe-2 nav-link px-2 text-secondary">Login Page</a></li>
+                    <li><a href="interface.html" id="linkSur" class="pe-2 nav-link px-2 text-white">Interface</a></li>
+                    <li><a href="options.html" id="linkRec" class="nav-link px-2 text-white">Options</a></li>
+                </ul>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+
+    <div class="w-100 h-100 mt-5" id="parent">
+    </div>
+    <script>
+        // Getting the values from the login page 
+        //const localIdUser = localStorage.getItem('idUser');
+        //const localDataSuper = localStorage.getItem('superuser');
+        //const enabledPage = localStorage.getItem('enabledPage');
+        //const auth = localStorage.getItem('auth');
+        //const idUser = parseInt(localIdUser);
+
+        const localDataSuper = 1;
+        const auth = 1;
+        const enabledPage = 1;
+        var idUser = 1;
+
+        console.log("User number " + idUser);
+        console.log("Is the page enabled? " + enabledPage);
+
+        // This is to check if you already logged in, else it will deactivate the page and links
+        function CheckAuth() {
+            var linkSur = document.getElementById('linkSur')
+            if (auth == 1 && localDataSuper == 1) {
+                linkSur.href = "interface.html";
+                $("#bigWrapper").show();
+                $("#steps").show();
+
+            } else {
+                const button1 = document.getElementById('nextBtn');
+                const button2 = document.getElementById('prevBtn');
+                button1.disabled = true;
+                button2.disabled = true;
+                alert("go back to the Login page");
+            }
+        }
+
+        var serverPort;
+        var serverHost;
+        // Getting the values from the config file 
+        function loadConfig() {
+            $.getJSON('config.json', function(data) {
+                serverPort = data.serverPort;
+                serverHost = data.serverHost;
+                console.log("Config loaded")
+
+                getGraphCtrlInfo();
+            });
+        }
+        loadConfig();
+
+        // Initializing var used inside the various get
+        var array1 = {};
+        var array2 = {};
+        var array3 = {};
+        var array4 = {};
+
+        var facNames = [];
+        var MedieOld = [];
+        var MedieNew = [];
+        var marksCanvas = [];
+        var arrayCat = ["1", "2", "3", "4", "5", "6"];
+        var dynamicalCanvas = [];
+        var dynamicalDiv = [];
+        var dynamicalButtonSur = [];
+        var dynamicalButtonRec = [];
+        var dynamicalFacName = [];
+        var dynamicalName = [];
+        var marksData = [];
+        var radarChart = [];
+        var rowDiv = [];
+        var usersIdArray = [];
+        var facIdArray = [];
+
+
+
+
+        function createVariables() {
+            let rowNum = 0;
+            for (var i = 0; i < 6; ++i) {
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    rowDiv[rowNum] = document.createElement('div');
+                    rowDiv[rowNum].setAttribute('class', "row border");
+                }
+                let canvasName = "marksChart" + i;
+                let divFacName = "titleDiv" + i;
+                let FacName = "factoryName" + i;
+                let divName = "chartjs-radar" + i;
+                let btnSurName = "btnsur" + i;
+                let btnRecName = "btnrec" + i;
+                marksCanvas[i] = document.getElementById(canvasName);
+
+                dynamicalDiv[i] = document.createElement('div');
+                dynamicalDiv[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
+                dynamicalDiv[i].setAttribute('id', divName);
+                //dynamicalDiv[i].setAttribute('onclick', "showDetailButton(this.id);");
+
+                dynamicalButtonSur[i] = document.createElement('button');
+                dynamicalButtonSur[i].setAttribute('type', "button");
+                dynamicalButtonSur[i].setAttribute('id', btnSurName);
+                dynamicalButtonSur[i].setAttribute('onclick', "redirect(this.id)");
+
+                dynamicalButtonRec[i] = document.createElement('button');
+                dynamicalButtonRec[i].setAttribute('type', "button");
+                dynamicalButtonRec[i].setAttribute('id', btnRecName);
+                dynamicalButtonRec[i].setAttribute('onclick', "recapRedirect(this.id)");
+
+
+                dynamicalCanvas[i] = document.createElement('canvas');
+                dynamicalCanvas[i].setAttribute('id', canvasName);
+                dynamicalCanvas[i].setAttribute('width', 300);
+                dynamicalCanvas[i].setAttribute('height', 200);
+
+                dynamicalFacName[i] = document.createElement('div');
+                dynamicalFacName[i].setAttribute('id', divFacName);
+                dynamicalFacName[i].setAttribute('class', "border text-center");
+
+                dynamicalName[i] = document.createElement('h2');
+                dynamicalName[i].setAttribute('id', FacName);
+                dynamicalName[i].setAttribute('class', "text-center");
+
+
+                // Append the newborn column div to the div row
+                rowDiv[rowNum].appendChild(dynamicalDiv[i]);
+
+                // Append the newborn canvas to the newborn div
+                dynamicalDiv[i].appendChild(dynamicalCanvas[i]);
+
+                //Append the invisible buttons
+                dynamicalDiv[i].appendChild(dynamicalButtonSur[i]);
+                dynamicalDiv[i].appendChild(dynamicalButtonRec[i]);
+
+
+                // Append the newborn h2 title to the newborn title div
+                dynamicalFacName[i].appendChild(dynamicalName[i]);
+
+                // Append the newborn title div to the newborn div
+                dynamicalDiv[i].appendChild(dynamicalFacName[i]);
+
+                // Append the new whole div as child to the parent tag
+                document.getElementById("parent").appendChild(rowDiv[rowNum]);
+
+
+                document.getElementById(FacName).textContent = facNames[i]; // Set the title of the graph
+
+                document.getElementById(btnSurName).textContent = 'Retake Survey';
+                document.getElementById(btnRecName).textContent = 'Review Survey';
+            }
+        }
+
+
+        function redirect(btnId) {
+            arrayIndex = btnId.replace('btnsur', '');
+            console.log("arrayIndex " + arrayIndex)
+
+            idUser = usersIdArray[arrayIndex].toString();
+            console.log("idUser  " + idUser.length)
+            localStorage.clear();
+            localStorage.setItem('superuser', localDataSuper);
+            localStorage.setItem('idUser', idUser);
+            localStorage.setItem('disabledPage', enabledPage);
+            localStorage.setItem('auth', auth);
+        }
+
+        function recapRedirect(btnRecName) {
+            localStorage.clear();
+            localStorage.setItem('superuser', localDataSuper);
+            localStorage.setItem('idUser', idUser);
+            localStorage.setItem('disabledPage', enabledPage);
+            localStorage.setItem('auth', auth);
+            window.location.href = "recap.html";
+        }
+    </script>
+</body>
+
+</html>

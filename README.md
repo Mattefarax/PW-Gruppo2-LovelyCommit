@@ -1,4 +1,11 @@
-# **PW-Gruppo2-LovelyCommit**
+[< Home](./README.md)
+
+[<p align="right">uController ></p>](./PIC/README.md)
+
+<!--![Train gif](./Images/train.gif)-->
+<p align="center"><img src="Images/train.gif" alt="Train gif" width="500" height="auto"/></p>
+
+**<h1 align="center">PW-Gruppo2-LovelyCommit</h1>**
 
 <p align="center">
     <a href="./LICENSE"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg"></a>
@@ -16,12 +23,40 @@
 </div>
 Project Work 2022 Group 2 Corso Diqu
 
-| Name | E-mail |
-|:-:|:-:|
-|Faraoni Matteo|matteo.faraoni@stud.tecnicosuperiorekennedy.it|
-|Gatto Alessandro|alessandro.gatto@stud.tecnicosuperiorekennedy.it|
-|Pizzato Davide|davide.pizzato@stud.tecnicosuperiorekennedy.it|
-|Scapolan Davide|davide.scapolan@stud.tecnicosuperiorekennedy.it|
+<div  align="center">
+<table>
+<thead>
+
+<tr>
+<th align="center">Name</th>
+<th align="center">E-mail</th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td align="center">Faraoni Matteo</td>
+<td align="center">matteo.faraoni@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+<tr>
+<td align="center">Gatto Alessandro</td>
+<td align="center">alessandro.gatto@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+<tr>
+<td align="center">Pizzato Davide</td>
+<td align="center">davide.pizzato@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+   
+<tr>
+<td align="center">Scapolan Davide</td>
+<td align="center">davide.scapolan@stud.tecnicosuperiorekennedy.it</td>
+</tr>
+    
+</table>
+</div>
 
 ## **Project Trace**
 
@@ -36,15 +71,28 @@ Additional features may be proposed by individual groups.
 
 ## **Schemas**
 
-To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository
+`To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository`
 
-<!-- |![Flow schema of the system](./Images/FlowSchema.jpg)|
-|-|-->
-<div align="center">  
+<div  align="center">
+<table>
+    
+<tr>
+<td align="center" valign="center">
 <img src="./Images/FlowSchema.jpg " 
-     alt="Flow Schema"
-     width="400" 
-     height="auto" />
+alt="Flow Schema"
+width="400" 
+height="auto" />
+</td>
+
+<td align="center" valign="center">
+<img src="./Images/StructureSchema.jpg " 
+alt="Structure Schema"
+width="400" 
+height="auto" />
+</td>
+</tr>
+    
+</table>
 </div>
 
 ## **uController**
@@ -65,50 +113,56 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 
 * led 3.3V
 
-*External element*:
+*Already in our possession*:
 
-* 
+* 4 2004 LCD Display
+
+* 2 servomotor
+
+* 4 rotary encoder
 
 ### **Protocol PIC-RPI Structure**
 
-<table style='margin:0 auto'>
+<div  align="center">
+<table>
 <thead>
 
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">PIC</th>
-<th style="text-align:center">RaspberryPI</th>
+<th align="center"></th>
+<th align="center">PIC</th>
+<th align="center">RaspberryPI</th>
 </tr>
 
 </thead>
 <tbody>
 
 <tr>
-<td style="text-align:center">Telemetry</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
-<td style="text-align:center"></td>
+<td align="center">Telemetry</td>
+<td align="center">id(RPI)_Payload_CRC</td>
+<td align="center"></td>
 </tr>
 
 <tr>
-<td style="text-align:center">Commands</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">id(PIC/Broadcast)_Payload_CRC</td>
+<td align="center">Commands</td>
+<td align="center"></td>
+<td align="center">id(PIC/Broadcast)_Payload_CRC</td>
 </tr>
 
 <tr>
-<td style="text-align:center">Text message</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">id(PIC/Broadcast)_Payload_CRC</td>
+<td align="center">Text message</td>
+<td align="center"></td>
+<td align="center">id(PIC/Broadcast)_Payload_CRC</td>
 </tr>
 
 <tr>
-<td style="text-align:center">Handshake</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
-<td style="text-align:center">id(RPI)_Payload_CRC</td>
+<td align="center">Handshake</td>
+<td align="center">id(RPI)_Payload_CRC</td>
+<td align="center">id(RPI)_Payload_CRC</td>
 </tr>
 
 </tbody>
 </table>
+</div>
 
 [Here](./Protocol/README.md) you can finde more specification about how does this protocl works and wor does it has been developped
 
@@ -123,9 +177,10 @@ To be able to view any .drowio file open [this link](https://draw.io), than open
 ## **Documents**
 
 * [uController section](./PIC/)
-* [RaspberryPi section](./RPI/)
-* [Cloud section](./Cloud/)
 * [Protocol section](./Protocol/)
+* [RaspberryPi section](./RPI/)
+* [MQTT section](./MQTT/)
+* [Cloud section](./Cloud/)
 
 ## **LICENSE**
 

@@ -1,0 +1,82 @@
+/* Style the input container */
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    height: 40px;
+}
+
+
+/* Style the form icons */
+
+.icon {
+    padding: 13px;
+    background: #c41329;
+    color: white;
+    min-width: 20px;
+    text-align: center;
+}
+
+
+/* Style the input fields */
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+}
+
+.input-field:focus {
+    border: 2px solid #c41329;
+}
+
+#basic-addon2 {
+    background-color: #c41329;
+    font-family: Raleway;
+    color: white;
+}
+
+
+/* Set a style for the submit button */
+
+.btn {
+    background-color: #c41329;
+    color: #c41329;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn:hover {
+    opacity: 1;
+    background-color: #c41329;
+    color: white;
+}
+
+body {
+    padding-top: 23px;
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        padding-top: 30px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    body {
+        padding-top: 70px;
+    }
+}
+
+.btn:hover>#loginButton {
+    color: white;
+}
+
+
+#navbar{
+    background: #c41329;
+}
