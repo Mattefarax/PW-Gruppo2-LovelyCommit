@@ -381,7 +381,7 @@ So we decided to split the old monolithic command messages in  different command
 </table>
 </div>
 
-#### **Text Message**
+#### **Payload Text Message**
 
 In the first iteration of our protocol we thought it would be a nice idea to have the the text message inside the command pyload.
 
