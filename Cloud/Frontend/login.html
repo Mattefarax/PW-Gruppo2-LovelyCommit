@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Gatto Alessandro">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Train Sensors Platform</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="login_style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </symbol>
+        </svg>
+</head>
+
+<header>
+    <nav class=" p-1 ps-4 text-white fixed-top " id="navbar">
+        <div class="container-fluid">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="login.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                    <img src="Trenitalia_Logo.png" alt="" width="300" height="auto" class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
+                </a>
+
+                <ul class="ps-4 nav col-12 col-lg-auto  me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="login.html" class="pe-2 nav-link px-2 text-secondary">Login Page</a></li>
+                    <li><a href="interface.html" id="linkSur" class="pe-2 nav-link px-2 text-white">Interface</a></li>
+                    <li><a href="options.html" id="linkRec" class="nav-link px-2 text-white">Options</a></li>
+                </ul>
+
+            </div>
+        </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="vh-100 container-fluid">
+
+        <div class="vh-100 d-flex align-items-center justify-content-center">
+            <div>
+                <div id="liveAlertPlaceholder"></div>
+                <h2>Login</h2>
+
+                <div class="input-group mb-3">
+                    <input type="text" id="UserLog" name="mail" onchange="getUserPsw()" class="form-control" placeholder="Username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-text" id="basic-addon2">@lovelycommit.com</span>
+                </div>
+
+                <div class="input-container">
+                    <i class="fa fa-key icon"></i>
+                    <label for="inputPassword2" class="visually-hidden">Password</label>
+                    <input type="password" onchange="getUserPsw()" class="form-control" name="psw" id="inputPassword2" placeholder="Password"> </div>
+
+                <button class="btn"><div id = "loginButton" class="d-flex justify-content-center">Login</div></button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var serverPort;
+        var serverHost;
+        // Getting the values from the config file 
+        function loadConfig() {
+            $.getJSON('config.json', function(data) {
+                serverPort = data.serverPort;
+                serverHost = data.serverHost;
+                console.log("Config loaded")
+            });
+        }
+        loadConfig();
+
+        // This is to check if you already logged in, else it will deactivate the links in the header
+        function CheckAuth() {
+            const auth = localStorage.getItem('auth');
+            var linkSur = document.getElementById('linkSur')
+            var linkRec = document.getElementById('linkRec')
+            if (auth == 1) {
+                linkSur.href = "interface.html";
+                linkRec.href = "options.html";
+            } else {
+                linkSur.href = "javascript:";
+                linkRec.href = "javascript:";
+            }
+        }
+        CheckAuth();
+
+        // Initializing local var
+        var userLog = "";
+        var pswLog = "";
+        var postSuccess = false;
+        var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+
+        // This function gets the user and the password
+        function getUserPsw() {
+            userLog = document.getElementById('UserLog').value;
+            pswLog = document.getElementById('inputPassword2').value;
+        }
+
+        // This function creates the alert if someone doesn't write correctly the user and the psw
+        function createAlert() {
+            alertPlaceholder.innerHTML = "";
+            var wrapper = document.createElement('div')
+            wrapper.innerHTML = '<div class="alert alert-danger d-flex align-items-center alert-dismissible fade show" id="alert" role="alert"> <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg><div>Wrong username/password<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>'
+            alertPlaceholder.append(wrapper)
+        }
+
+        // This is the ajax Post function fot the login
+        $(document).ready(function() {
+            $("#loginButton").click(function(event) {
+                $.ajax({
+                    method: "POST",
+                    url: "http://" + serverHost + ":" + serverPort + "/login",
+                    data: {
+                        mail: userLog,
+                        psw: pswLog
+                    }
+                }).done(function(res) {
+                    console.log(res);
+                    console.log(postSuccess);
+                    console.log("User " + userLog + " logged in");
+                    setLocalStorage(res)
+                    window.location.href = "interface.html";
+                }).catch(function(res) {
+                    // If the login info are wrong then it calls the alert generator, it clears the localstorage and it deactivates the links inside the header
+                    createAlert();
+                    localStorage.clear();
+                    CheckAuth();
+                });
+            });
+        });
+
+        // This functions saves in localstorage, if the user is a superuser and if it is authorized to use the links
+        function setLocalStorage(res) {
+            let superuser = res.user[0].SuperAdmin;
+            let idUser = res.user[0].Id_User;
+            let IsActive = res.user[0].IsActive;
+            let auth = 1;
+            postSuccess = res.success;
+            localStorage.clear();
+            localStorage.setItem('superuser', superuser);
+            localStorage.setItem('idUser', idUser);
+            localStorage.setItem('disabledPage', IsActive);
+            localStorage.setItem('auth', auth);
+        }
+        /* PROBLEM = WORKS EVEN WHEN YOU CHANGE PAGE
+        //When the page is closed, this function fires up deleting the localStorage items, so< superuser and the auth "Token"
+        window.addEventListener('beforeunload', function(e) {
+            localStorage.clear();
+            delete e['returnValue'];
+        });
+        */
+    </script>
+</body>
+
+</html>
