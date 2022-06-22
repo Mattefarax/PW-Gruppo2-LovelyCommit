@@ -23,32 +23,48 @@
 
 
 char UARTRead;
-int baudRate = 115200;
-char stringa[20];
+#define baudRate 115200
+#define preloadTMR 131
+
+char count = 0;
+int countMilli = 0;
+char lastReceiveSec = 0;
 
 char *CharToLCD (char num);
 unsigned long Power(char num, char times);
 
 
 void main(void) {
-    INTCON |= 0xC0; //Interrupt configuration //GIE PIEI
+    //Interrupt configuration
+    INTCON = 0x80; //GIE 
+    INTCON |= 0x40; //PIEI
+    INTCON |= 0x20; //TMR0IE
+    
+    //Value for 200us interrupt
+    OPTION_REG = 0x02; //Prescaler
+    TMR0 = preloadTMR; //Pre Load Timer Value
+            
     TRISC = 0X80;
     TRISD = 0X00;
     TRISE = 0X00;
     UART_Init(baudRate);
     LCD_Init();
-    PROTO_HandshakeReq();
+    
     while(1)
     {
-        if (queueElement >= queueLenght)
-        {       
-            if (addrRequested == 1)
-            {
-                LCD_Write("ID:");
-                PROTO_QueueChecker();
-                LCD_Write(CharToLCD(addr));
-                PROTO_SendPayload();
-            }
+        if ( (countMilli/1000 >= payloadAddrRetry) && (addr == 0)) 
+        {
+            PROTO_HandshakeReq();
+            countMilli = 0;
+        }
+        if ( (countMilli/1000 >= payloadSendSecond) && (addr != 0))
+        {
+            PROTO_SendPayload();
+            countMilli = 0;
+        }
+        if ( (lastReceiveSec >= messageOffsetTimeout) && (queueElement != 0))
+        {
+            PROTO_QueueChecker();   
         }
     }
     return;
@@ -73,19 +89,33 @@ unsigned long Power(char num, char times) {
 }
 
 
-
-
-
 void __interrupt() ISR()
 {
-    if(PIR1 & 0x20)
+    if(PIR1 & 0x20) //UART Receive
     {
-
         UARTRead = RCREG;
         //PIR1 &= ~0x20;
         if ((queueElement < queueLenght) )
         {
             QUEUE_Insert(UARTRead);
         }
+        lastReceiveSec = 0;
+    }
+    if(INTCON & 0x04) //Timer 
+    {
+        //200us each interrupt
+        count++;
+        if (count >= 5)
+        {
+            countMilli++;
+            count = 0;
+        }
+        if (lastReceiveSec <= messageOffsetTimeout)
+        {
+            lastReceiveSec++;
+        }
+        
+        TMR0 = preloadTMR;
+        INTCON &= ~0x04; //Reset T0IF to 0
     }
 }

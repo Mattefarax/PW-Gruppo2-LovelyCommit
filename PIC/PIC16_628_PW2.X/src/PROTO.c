@@ -30,17 +30,29 @@ void PROTO_QueueChecker()
         {
             addr = queue[3];
             addrRequested = 0;
+            UART_Send(0x01);
         }
-        else if ((queue[0] == addr)||(queue[0] == 0xff))
+        else if (((queue[0] == addr)||(queue[0] == 0xff)) && (addr != 0))
         {
             if (queue[2] == 0x10)
             {
-                //CMD
+                //EMERGENCY
+                UART_Send(0x10);
             }
             else if (queue[2] == 0x11)
             {
+                //TARGET TEMP
+                UART_Send(0x11);
+            }
+            else if (queue[2] == 0x12)
+            {
+                //DOORS
+                UART_Send(0x12);
+            }
+            else if (queue[2] == 0x13)
+            {
                 //TEXT
-
+                UART_Send(0x13);
             }
         }
     }
