@@ -90,7 +90,7 @@ To simplify the parsing of the messages we decided to place as the very first By
 </tr>
 
 <tr>
-<td align="center">Comands</td>
+<td align="center">commands</td>
 <td align="center">10-12</td>
 <td align="center">RPI</td>
 </tr>
@@ -119,7 +119,7 @@ To simplify the parsing of the messages we decided to place as the very first By
 
 ## **Protocol Summary**
 
-Here you can finde some link to fastly navigate to the section you need:
+Here you can find some links to fastly travel in the documentatione:
 
 <div  align="center">
 <table>
@@ -235,13 +235,13 @@ This message will be sent every 10 seconds in every uC.
 
 #### **Payload Commands**
 
-At firt we thought it would have been a good idea to have all the comands on the same message using a unique code: 0x10.
+At firt we thought it would have been a good idea to have all the commands on the same message using a unique code: 0x10.
 
-Working our way to the interpreter of the messages and the sender of the comands we found out that we were forcing the RPI to send a bunch of Byte with no sense:
+Working our way to the interpreter of the messages and the sender of the commands we found out that we were forcing the RPI to send a bunch of Byte with no sense:
 
-ex. We would have needed to finde a way to discriminate wather the target temp needed to stay the same as before or needed to change in response of the comands with target temp's bytes set to 0, for example.
+ex. We would have needed to finde a way to discriminate wather the target temp needed to stay the same as before or needed to change in response of the commands with target temp's bytes set to 0, for example.
 
-So we decided to split the old monolithic comand messages in  different comand messages per macro-topics:
+So we decided to split the old monolithic command messages in  different command messages per macro-topics:
 
 ***Emergencies***
 
@@ -383,7 +383,7 @@ So we decided to split the old monolithic comand messages in  different comand m
 
 #### **Text Message**
 
-In the first iteration of our protocol we thought it would be a nice idea to have the the text message inside the comand pyload.
+In the first iteration of our protocol we thought it would be a nice idea to have the the text message inside the command pyload.
 
 As soon as we did it we discovered it was a bad decision so we decided to have a message code and also a message type specific for the text message.
 

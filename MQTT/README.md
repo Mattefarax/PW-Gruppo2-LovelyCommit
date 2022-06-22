@@ -6,6 +6,16 @@
 
 ## **Pub Sub structure**
 
+For the topic structure we decided to have in all of them a **common base** composed of the name of the company and the id of the train.
+
+From there we added the wagon id or the word "all" to discriminate wether the commands or the text messages will be recived from a determinated wagon or to all of them.   
+The telemetry is specific bounded to the wagon so there is no way to not have it on the topic.   
+The emrgency dont have any wagon specification on the topic but the status has it inside the message.
+
+Then we have the specification on what the message is devided in telemetry, cmd, msg and emergency.
+
+Here you can find some links to fastly travel in the documentatione:
+
 <div  align="center">
 <table>
 <thead>
@@ -28,13 +38,13 @@
 <tr>
 <td align="center">commands</td>
 <td align="center"></td>
-<td align="center"><a href="#comand">lovelyCommit/idTrain/wagon/cmd or lovelyCommit/idTrain/all/cmd</a></td>
+<td align="center"><a href="#command">lovelyCommit/idTrain/wagon/cmd</br>or</br>lovelyCommit/idTrain/all/cmd</a></td>
 </tr>
 
 <tr>
 <td align="center">Text message</td>
 <td align="center"></td>
-<td align="center"><a href="#message">lovelyCommit/idTrain/wagon/msg or lovelyCommit/idTrain/all/msg</a></td>
+<td align="center"><a href="#message">lovelyCommit/idTrain/wagon/msg</br>or</br>lovelyCommit/idTrain/all/msg</a></td>
 </tr>
 
 <tr>
@@ -48,6 +58,10 @@
 </div>
 
 ### **Telemetry**
+
+To have a better flexibility for future requests from the client we decided to split the topics in per macro-argument.
+
+Bounding together telemetry values and the relative Timestamps we have the chance to keep trace of all alteration.
 
 <div  align="center">
 <table>
@@ -104,7 +118,9 @@
 </table>
 </div>
 
-### **Comand**
+### **command**
+
+Like for the telemetry, the command's topic are splitted, so we decided to put every command in a dedicated topic to keep values apart inside arguments.
 
 <div  align="center">
 <table>
@@ -149,6 +165,8 @@ anything
 
 ### **Message**
 
+The message is sent in a topic that can be directed to all uC or to a specific one depending on the topic's wagon.
+
 <div  align="center">
 <table>
 <thead>
@@ -177,6 +195,10 @@ anything
 </div>
 
 ### **Emergency**
+
+For the Emergency we opted to allow to only set remotely, the reset is allowed only from the RPI interface for security reason.
+
+To keep the base topic identical among the Emergency's topics, we decided to put the wagon's id inside the message of the Status topic together with the Timestamp.
 
 <div  align="center">
 <table>
@@ -222,6 +244,7 @@ anything
 
 ##### **IdSender**
 
+The Id sender here rappresented is used in the set topic of the emergency to indicate who sent it and in the status topic of the emergency to show whose belonging the status.
 
 <div  align="center">
 <table>
