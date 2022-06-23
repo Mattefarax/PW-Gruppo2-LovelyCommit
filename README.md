@@ -21,7 +21,8 @@
   | <a href="#documents"> Documents </a>
 </h4>
 </div>
-Project Work 2022 Group 2 Corso Diqu
+
+## *Project Work 2022 Group 2 Corso Diqu*
 
 <div  align="center">
 <table>
