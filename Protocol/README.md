@@ -4,6 +4,17 @@
 
 **<h1 align="center">Protocol Specification</h1>**
 
+<div align="center">  
+<h4>
+    <a href="#addressing"> Addressing </a>
+  | <a href="#addresses"> Addresses </a>
+  | <a href="#transmission-code"> Transmission Code</a>
+  | <a href="#protocol-summary"> Protocol Summary </a>
+  | <a href="#crc-calc"> CRC Calc </a>
+  
+</h4>
+</div>
+
 ## **Addressing**
 
 As message structure we decided to use a common structure designed as follows:
@@ -554,7 +565,7 @@ When the RPI recives an Handshake request it will supply an available address to
 </table>
 </div>
 
-#### **CRC Calc**
+## **CRC Calc**
 
 We decided to use the same crc used in Modbus protocol, which is a 16 bit crc, with the Big Endian standard: haveing so the less significant byte first than the most significant one.
 

@@ -4,6 +4,13 @@
 
 **<h1 align="center">MQTT Specification</h1>**
 
+<div align="center">  
+<h4>
+    <a href="#pub-sub-structure"> Pub Sub structure </a>
+  | <a href="#idsender"> IdSender </a>
+</h4>
+</div>
+
 ## **Pub Sub structure**
 
 For the topic structure we decided to have in all of them a **common base** composed of the name of the company and the id of the train.
@@ -118,7 +125,7 @@ Bounding together telemetry values and the relative Timestamps we have the chanc
 </table>
 </div>
 
-### **command**
+### **Command**
 
 Like for the telemetry, the command's topic are splitted, so we decided to put every command in a dedicated topic to keep values apart inside arguments.
 
@@ -242,7 +249,7 @@ To keep the base topic identical among the Emergency's topics, we decided to put
 </table>
 </div>
 
-##### **IdSender**
+## **IdSender**
 
 The Id sender here rappresented is used in the set topic of the emergency to indicate who sent it and in the status topic of the emergency to show whose belonging the status.
 
