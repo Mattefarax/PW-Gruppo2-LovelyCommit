@@ -90,14 +90,20 @@ To simplify the parsing of the messages we decided to place as the very first By
 </tr>
 
 <tr>
-<td align="center">commands</td>
+<td align="center">Commands</td>
 <td align="center">10-12</td>
 <td align="center">RPI</td>
 </tr>
 
 <tr>
-<td align="center">Text</td>
+<td align="center">Text message</td>
 <td align="center">13</td>
+<td align="center">RPI</td>
+</tr>
+
+<tr>
+<td align="center">Wagon number</td>
+<td align="center">14</td>
 <td align="center">RPI</td>
 </tr>
 
@@ -150,6 +156,12 @@ Here you can find some links to fastly travel in the documentatione:
 <td align="center">Text message</td>
 <td align="center"></td>
 <td align="center"><a href='#payload-text-message'>More here</a></td>
+</tr>
+
+<tr>
+<td align="center">Wagon number</td>
+<td align="center"></td>
+<td align="center"><a href='#payload-wagon-number'>More here</a></td>
 </tr>
 
 <tr>
@@ -415,6 +427,46 @@ As soon as we did it we discovered it was a bad decision so we decided to have a
 <td align="center"></td>
 <td align="center">00</td>
 <td align="center">13</td>
+<td align="center"></td>
+<td colspan="2" align="center"></td>
+</tr>
+
+</tbody>
+</table>
+</div>
+
+#### **Payload Wagon Number**
+
+With the folowing transmission the RPI will be able to bind a wagon number to the uC and allows it to display the number on LCD screen.
+
+<div  align="center">
+<table>
+<thead>
+
+<tr>
+<th align="center">1° Byte</th>
+<th align="center">2° Byte</th>
+<th align="center">3° Byte</th>
+<th align="center">4° Byte</th>
+<th align="center">5° Byte</th>
+<th align="center">6° Byte</th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td align="center">id(PIC)</td>
+<td align="center">id(RPI)</td>
+<td align="center">code</td>
+<td align="center">wagon number</td>
+<td colspan="2" align="center">CRC</td>
+</tr>
+
+<tr>
+<td align="center"></td>
+<td align="center">00</td>
+<td align="center">14</td>
 <td align="center"></td>
 <td colspan="2" align="center"></td>
 </tr>
