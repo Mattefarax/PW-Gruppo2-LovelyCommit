@@ -168,11 +168,29 @@ height="auto" />
 
 ## **RaspberryPi**
 
-### **AMQP RPI**
+### **AMQP**
 
-### **Mqtt RPI-Azure**
+We decided to use the AMQP protocol as a queue, using a RabbitMQ broker we will be able to host everything in the RPI.
+
+It will behave as an abstraction layer between the parsed telemetries comming from the uCs and the commands sent from RPI's HMI or the Cloud's Web App.   
+Every data sent to and from the uC will have to go through it on a specific queue.
+
+This approach allows us to separate the code used to interpret send and recive messages of the uCs from the code used for the RPI's HMI or to send and recive data from the Cloud.
+
+### **Mqtt**
+
+This protocol is used to interaction between the RPI and the Cloud's services.   
+We implemented the AMQP's queue for when the connection is down or the Cloud is unreachable but when the connection is established we will use this protocol to comunicate.
+
+As soon as the Cloud can be reached the queue will be emtied sending all the messages to the cloud where will be parsed and stored on a database.
 
 ## **Cloud**
+
+The telemety values recived from the MQTT broker of all the trains and wagons will be recived by a parser that will store the datas on a db with different headers depending on the reciving topics.
+
+From here the telemetries are shown on the Web App and through the form inside it the user will be able to send comands according to the permissions his account has.
+
+The comands then will be directed on the apropriated topic to reach the RPI.
 
 ## **Documents**
 
