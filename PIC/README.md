@@ -28,30 +28,368 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 
 #### *Home*
 
-|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|>| |R|e|a|l| |T|i|m|e| |V|a|l|u|e|s| | |
-| | |C|o|n|f|i|g|u|r|a|t|i|o|n| | | | | |
-| | | | | | | | | | | | | | | | | | | | |
-| |T|e|x|t| |M|e|s|s|a|g|e| |H|e|r|e| | |
+<div align="center">
+<table>
+<thead>
+<tr>
+<th><sup>1 </sup></th>
+<th><sup>2 </sup></th>
+<th><sup>3 </sup></th>
+<th><sup>4 </sup></th>
+<th><sup>5 </sup></th>
+<th><sup>6 </sup></th>
+<th><sup>7 </sup></th>
+<th><sup>8 </sup></th>
+<th><sup>9 </sup></th>
+<th><sup>10 </sup></th>
+<th><sup>11 </sup></th>
+<th><sup>12 </sup></th>
+<th><sup>13 </sup></th>
+<th><sup>14 </sup></th>
+<th><sup>15 </sup></th>
+<th><sup>16 </sup></th>
+<th><sup>17 </sup></th>
+<th><sup>18 </sup></th>
+<th><sup>19 </sup></th>
+<th><sup>20 </sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td>R</td>
+<td>e</td>
+<td>a</td>
+<td>l</td>
+<td></td>
+<td>T</td>
+<td>i</td>
+<td>m</td>
+<td>e</td>
+<td></td>
+<td>V</td>
+<td>a</td>
+<td>l</td>
+<td>u</td>
+<td>e</td>
+<td>s</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>C</td>
+<td>o</td>
+<td>n</td>
+<td>f</td>
+<td>i</td>
+<td>g</td>
+<td>u</td>
+<td>r</td>
+<td>a</td>
+<td>t</td>
+<td>i</td>
+<td>o</td>
+<td>n</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>T</td>
+<td>e</td>
+<td>x</td>
+<td>t</td>
+<td></td>
+<td>M</td>
+<td>e</td>
+<td>s</td>
+<td>s</td>
+<td>a</td>
+<td>g</td>
+<td>e</td>
+<td></td>
+<td>H</td>
+<td>e</td>
+<td>r</td>
+<td>e</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
 
 #### *Real Time Values*
 
-|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|>| |B|e|a|k| | | | | | | | | | | | | | |
-|T|e|m|p|°| | | | |W|N| | | | | |H|u|m|%|
-| | | | | | | | | | | | | | | | | | | | |
-| |T|e|x|t| |M|e|s|s|a|g|e| |H|e|r|e| | |
+<div align="center">
+<table>
+<thead>
+<tr>
+<th><sup>1 </sup></th>
+<th><sup>2 </sup></th>
+<th><sup>3 </sup></th>
+<th><sup>4 </sup></th>
+<th><sup>5 </sup></th>
+<th><sup>6 </sup></th>
+<th><sup>7 </sup></th>
+<th><sup>8 </sup></th>
+<th><sup>9 </sup></th>
+<th><sup>10 </sup></th>
+<th><sup>11 </sup></th>
+<th><sup>12 </sup></th>
+<th><sup>13 </sup></th>
+<th><sup>14 </sup></th>
+<th><sup>15 </sup></th>
+<th><sup>16 </sup></th>
+<th><sup>17 </sup></th>
+<th><sup>18 </sup></th>
+<th><sup>19 </sup></th>
+<th><sup>20 </sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td>B</td>
+<td>e</td>
+<td>a</td>
+<td>k</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T</td>
+<td>e</td>
+<td>m</td>
+<td>p</td>
+<td>°</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>W</td>
+<td>N</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>H</td>
+<td>u</td>
+<td>m</td>
+<td>%</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>T</td>
+<td>e</td>
+<td>x</td>
+<td>t</td>
+<td></td>
+<td>M</td>
+<td>e</td>
+<td>s</td>
+<td>s</td>
+<td>a</td>
+<td>g</td>
+<td>e</td>
+<td></td>
+<td>H</td>
+<td>e</td>
+<td>r</td>
+<td>e</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 #### *Configuration*
 
-|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
-|>| |S|e|t| |T|e|m|p| | | | | |T|e|m|p|°|
-| | |B|e|a|k| | | | | | | | | | | | | | |
-| | | | | | | | | | | | | | | | | | | | |
-| |T|e|x|t| |M|e|s|s|a|g|e| |H|e|r|e| | |
+<div align="center">
+<table>
+<thead>
+<tr>
+<th><sup>1 </sup></th>
+<th><sup>2 </sup></th>
+<th><sup>3 </sup></th>
+<th><sup>4 </sup></th>
+<th><sup>5 </sup></th>
+<th><sup>6 </sup></th>
+<th><sup>7 </sup></th>
+<th><sup>8 </sup></th>
+<th><sup>9 </sup></th>
+<th><sup>10 </sup></th>
+<th><sup>11 </sup></th>
+<th><sup>12 </sup></th>
+<th><sup>13 </sup></th>
+<th><sup>14 </sup></th>
+<th><sup>15 </sup></th>
+<th><sup>16 </sup></th>
+<th><sup>17 </sup></th>
+<th><sup>18 </sup></th>
+<th><sup>19 </sup></th>
+<th><sup>20 </sup></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td></td>
+<td>S</td>
+<td>e</td>
+<td>t</td>
+<td></td>
+<td>T</td>
+<td>e</td>
+<td>m</td>
+<td>p</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>T</td>
+<td>e</td>
+<td>m</td>
+<td>p</td>
+<td>°</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>B</td>
+<td>e</td>
+<td>a</td>
+<td>k</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>T</td>
+<td>e</td>
+<td>x</td>
+<td>t</td>
+<td></td>
+<td>M</td>
+<td>e</td>
+<td>s</td>
+<td>s</td>
+<td>a</td>
+<td>g</td>
+<td>e</td>
+<td></td>
+<td>H</td>
+<td>e</td>
+<td>r</td>
+<td>e</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+</div>
 
 We created also some custom funcion to better manage those screens:
 
