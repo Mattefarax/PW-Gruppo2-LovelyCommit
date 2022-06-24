@@ -17,7 +17,7 @@
 
 ## **Addressing**
 
-As message structure we decided to use a common structure designed as follows:
+As message structure we decided to use a common structure designed as follows: 
 
 <div  align="center">
 <table>
