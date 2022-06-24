@@ -14,7 +14,7 @@
 </div>
 
 <div align="center">
-<a href="./Docs/Schema.pdf"><img src="../Images/BoardSchema.Jpg" alt="Board schema" width=600></a>
+<a href="./Docs/Schema.pdf"><img src="../Images/BoardSchema.jpg" alt="Board schema" width=600></a>
 </div>
 
 For better mantainability of the code wedecided to split it in libraris.   
