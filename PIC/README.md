@@ -28,7 +28,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 
 #### *Home*
 
-|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|
+|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |>| |R|e|a|l| |T|i|m|e| |V|a|l|u|e|s| | |
 | | |C|o|n|f|i|g|u|r|a|t|i|o|n| | | | | |
@@ -37,7 +37,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 
 #### *Real Time Values*
 
-|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|
+|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |>| |B|e|a|k| | | | | | | | | | | | | | |
 |T|e|m|p|°| | | | |W|N| | | | | |H|u|m|%|
@@ -46,7 +46,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 
 #### *Configuration*
 
-|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20|
+|<sup>1 </sup>|<sup>2 </sup>|<sup>3 </sup>|<sup>4 </sup>|<sup>5 </sup>|<sup>6 </sup>|<sup>7 </sup>|<sup>8 </sup>|<sup>9 </sup>|<sup>10 </sup>|<sup>11 </sup>|<sup>12 </sup>|<sup>13 </sup>|<sup>14 </sup>|<sup>15 </sup>|<sup>16 </sup>|<sup>17 </sup>|<sup>18 </sup>|<sup>19 </sup>|<sup>20 </sup>|
 |-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|
 |>| |S|e|t| |T|e|m|p| | | | | |T|e|m|p|°|
 | | |B|e|a|k| | | | | | | | | | | | | | |
