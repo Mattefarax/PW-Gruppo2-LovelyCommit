@@ -20,6 +20,7 @@
 #include "UART.h"
 #include "QUEUE.h"
 #include "PROTO.h"
+#include "MENU.h"
 
 
 char UARTRead;
@@ -50,6 +51,14 @@ void main(void) {
     UART_Init(baudRate);
     LCD_Init();
     
+    temp_1_2 = 27;
+    temp_2_2 = 3;
+    setTemp_1_2 = 28;
+    setTemp_2_2 = 5;
+    humidity_1_2 = 30; 
+    humidity_2_2 = 5;
+    
+    protoStatusByte = 0x03;
     while(1)
     {
         if ( (countMilli/1000 >= payloadAddrRetry) && (addr == 0)) 
@@ -64,7 +73,7 @@ void main(void) {
         }
         if ( (lastReceiveSec >= messageOffsetTimeout) && (queueElement != 0))
         {
-            PROTO_QueueChecker();   
+            PROTO_QueueChecker();
         }
     }
     return;

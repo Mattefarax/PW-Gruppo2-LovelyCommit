@@ -1,6 +1,6 @@
 #include "CRC.h"
 
-char *CRC_calc(char buff[], char queueElement) //big endian in buffer 0
+char *CRC_Calc(char buff[], char queueElement) //big endian in buffer 0
 {
     unsigned short crc = 0xFFFF;
     for (char i = 0; i < queueElement; i++)
@@ -26,4 +26,23 @@ char *CRC_calc(char buff[], char queueElement) //big endian in buffer 0
     char crcArray[] = { LowCRC, HighCRC };
 
     return crcArray;     //when che operation is over return the crc
+}
+char CRC_Check(char buff[], char len)
+{
+    char *payload_crc = CRC_Calc(buff, len);
+    if ((buff[len] == payload_crc[0])&&(buff[len+1] == payload_crc[1]))
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+char *CRC_Add(char buff[], char len)
+{
+    char *payload_crc = CRC_Calc(buff, len); 
+    buff[len] = payload_crc[0];
+    buff[len+1] = payload_crc[1];
+    return buff;
 }

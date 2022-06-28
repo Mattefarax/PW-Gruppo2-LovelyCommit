@@ -15,3 +15,10 @@ void UART_Send(char dataSend)
     PIR1 &= ~0x10;
     TXREG = dataSend;
 }
+void UART_SendBuffer(char buff[], char len)
+{
+    for (char ind = 0; ind < len; ind++)
+    {
+        UART_Send(buff[ind]);
+    }
+}
