@@ -1,6 +1,6 @@
-[< Home](./README.md)
+[< Home](./)
 
-[<p align="right">uController ></p>](./PIC/README.md)
+[<p align="right">uController ></p>](./PIC/)
 
 <!--![Train gif](./Images/train.gif)-->
 <p align="center"><img src="Images/train.gif" alt="Train gif" width="500" height="auto"/></p>
