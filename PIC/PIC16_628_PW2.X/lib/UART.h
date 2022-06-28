@@ -7,5 +7,6 @@
 
 void UART_Init(long baudRate);
 void UART_Send(char dataSend);
+void UART_SendBuffer(char buff[], char len);
 
 #endif

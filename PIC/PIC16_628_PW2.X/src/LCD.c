@@ -32,8 +32,9 @@ void LCD_Init()
 }
 void LCD_Write(char phrase[])
 {
+    
     //if(phrase[j] == '\0')
-    for(int j = 0; j < 32; j++)
+    for(int j = 0; j < 20; j++)
     {
         if(phrase[j] == '\0'){break;};
         LCD_Send(phrase[j], 0);

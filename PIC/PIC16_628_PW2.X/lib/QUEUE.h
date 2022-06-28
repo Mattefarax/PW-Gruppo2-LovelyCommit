@@ -3,9 +3,8 @@
 #include <xc.h>
 
 //Declarations
-
-char queueLenght = 8;
-char queue[8];
+#define queueLenght 30
+char queue[queueLenght];
 char queueElement = 0;
 
 char QUEUE_Insert(char element);

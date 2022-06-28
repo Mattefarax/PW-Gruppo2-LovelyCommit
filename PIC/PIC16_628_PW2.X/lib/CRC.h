@@ -3,6 +3,8 @@
 #include <xc.h>
 
 //Declaration
-char *CRC_calc(char[], char);
+char *CRC_Calc(char[], char);
+char CRC_Check(char buff[], char len);
+char *CRC_Add(char buff[], char len);
 
 #endif
