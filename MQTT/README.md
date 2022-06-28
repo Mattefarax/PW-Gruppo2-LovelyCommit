@@ -1,8 +1,10 @@
 [< Home](../README.md)
 
-[<p align="right">Cloud ></p>](../Cloud/README.md)
+[<p align="right">IoT Hub Specification ></p>](../IoT_Hub/README.md)
 
 **<h1 align="center">MQTT Specification</h1>**
+***<h2 align="center">Deprecated</h2>***
+***
 
 <div align="center">  
 <h4>
