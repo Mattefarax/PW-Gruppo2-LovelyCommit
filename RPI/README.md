@@ -1,6 +1,6 @@
 [< Home](../README.md)
 
-[<p align="right">MQTT Specification ></p>](../MQTT/README.md)
+[<p align="right">MQTT Specification [Deprecated] ></p>](../MQTT/README.md)
 
 **<h1 align="center">RPI Programs Specification</h1>**
 
@@ -9,7 +9,9 @@
     <a href="#quick-start"> Quick Start </a>
   | <a href="#protocol"> Protocol </a>
   | <a href="#amqp"> AMQP </a>
-  | <a href="#mqtt"> MQTT </a>
+  | <a href="#mqtt-deprecated"> MQTT [Deprecated] </a>
+  | <a href="#iot-hub"> IoT Hub </a>
+  
 </h4>
 </div>
 
@@ -63,6 +65,10 @@ You will find more information [here](../Protocol/README.md).
 
 
 
-## **MQTT**
+## **MQTT** [*Deprecated*]
 
 You will find more information [here](../MQTT/README.md).
+
+## **IoT Hub**
+
+You will find more information [here](../IoT_Hub/README.md)
