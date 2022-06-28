@@ -179,7 +179,7 @@ Every data sent to and from the uC will have to go through it on a specific queu
 
 This approach allows us to separate the code used to interpret send and recive messages of the uCs from the code used for the RPI's HMI or to send and recive data from the Cloud.
 
-### **Mqtt**
+### **Mqtt** [*Deprecated*]
 
 This protocol is used to interaction between the RPI and the Cloud's services.   
 We implemented the AMQP's queue for when the connection is down or the Cloud is unreachable but when the connection is established we will use this protocol to comunicate.
@@ -199,7 +199,8 @@ The comands then will be directed on the apropriated topic to reach the RPI.
 * [uController section](./PIC/)
 * [Protocol section](./Protocol/)
 * [RaspberryPi section](./RPI/)
-* [MQTT section](./MQTT/)
+* [MQTT section [Deprecated]](./MQTT/)
+* [IoT Hub section](./IoT_Hub/)
 * [Cloud section](./Cloud/)
 
 ## **LICENSE**
