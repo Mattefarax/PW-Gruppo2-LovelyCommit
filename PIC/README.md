@@ -1,4 +1,4 @@
-[< Home](../)
+[< Home](/)
 
 [<p align="right">Protocol Specification ></p>](../Protocol/)
 
