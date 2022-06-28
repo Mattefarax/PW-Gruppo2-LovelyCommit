@@ -19,6 +19,7 @@
   | <a href="#raspberrypi"> RaspberryPi </a>
   | <a href="#cloud"> Cloud </a>
   | <a href="#documents"> Documents </a>
+  | <a href="#contributores"> Contributores </a>
 </h4>
 </div>
 
@@ -72,7 +73,7 @@ Additional features may be proposed by individual groups.
 
 ## **Schemas**
 
-`To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository`
+To be able to view any .drowio file open [this link](https://draw.io), than open the file from the repository
 
 <div  align="center">
 <table>
@@ -204,3 +205,13 @@ The comands then will be directed on the apropriated topic to reach the RPI.
 ## **LICENSE**
 
 LovelyCommit is provided under the [GNU General Public License Version 3](./LICENSE)
+
+## **Contributores**
+
+<div align="center">
+<a href="https://github.com/Mattefarax/PW-Gruppo2-LovelyCommit/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Mattefarax/PW-Gruppo2-LovelyCommit" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
+</div>
