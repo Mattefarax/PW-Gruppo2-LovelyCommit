@@ -1,6 +1,6 @@
 [< Home](../README.md)
 
-[<p align="right">IoT Hub Specification ></p>](./README.md)
+[<p align="right">Cloud ></p>](../Cloud/README.md)
 
 **<h1 align="center">IoT Hub Specification</h1>**
 
