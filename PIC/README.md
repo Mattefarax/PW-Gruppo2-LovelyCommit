@@ -36,6 +36,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <table>
 <thead>
 <tr>
+<th></th>
 <th><sup>1 </sup></th>
 <th><sup>2 </sup></th>
 <th><sup>3 </sup></th>
@@ -60,6 +61,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 </thead>
 <tbody>
 <tr>
+<th><sup>1</sup></th>
 <td>&gt;</td>
 <td></td>
 <td>R</td>
@@ -82,6 +84,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>2</sup></th>
 <td></td>
 <td></td>
 <td>C</td>
@@ -104,6 +107,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>3</sup></th>
 <td></td>
 <td></td>
 <td></td>
@@ -126,6 +130,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>4</sup></th>
 <td></td>
 <td>T</td>
 <td>e</td>
@@ -157,6 +162,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <table>
 <thead>
 <tr>
+<th></th>
 <th><sup>1 </sup></th>
 <th><sup>2 </sup></th>
 <th><sup>3 </sup></th>
@@ -181,6 +187,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 </thead>
 <tbody>
 <tr>
+<th><sup>1</sup></th>
 <td>&gt;</td>
 <td></td>
 <td>B</td>
@@ -203,6 +210,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>2</sup></th>
 <td>T</td>
 <td>e</td>
 <td>m</td>
@@ -225,6 +233,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td>%</td>
 </tr>
 <tr>
+<th><sup>3</sup></th>
 <td></td>
 <td></td>
 <td></td>
@@ -247,6 +256,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>4</sup></th>
 <td></td>
 <td>T</td>
 <td>e</td>
@@ -279,6 +289,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <table>
 <thead>
 <tr>
+<th></th>
 <th><sup>1 </sup></th>
 <th><sup>2 </sup></th>
 <th><sup>3 </sup></th>
@@ -303,6 +314,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 </thead>
 <tbody>
 <tr>
+<th><sup>1</sup></th>
 <td>&gt;</td>
 <td></td>
 <td>S</td>
@@ -325,6 +337,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td>°</td>
 </tr>
 <tr>
+<th><sup>2</sup></th>
 <td></td>
 <td></td>
 <td>B</td>
@@ -347,6 +360,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>3</sup></th>
 <td></td>
 <td></td>
 <td></td>
@@ -369,6 +383,7 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 </tr>
 <tr>
+<th><sup>4</sup></th>
 <td></td>
 <td>T</td>
 <td>e</td>
