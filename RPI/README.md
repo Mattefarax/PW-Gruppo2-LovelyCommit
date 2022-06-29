@@ -57,7 +57,31 @@ You will find more information [here](../Protocol/README.md).
 
 ## **AMQP**
 
+We decided to implement AMQP in our project to benefit from it's queue system.   
+Using this functionality we've been able to detach the serial receiver program from the IoT Hub's device code.   
+Thanks to it we managed to create a micro-service alike structure inside the Raspberry.
 
+We created a queue called "telemetryQueue" where travels a JSON formatted like this:
+``` JSON
+{
+  "idVagone": 1,
+  "Current_Temperature": "27,3",
+  "Desired_Temperature": "28,5",
+  "Humidity": "30,5",
+  "Emergency Status": "\\u0000",
+  "Back Door": "\\u0000",
+  "Front Door": "\\u0001",
+  "Toilette": "\\u0001",
+  "Timestamp": "2022-06-29 15:16:28.042769"
+}
+```
+Where travels the updates for the device twin configurations with the newly received telemetry.
+
+We used also a queue called 'commandQueue' where travels a JSON formatted like this:
+``` JSON
+
+```
+Where travels the new comands comming from the desired section of the device twin configuration.
 
 ## **MQTT** [*Deprecated*]
 
