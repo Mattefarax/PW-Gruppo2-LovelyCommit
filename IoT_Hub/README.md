@@ -20,7 +20,7 @@ Also the management of all the devices that would have requires a differnet topi
 
 Every train will have it's own twin configuration where you'll find wevry telemetry values sent from every wagon, you can find more information on the telemetry sent from uCs that controls the wagons [here](../Protocol/README.md#payload-telemetry)
 
-#### **Config Structure**
+#### **Configuration Structure**
 
 ``` JSON
 
