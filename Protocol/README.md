@@ -36,8 +36,6 @@ As message structure we decided to use a common structure designed as follows:
 
 ## **Addresses**
 
-
-
 We decided to inspire our serial network to the tcp/ip's one, so we gave to the RPI the available first id and use the very last one for the broadcast address to send to all the uC the same message. In this way the uCs are going to have 254 available address.
 
 <div  align="center">
