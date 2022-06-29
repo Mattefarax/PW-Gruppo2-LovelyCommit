@@ -21,6 +21,38 @@
 
 ## **DB**
 
+4 collection
+
+* users
+  * username
+  * password
+  * train management permissions
+  * creation date
+  * last access
+* trains
+  * id train
+  * number of wagons
+  * date creation
+  * date last update
+* telemetries
+  * id telemetry
+  * id train
+  * wagon number
+  * current temperature
+  * desired temperature
+  * humidity
+  * emergency status
+  * back door
+  * front door
+  * toilette status
+  * timestamp
+* alarms
+  * id train
+  * sender
+  * emergency message
+  * creation date
+  * closing date
+
 ## **MQTT** [*Deprecated*]
 
 You will find more information [here](../MQTT/README.md).
