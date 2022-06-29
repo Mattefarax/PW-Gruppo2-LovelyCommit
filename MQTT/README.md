@@ -4,7 +4,6 @@
 
 **<h1 align="center">MQTT Specification</h1>**
 ***<h2 align="center">Deprecated</h2>***
-***
 
 <div align="center">  
 <h4>
