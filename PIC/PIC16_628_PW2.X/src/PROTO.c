@@ -25,8 +25,9 @@ void PROTO_QueueChecker()
 {
     if (queue[1] == 0x00) //RPI Addr
     {
-        if ((addrRequested == 1) && (queue[0] == 0xff) && (queue[2] == 0x01) && (CRC_Check(queue, 4))) //My request //On Broadcast //With IDResponse Code
+        if ((addrRequested == 1) && (queue[0] == 0xff) && (queue[2] == 0x01) && (CRC_Check(queue, 4))) //My request //On Broadcast //With IDResponse Code //CRC Check
         {
+            //ADDRESS
             addr = queue[3];
             addrRequested = 0;
         }

@@ -22,9 +22,6 @@
 #include "PROTO.h"
 #include "MENU.h"
 
-
-char UARTRead;
-#define baudRate 115200
 #define preloadTMR 131
 
 char count = 0;
@@ -33,9 +30,46 @@ char lastReceiveSec = 0;
 
 char *CharToLCD (char num);
 unsigned long Power(char num, char times);
+void PIC_Init();
 
 
 void main(void) {
+    
+    PIC_Init();
+    UART_Init(baudRate);
+    LCD_Init();
+    
+    //Test value
+    temp_1_2 = 27;
+    temp_2_2 = 3;
+    setTemp_1_2 = 28;
+    setTemp_2_2 = 5;
+    humidity_1_2 = 30; 
+    humidity_2_2 = 5;
+    protoStatusByte = 0x03;
+    
+    while(1)
+    {
+        if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
+        {
+            PROTO_HandshakeReq();
+            countMilli = 0;
+        }
+        if ( (countMilli/1000 >= payloadSendMs) && (addr != 0)) //Schedule payload transmission
+        {
+            PROTO_SendPayload();
+            countMilli = 0;
+        }
+        if ( (lastReceiveSec >= payloadValidationTimeout) && (queueElement != 0)) //Validate the queue if a time of transmission-silence occurred
+        {
+            PROTO_QueueChecker();
+        }
+    }
+    return;
+}
+
+void PIC_Init()
+{
     //Interrupt configuration
     INTCON = 0x80; //GIE 
     INTCON |= 0x40; //PIEI
@@ -48,37 +82,7 @@ void main(void) {
     TRISC = 0X80;
     TRISD = 0X00;
     TRISE = 0X00;
-    UART_Init(baudRate);
-    LCD_Init();
-    
-    temp_1_2 = 27;
-    temp_2_2 = 3;
-    setTemp_1_2 = 28;
-    setTemp_2_2 = 5;
-    humidity_1_2 = 30; 
-    humidity_2_2 = 5;
-    
-    protoStatusByte = 0x03;
-    while(1)
-    {
-        if ( (countMilli/1000 >= payloadAddrRetry) && (addr == 0)) 
-        {
-            PROTO_HandshakeReq();
-            countMilli = 0;
-        }
-        if ( (countMilli/1000 >= payloadSendSecond) && (addr != 0))
-        {
-            PROTO_SendPayload();
-            countMilli = 0;
-        }
-        if ( (lastReceiveSec >= messageOffsetTimeout) && (queueElement != 0))
-        {
-            PROTO_QueueChecker();
-        }
-    }
-    return;
 }
-
 char *CharToLCD (char num)
 {
     char res[4];
@@ -114,14 +118,14 @@ void __interrupt() ISR()
     {
         //200us each interrupt
         count++;
-        if (count >= 5)
+        if (count >= 5) //Each ms
         {
             countMilli++;
             count = 0;
-        }
-        if (lastReceiveSec <= messageOffsetTimeout)
-        {
-            lastReceiveSec++;
+            if (lastReceiveSec <= payloadValidationTimeout) //
+            {
+                lastReceiveSec++;
+            }
         }
         
         TMR0 = preloadTMR;
