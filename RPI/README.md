@@ -64,6 +64,7 @@ Thanks to it we managed to create a micro-service alike structure inside the Ras
 We created a queue called "telemetryQueue" where travels a JSON formatted like this:
 ``` JSON
 {
+  "Telemetry": {
   "idVagone": 1,
   "Current_Temperature": "27,3",
   "Desired_Temperature": "28,5",
@@ -73,6 +74,12 @@ We created a queue called "telemetryQueue" where travels a JSON formatted like t
   "Front Door": "\\u0001",
   "Toilette": "\\u0001",
   "Timestamp": "2022-06-29 15:16:28.042769"
+  },
+  "Emergency": {
+    "IdSender": 1,
+    "CreationDate": "2022-06-29 15:16:28.042769",
+    "EmergencyMessage": "Generic Error"
+  }
 }
 ```
 Where travels the updates for the device twin configurations with the newly received telemetry.
