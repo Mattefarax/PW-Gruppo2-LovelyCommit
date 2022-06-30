@@ -27,7 +27,7 @@ void LCD_Init()
     LCD_Send(L_OFF, 1);
     LCD_Send(L_ON, 1);
     LCD_Send(L_CLR, 1);
-    LCD_Send(L_CUR, 1);
+    LCD_Send(L_NCR, 1);
     LCD_Send(L_L1_C1, 1);
 }
 void LCD_Write(char phrase[])

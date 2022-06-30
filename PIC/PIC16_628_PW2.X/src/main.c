@@ -23,21 +23,35 @@
 #include "MENU.h"
 
 #define preloadTMR 131
+#define baudRate 115200
 
+#define BTN_UP 0X01
+#define BTN_ENTER 0X02
+
+//Counters
 char count = 0;
 int countMilli = 0;
 char lastReceiveSec = 0;
 
+//Buttons
+char memBtnUp = 1;
+char memBtnEnter = 1;
+
 char *CharToLCD (char num);
 unsigned long Power(char num, char times);
 void PIC_Init();
-
+char menuVoiceRTV[] = "Real Time value";
+char menuVoiceCFG[] = "Configuration";
+char menuVoiceBACK[] = "Back";
+char menuVoiceTT[] = "Target Temp";
+char actualPage = 0;
 
 void main(void) {
     
     PIC_Init();
     UART_Init(baudRate);
     LCD_Init();
+    MENU_Page(menuVoiceRTV, menuVoiceCFG);
     
     //Test value
     temp_1_2 = 27;
@@ -50,6 +64,50 @@ void main(void) {
     
     while(1)
     {
+        
+        if (!(PORTB & BTN_UP) && (!memBtnUp) && (actualPage != 1)) //Detect rising edge 
+        {
+            MENU_Toggle();
+        }
+        memBtnUp = !(PORTB & BTN_UP);
+        
+        if (!(PORTB & BTN_ENTER) && (!memBtnEnter)) //Detect rising edge 
+        {
+            
+            if(actualPage == 0) //Page0 
+            {
+                if (posCursore == 1) //Real Time Value 
+                {
+                    MENU_Page(menuVoiceBACK, "");
+                    actualPage = 1;
+                }
+                else //Configurations
+                {
+                    MENU_Page(menuVoiceBACK, menuVoiceTT);
+                    actualPage = 2;
+                }
+            }
+            else if(actualPage == 1)//Page1 -> Real Time Value 
+            {
+                if (posCursore == 1) //Back
+                {
+                    MENU_Page(menuVoiceRTV, menuVoiceCFG);
+                    actualPage = 0;
+                }
+                else //Target Temperature
+                {
+                    //TARGET CHANGE IMPLEMENTATION
+                }
+            }
+            else if(actualPage == 2)//Page2 -> Configuration
+            {
+                MENU_Page(menuVoiceRTV, menuVoiceCFG);
+                actualPage = 0;
+            }
+        }
+        memBtnEnter = !(PORTB & BTN_ENTER);
+        
+        
         if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
         {
             PROTO_HandshakeReq();
@@ -82,6 +140,8 @@ void PIC_Init()
     TRISC = 0X80;
     TRISD = 0X00;
     TRISE = 0X00;
+    TRISB = 0X00;
+    TRISB |= 0X07; //Buttons
 }
 char *CharToLCD (char num)
 {
@@ -112,7 +172,7 @@ void __interrupt() ISR()
         {
             QUEUE_Insert(UARTRead);
         }
-        lastReceiveSec = 0;
+        lastReceiveSec = 0; //If something is received thru uart this counter is reset
     }
     if(INTCON & 0x04) //Timer 
     {
@@ -122,7 +182,7 @@ void __interrupt() ISR()
         {
             countMilli++;
             count = 0;
-            if (lastReceiveSec <= payloadValidationTimeout) //
+            if (lastReceiveSec <= payloadValidationTimeout) 
             {
                 lastReceiveSec++;
             }

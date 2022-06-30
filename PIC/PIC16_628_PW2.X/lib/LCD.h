@@ -29,7 +29,6 @@
 //Pin Setup
 #define L_RS 0X04 //LCD Register Selector (Command or Character)
 #define L_EN 0X02 //LCD Enable
-//Declarations
 
 void LCD_Init(void);
 void LCD_Send(char, char);

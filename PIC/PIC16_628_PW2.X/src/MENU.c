@@ -3,7 +3,7 @@
 
 void drawCursore(char pos);
 
-void MENU_Page(char option1[], char option2[], char pointerLocation){
+void MENU_Page(char option1[], char option2[]){
     
     LCD_Send(L_CLR, 1); //Clear the LCD
     drawCursore(1); //Draw the menu pointer on the first row
@@ -22,12 +22,9 @@ void MENU_Toggle(){
     }
 }
 
-char MENU_Enter(){
-    return posCursore;
-}
 
 void drawCursore(char pos)
-{
+{//efficenza da migliorare
     if(pos==1){
         posCursore=1;
         //sposto il cursore sulla prima riga
