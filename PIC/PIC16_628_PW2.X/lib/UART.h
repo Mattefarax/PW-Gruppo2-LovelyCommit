@@ -1,7 +1,11 @@
 #ifndef UART_h
 #define UART_h
 #include <xc.h>
-#define _XTAL_FREQ 20000000
+#define _XTAL_FREQ 8000000
+
+#define RE_Pin 0x01
+#define TX_Pin 0x40
+#define RX_Pin 0x80
 
 char UARTRead;
 

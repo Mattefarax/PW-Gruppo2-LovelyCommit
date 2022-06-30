@@ -48,3 +48,53 @@ void drawCursore(char pos)
         LCD_Send('>',  0); //8bit
     }
 }
+
+void MENU_Check()
+{
+    if (!(PORTB & BTN_UP) && (!memBtnUp) && (actualPage != 1)) //Detect rising edge of the up button
+    {
+        MENU_Toggle();
+    }
+    memBtnUp = !(PORTB & BTN_UP);
+
+    if (!(PORTB & BTN_ENTER) && (!memBtnEnter)) //Detect rising edge of the enter button
+    {
+
+        if(actualPage == 0) //Page0 
+        {
+            if (posCursore == 1) //Real Time Value 
+            {
+                MENU_Page(menuVoiceBACK, "");
+                actualPage = 1;
+            }
+            else //Configurations
+            {
+                MENU_Page(menuVoiceBACK, menuVoiceTT);
+                actualPage = 2;
+            }
+        }
+        else if(actualPage == 1)//Page1 -> Real Time Value 
+        {
+            MENU_Home();
+            actualPage = 0;   
+        }
+        else if(actualPage == 2)//Page2 -> Configuration
+        {
+            if (posCursore == 1) //Back
+            {
+                MENU_Home();
+                actualPage = 0;
+            }
+            else //Target Temperature
+            {
+                //TARGET CHANGE IMPLEMENTATION
+            }
+        }
+    }
+    memBtnEnter = !(PORTB & BTN_ENTER);
+}
+
+void MENU_Home()
+{
+    MENU_Page(menuVoiceRTV, menuVoiceCFG);
+} 

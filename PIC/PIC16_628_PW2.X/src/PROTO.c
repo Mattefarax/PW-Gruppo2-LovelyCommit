@@ -6,9 +6,13 @@
 
 void PROTO_HandshakeReq()
 {
+    char handshake[5] = { 0x00, 0xff, 0x00 }; //  ID RPI - ID Broadcast - Code
+    UART_SendBuffer(CRC_Add(handshake, 3), 5);
+    /*
     UART_Send(0x00); //ID RPI
     UART_Send(0xff); //ID Broadcast
     UART_Send(0x00); //Code
+    */
     addrRequested = 1;
 }
 

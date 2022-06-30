@@ -2,7 +2,7 @@
 #define LCD_h
 #include <xc.h>
 
-#define _XTAL_FREQ 20000000
+#define _XTAL_FREQ 8000000
 
 //Clear Display
 #define L_CLR 0X01

@@ -8,7 +8,7 @@ char displayText[20];
 
 #define payloadValidationTimeout 2 //After this time(ms) of no receive data the queue is checked for payload 
 #define payloadAddrRetryMs 2 //Time(ms) between handshakes retry
-#define payloadSendMs 10 //Scheduling time(ms) for send payload
+#define payloadSendS 10 //Scheduling time(s) for send payload
 
 //Each of used bit definition for 10th byte of the payload  
 #define EMERGENCY_BIT 0X08 
