@@ -8,8 +8,8 @@
 <h4>
     <a href="#quick-start"> Quick Start </a>
   | <a href="#protocol"> Protocol </a>
-  | <a href="#amqp"> AMQP </a>
   | <a href="#mqtt-deprecated"> MQTT [Deprecated] </a>
+  | <a href="#amqp"> AMQP </a>
   | <a href="#iot-hub"> IoT Hub </a>
   
 </h4>
@@ -49,11 +49,21 @@ For connecting through serial to the uC you can find the documentation <a href="
 <code class="lang-cmd">pip <span class="hljs-keyword">install</span> pyserial</code>
 </pre>
 </li>
+
+<li>
+To host the AMQP queue manager on a docker compose you can issue the following comand:
+<pre><code class="lang-bash">docker run -it --rm --name rabbitmq -<span class="hljs-selector-tag">p</span> <span class="hljs-number">5672</span>:<span class="hljs-number">5672</span> -<span class="hljs-selector-tag">p</span> <span class="hljs-number">15672</span>:<span class="hljs-number">15672</span> rabbitmq:<span class="hljs-number">3.10</span>-management
+</code></pre>
+</li>
 </ul>
 
 ## **Protocol**
 
 You will find more information [here](../Protocol/README.md).
+
+## **MQTT** [*Deprecated*]
+
+You will find more information [here](../MQTT/README.md).
 
 ## **AMQP**
 
@@ -62,6 +72,7 @@ Using this functionality we've been able to detach the serial receiver program f
 Thanks to it we managed to create a micro-service alike structure inside the Raspberry.
 
 We created a queue called "telemetryQueue" where travels a JSON formatted like this:
+
 ``` JSON
 {
   "Telemetry": {
@@ -82,6 +93,7 @@ We created a queue called "telemetryQueue" where travels a JSON formatted like t
   }
 }
 ```
+
 Where travels the updates for the device twin configurations with the newly received telemetry.
 
 We used also a queue called 'commandQueue' where travels a JSON formatted like this:
@@ -89,10 +101,6 @@ We used also a queue called 'commandQueue' where travels a JSON formatted like t
 
 ```
 Where travels the new comands comming from the desired section of the device twin configuration.
-
-## **MQTT** [*Deprecated*]
-
-You will find more information [here](../MQTT/README.md).
 
 ## **IoT Hub**
 
