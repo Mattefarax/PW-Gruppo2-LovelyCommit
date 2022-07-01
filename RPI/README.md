@@ -75,31 +75,46 @@ We created a queue called "telemetryQueue" where travels a JSON formatted like t
 
 ``` JSON
 {
-  "Telemetry": {
-  "idVagone": 1,
-  "Current_Temperature": "27,3",
-  "Desired_Temperature": "28,5",
-  "Humidity": "30,5",
-  "Emergency Status": "\\u0000",
-  "Back Door": "\\u0000",
-  "Front Door": "\\u0001",
-  "Toilette": "\\u0001",
-  "Timestamp": "2022-06-29 15:16:28.042769"
-  },
-  "Emergency": {
-    "IdSender": 1,
-    "CreationDate": "2022-06-29 15:16:28.042769",
-    "EmergencyMessage": "Generic Error"
-  }
+    "Telemetry":{
+        "idVagone":1,
+        "Current_Temperature":"27,3",
+        "Desired_Temperature":"28,5",
+        "Humidity":"30,5",
+        "Emergency_Status":"\\u0000",
+        "Back_Door":"\\u0000",
+        "Front_Door":"\\u0001",
+        "Toilette":"\\u0001",
+        "Timestamp":"2022-06-29 15:16:28.042769"
+    },
+    "Emergency":{
+        "IdSender":1,
+        "CreationDate":"2022-06-29 15:16:28.042769",
+        "EmergencyMessage":"Generic Error"
+    }
 }
 ```
 
 Where travels the updates for the device twin configurations with the newly received telemetry.
 
 We used also a queue called 'commandQueue' where travels a JSON formatted like this:
-``` JSON
 
+``` JSON
+{
+    "Comands": {
+        "IdVagone": 1,
+        "Desired_Temperature": "28,5",
+        "Timestamp": "2022-06-29 15:16:28.042769",
+        "Toggle_Back_Door": false,
+        "Toggle_Front_Door": false,
+        "Text_Message": "Prova 1 2 3 Prova"
+    },
+    "Emergency_Set": {
+        "Timestamp": "2022-06-29 15:16:28.042769",
+        "EmergencyMessage": "Generic Error"
+    }
+}
 ```
+
 Where travels the new comands comming from the desired section of the device twin configuration.
 
 ## **IoT Hub**
