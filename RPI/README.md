@@ -61,10 +61,6 @@ To host the AMQP queue manager on a docker compose you can issue the following c
 
 You will find more information [here](../Protocol/README.md).
 
-## **MQTT** [*Deprecated*]
-
-You will find more information [here](../MQTT/README.md).
-
 ## **AMQP**
 
 We decided to implement AMQP in our project to benefit from it's queue system.   
@@ -116,6 +112,10 @@ We used also a queue called 'commandQueue' where travels a JSON formatted like t
 ```
 
 Where travels the new comands comming from the desired section of the device twin configuration.
+
+## **MQTT** [*Deprecated*]
+
+You will find more information [here](../MQTT/README.md).
 
 ## **IoT Hub**
 
