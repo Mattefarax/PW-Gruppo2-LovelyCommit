@@ -92,7 +92,7 @@ We created a queue called "telemetryQueue" where travels a JSON formatted like t
 
 Where travels the updates for the device twin configurations with the newly received telemetry.
 
-We used also a queue called 'commandQueue' where travels a JSON formatted like this:
+We used also a queue called "commandQueue" where travels a JSON formatted like this:
 
 ``` JSON
 {
