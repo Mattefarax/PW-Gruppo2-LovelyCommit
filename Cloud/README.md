@@ -25,8 +25,6 @@ We decided to use a non-relational documental database for its flexibility: it w
 
 We split datas in 4 collection where only 2 stores data sent from and to the train. The other 2 collections are purely organizational.
 
-4 collection
-
 #### **Users**
 
 <div align="center">
