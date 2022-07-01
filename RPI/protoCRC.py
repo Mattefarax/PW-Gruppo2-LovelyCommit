@@ -3,7 +3,7 @@ import numpy as np
 def crc_calc(buff):
     crc = (0xFFFF)
     for i in buff:
-        crc = (crc ^ (i | 0x0000));      #for every byte that compose the request update the crc following the polynomials operation
+        crc = crc ^ (crc ^ (i | 0x0000))      #for every byte that compose the request update the crc following the polynomials operation
         for  j in range(8, 0, -1):
             if ((crc & 1) != 0):
                 crc = (crc >> 0x0001)
@@ -11,8 +11,8 @@ def crc_calc(buff):
             else:
                 crc = (crc >> 1)
     
-    HighCRC = np.int8(crc >> 8)
-    LowCRC = np.int8(crc & 0xFF)
+    HighCRC = bytes(crc >> 8)
+    LowCRC = bytes(crc & 0xFF)
 
     crcArray = [ LowCRC, HighCRC ]
 
