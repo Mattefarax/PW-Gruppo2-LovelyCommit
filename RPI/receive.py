@@ -1,53 +1,53 @@
+import asyncio
+import random
 import pika, sys, os
 from paho.mqtt.client import Client
 import json
+from iotHub_invioReported import asyncall, main as sender
 
 from sqlalchemy import null
 
+import tracemalloc
+from azure.iot.device.aio import IoTHubDeviceClient
+tracemalloc.start()
+jsonMessage=""
 
-def main():
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-    channel = connection.channel()
 
-    channel.queue_declare(queue='hello')
-    client=Client(client_id="client_1")
-    #client.connect('192.168.101.111',port=1883) #broker a cui si deve connettere il client
-    client.connect('test.mosquitto.org')
-        
-    def callback(ch, method, properties, body):
-        print(" [x] Received %r" % body)
-        client.subscribe('topic_1',2)
-        client.publish(topic = "topic_2", payload = body) 
-        print("Successfully published on MQTT body"%body)
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+channel = connection.channel()
 
-    channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
+channel.queue_declare(queue='hello')
 
-    # print(' [*] Waiting for messages. To exit press CTRL+C')
-    channel.start_consuming()
 
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print('Interrupted')
-        try:
-            sys.exit(0)
-        except SystemExit:
-            os._exit(0)
+def callback(channel, method_frame, header_frame,body): 
+    print(" [x] Received %r" %body)
+
+    print("Successfully passed to IotHub sender "%body)
+    global jsonMessage
+    jsonMessage=body
+    print("jsonMessage dentro callback {}", jsonMessage)
+
     
+    asyncio.run(send())
 
-#str="Supercalifragilistichespiralidoso"
-#x = {
-#   "name": "John",
-#   "age": 30,
-#   "married": True,
-#   "divorced": False,
-#   "children": ("Ann","Billy"),
-#   "pets": None,
-#   "cars": [
-#     {"model": "BMW 230", "mpg": 27.5},
-#     {"model": "Ford Edge", "mpg": 24.1}
-#   ]
-# }
-# j=json.dumps(str)
-# print(j)
+
+channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
+
+async def send():
+    global jsonMessage
+    os.environ["IOTHUB_DEVICE_CONNECTION_STRING"] ="HostName=Scapolan.azure-devices.net;DeviceId=rpiPW2Ciccia;SharedAccessKey=GSu0yw1qe+KtYilo4b9O44fW/c+Qs1Mukf89zKzmx9s="
+             #"HostName=LovelyCommitIotHub.azure-devices.net;DeviceId=Rpi-train1;SharedAccessKey=dcvdrkfRKc1r5RaD/f4k+2EqUE8Kow8YA1Mynzqi8oU="
+
+    conn_str = os.getenv("IOTHUB_DEVICE_CONNECTION_STRING")
+    device_client = IoTHubDeviceClient.create_from_connection_string("HostName=Scapolan.azure-devices.net;DeviceId=rpiPW2Ciccia;SharedAccessKey=GSu0yw1qe+KtYilo4b9O44fW/c+Qs1Mukf89zKzmx9s=")#conn_str)
+    # connect the client.
+    await device_client.connect()
+
+    property = json.loads(jsonMessage)
+    await device_client.patch_twin_reported_properties(property)
+
+    # Finally, shut down the client
+    await device_client.shutdown()
+    print("succesfully porco dio")
+
+channel.start_consuming()
