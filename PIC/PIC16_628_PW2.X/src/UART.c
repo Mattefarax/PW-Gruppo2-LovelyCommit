@@ -14,11 +14,11 @@ void UART_Init(long baudRate)
 }
 void UART_Send(char dataSend)
 {
-    //PORTE &= ~RE_Pin;
+    PORTE &= ~RE_Pin;
     while(!(PIR1 & 0x10));
     PIR1 &= ~0x10;
     TXREG = dataSend;
-    //PORTE |= RE_Pin;
+    PORTE |= RE_Pin;
 
 }
 void UART_SendBuffer(char buff[], char len)

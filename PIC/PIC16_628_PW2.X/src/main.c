@@ -30,9 +30,11 @@ char count = 0;
 int countMilli = 0;
 char lastReceiveSec = 0;
 
+#define sensorCheckSec 5
 char *CharToLCD (char num);
+
 unsigned long Power(char num, char times);
-void PIC_Init();
+void PIC_Init(void);
 
 void main(void) 
 {
@@ -54,6 +56,10 @@ void main(void)
     while(1)
     {
         MENU_Check();
+        if ((countMilli/1000 >= sensorCheckSec))
+        {
+            
+        }
         if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
         {
             PROTO_HandshakeReq();
@@ -83,10 +89,10 @@ void PIC_Init()
     OPTION_REG = 0x00; //Prescaler
     TMR0 = preloadTMR; //Pre Load Timer Value
             
+    TRISB = 0X00;
     TRISC = 0X00;
     TRISD = 0X00;
-    //TRISE = 0X00;
-    TRISB = 0X00;
+    TRISE = 0X00;
     TRISB |= 0X07; //Buttons
 }
 

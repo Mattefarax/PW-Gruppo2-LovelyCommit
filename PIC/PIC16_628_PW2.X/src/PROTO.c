@@ -68,7 +68,7 @@ void PROTO_QueueChecker()
                 {
                     displayText[chr] = queue[chr+3];
                 }
-                displayText[20] = '\0';
+                displayText[19] = '\0';
                 LCD_Send(0xD4, 1);
                 LCD_Write(displayText);
             }

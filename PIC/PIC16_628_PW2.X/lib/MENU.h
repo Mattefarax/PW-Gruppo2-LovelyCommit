@@ -17,8 +17,8 @@ char actualPage = 0;
 
 char posCursore = 0;
 void MENU_Page(char[], char[]);
-void MENU_Toggle();
-void MENU_Home();
-void MENU_Check();
+void MENU_Toggle(void);
+void MENU_Home(void);
+void MENU_Check(void);
 
 #endif
