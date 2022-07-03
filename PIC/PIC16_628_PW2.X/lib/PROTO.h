@@ -20,14 +20,9 @@ char protoStatusByte = 0x00; //X - X - X - X - EMERGENCY_BIT - BACKDOOR_BIT - FR
 char  setTemp_1_2;
 char  setTemp_2_2;
 
-//
-char  humidity_1_2; 
-char  humidity_2_2;
-char  temp_1_2;
-char  temp_2_2;
 
 void PROTO_HandshakeReq(void);
-void PROTO_SendPayload(void);
+void PROTO_SendPayload(char, char, char, char);
 void PROTO_QueueChecker(void);
 
 #endif

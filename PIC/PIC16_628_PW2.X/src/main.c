@@ -21,6 +21,7 @@
 #include "QUEUE.h"
 #include "PROTO.h"
 #include "MENU.h"
+#include "SENSORS.h"
 
 #define preloadTMR 56
 #define baudRate 9600
@@ -30,9 +31,7 @@ char count = 0;
 int countMilli = 0;
 char lastReceiveSec = 0;
 
-#define sensorCheckSec 5
 char *CharToLCD (char num);
-
 unsigned long Power(char num, char times);
 void PIC_Init(void);
 
@@ -43,22 +42,14 @@ void main(void)
     UART_Init(baudRate);
     LCD_Init();
     MENU_Home();
-    
-    //Test value
-    temp_1_2 = 27;
-    temp_2_2 = 3;
-    setTemp_1_2 = 28;
-    setTemp_2_2 = 5;
-    humidity_1_2 = 30; 
-    humidity_2_2 = 5;
-    protoStatusByte = 0x03;
+    SENSORS_Init();
     
     while(1)
     {
         MENU_Check();
         if ((countMilli/1000 >= sensorCheckSec))
         {
-            
+            SENSORS_Get();
         }
         if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
         {
@@ -67,7 +58,7 @@ void main(void)
         }
         if ( (countMilli/1000 >= payloadSendS) && (addr != 0)) //Schedule payload transmission
         {
-            PROTO_SendPayload();
+            PROTO_SendPayload(temp_1_2, temp_2_2, humidity_1_2, humidity_2_2);
             countMilli = 0;
         }
         if ( (lastReceiveSec >= payloadValidationTimeout) && (queueElement != 0)) //Validate the queue if a time of transmission-silence occurred
@@ -103,7 +94,7 @@ char *CharToLCD (char num)
     {
         res[3 - i - 1] = (num / Power(10, i)) % 10 + '0';
     }
-    res[4] = "\0";
+    res[3] = "\0";
     return res;
 }
 

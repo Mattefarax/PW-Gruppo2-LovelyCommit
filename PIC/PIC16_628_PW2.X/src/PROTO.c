@@ -15,8 +15,7 @@ void PROTO_HandshakeReq()
     */
     addrRequested = 1;
 }
-
-void PROTO_SendPayload()
+void PROTO_SendPayload(char temp_1_2, char temp_2_2, char humidity_1_2, char humidity_2_2)
 {   
     char payload[12] = { 0x00, addr, 0x20, temp_1_2, temp_2_2, setTemp_1_2, setTemp_2_2, humidity_1_2, humidity_2_2, protoStatusByte};
     UART_SendBuffer(CRC_Add(payload, 10), 12);
