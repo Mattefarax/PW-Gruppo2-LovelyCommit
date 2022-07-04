@@ -48,6 +48,6 @@ async def send():
 
     # Finally, shut down the client
     await device_client.shutdown()
-    print("succesfully porco dio")
+    print("succesfully")
 
 channel.start_consuming()
