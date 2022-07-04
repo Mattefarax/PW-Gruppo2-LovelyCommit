@@ -1,4 +1,6 @@
 from ast import Bytes
+from doctest import ELLIPSIS_MARKER
+import json
 from logging import raiseExceptions
 from multiprocessing.reduction import send_handle
 import random
@@ -6,10 +8,63 @@ from ssl import MemoryBIO
 from time import sleep
 from unicodedata import numeric
 from numpy import broadcast
+from psycopg2 import Timestamp
 import serial
 from send import send_to_queue
 import datetime
 from protoCRC import crc_calc
+import pika
+
+
+countId=1
+
+oldEmergencyTimestamp=""
+oldTelemetryTimestamp=""
+zero=0
+handshakeCode=1
+broadcastCode=255
+s=serial.Serial(port='COM6',baudrate=115200, bytesize=8, parity='N', stopbits=1)
+
+ncycles=10
+myId=0
+sendAddress=[]
+
+def send_to_pic(message):
+    global oldEmergencyTimestamp
+    global oldTelemetryTimestamp
+    emergencyList=[]
+    comandsList=[]
+    emergencyTimestamp=""
+    telemetryTimestamp=""
+    print(type(message))
+    strMessage=message.decode('utf-8')
+    print(type(strMessage))
+    print("Messaggio da mandare al Pic",strMessage)
+    jsonMessage=json.loads(strMessage)
+    emergencyTimestamp=jsonMessage["Emergency_Set"]["Timestamp"]
+    telemetryTimestamp=jsonMessage["Comands"]["Timestamp"]
+    if(emergencyTimestamp!=oldEmergencyTimestamp):
+        print("funzione di invio delle emergenze")
+        strCiccia=jsonMessage['Emergency_Set']['EmergencyMessage']
+        print('cicciata',strCiccia)
+        print(type(strCiccia))
+        if(len(strCiccia)<20):
+            ciccia=20-len(strCiccia)
+            while(ciccia):
+                strCiccia=strCiccia+' '
+                ciccia-=1
+
+        print('nuova stringa',strCiccia)
+        emergencyList.append(bytearray(jsonMessage['Emergency_Set']['EmergencyMessage'].encode())) 
+        print("Ciccia ultrapasticciata",emergencyList)
+        #sendMessage(emergencyList)
+        oldEmergencyTimestamp=emergencyTimestamp
+    if(telemetryTimestamp!=oldTelemetryTimestamp):
+        print("funzione di invio delle telemetrie")
+        oldTelemetryTimestamp=telemetryTimestamp
+
+
+
 
 def create_Json(list):
     print("bisogna creare un json con le informazioni salvate nella lista")
@@ -33,6 +88,7 @@ def Addresser(list,countId):
             sendAddress.append(b'\x60')
             sendMessage(sendAddress)
             print(sendAddress)
+            sendAddress.clear()
 def sendTelemetry(list):
     print('sono dentro telemetria')
     idPic=list[1]
@@ -70,56 +126,70 @@ def sendTelemetry(list):
     print(listTelemetry)
     jsonTelemetry=create_Json(listTelemetry)
     print(jsonTelemetry)
-    send_to_queue(jsonTelemetry)
+    send_to_queue(jsonTelemetry,'telemetryQueue')
+    listTelemetry.clear()
 
 
+def serial_to_amqp():
+    while(1):
+        lista=[]
+        global countId
+        count=s.in_waiting    #conta il numero di byte presenti all'interno della seriale
+        if count>0:
+            numCycles=0
+            BytestoRead=0
+            LastBytestoRead=0
+            while numCycles<ncycles:
+                numCycles+=1
+                BytestoRead=s.in_waiting
 
+                if (BytestoRead!=LastBytestoRead):
+                    LastBytestoRead=BytestoRead
+                    numCycles=0
+                sleep(0.005)
+            for c in range(BytestoRead):
+                lista.append(s.read(1))
 
-countId=1
-zero=0
-handshakeCode=1
-broadcastCode=255
-s=serial.Serial(port='COM8',baudrate=115200, bytesize=8, parity='N', stopbits=1)
-lista=[]
-ncycles=10
-myId=0
-sendAddress=[]
-while 1:
-    count=s.in_waiting    #conta il numero di byte presenti all'interno della seriale
-    if count>0:
-        numCycles=0
-        BytestoRead=0
-        LastBytestoRead=0
-        while numCycles<ncycles:
-            numCycles+=1
-            BytestoRead=s.in_waiting
-
-            if (BytestoRead!=LastBytestoRead):
-                LastBytestoRead=BytestoRead
-                numCycles=0
-            sleep(0.005)
-        for c in range(BytestoRead):
-            lista.append(s.read(1))
-
-        print(lista)
-        if(lista[0]==myId.to_bytes(1,'big')):
-            #crcList=crc_calc(lista)
-            if len(lista)==5:
-                Addresser(lista,countId)
-                countId+=1
-        
-            if len(lista)>5:
-                sendTelemetry(lista)
-        # if(lista[2]==bytes(b'\x20'))and(lista[3]):
-        #     Temperature(lista)
-    
-        # if(lista[2]==bytes(b'\x20'))and(lista[5]):
-        #     Humidity(lista)
-
-            # sendAddress=[]
+            print(lista)
+            if(lista[0]==myId.to_bytes(1,'big')):
+                crcList=crc_calc(lista)
+                if(crcList==0):             #[0]==lista[len(lista)-1]) and (crcList[1]==lista[len(lista)])):
+                    if len(lista)==5:
+                        Addresser(lista,countId)
+                        countId+=1
+                        
             
-    # sendMessage(lista)
-    lista=[]
+                    if len(lista)>5:
+                        sendTelemetry(lista)
+                        
+            # if(lista[2]==bytes(b'\x20'))and(lista[3]):
+            #     Temperature(lista)
+        
+            # if(lista[2]==bytes(b'\x20'))and(lista[5]):
+            #     Humidity(lista)
+
+                # sendAddress=[]
+   
+        # sendMessage(lista)
+        lista.clear()
+        break
+
+def amqp_to_serial():
+    connection = pika.BlockingConnection()
+    channel = connection.channel()
+    method_frame, header_frame, body = channel.basic_get(queue='commandQueue',auto_ack=True)
+    if method_frame:
+          send_to_pic(body)
+    # else:
+    #     print('No message returned')
+
+
+
+while 1:
+    serial_to_amqp()
+    amqp_to_serial()
+
+    
 
     
 
