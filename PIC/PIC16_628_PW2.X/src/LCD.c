@@ -41,3 +41,21 @@ void LCD_Write(char phrase[])
     }
 }
 
+char *CharToLCD (char num)
+{
+    char res[3];
+    for (char i = 0; i < 2; i++) 
+    {
+        res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
+    }
+    res[2] = "\0";
+    return res;
+}
+
+unsigned long Power(char num, char times) {
+    unsigned long result = 1;
+    for (char i = 0; i < times; i++) {
+        result *= num;
+    }
+    return result;
+}

@@ -64,13 +64,15 @@ void MENU_Check()
         {
             if (posCursore == 1) //Real Time Value 
             {
-                MENU_Page(menuVoiceBACK, "");
-                actualPage = 1;
-            }
-            else //Configurations
-            {
-                MENU_Page(menuVoiceBACK, menuVoiceTT);
-                actualPage = 2;
+                LCD_Send(L_CLR, 1); //Clear the LCD
+                drawCursore(1); //Draw the menu pointer on the first row
+                LCD_Send(L_L1_C3, 1); 
+                LCD_Write(menuVoiceBACK);
+                LCD_Send(L_L2_C1, 1); 
+                LCD_Write(menuVoiceRT_1);
+                LCD_Send(0x94 ,1);
+                LCD_Write(menuVoiceRT_2);
+                MENU_SendValue();
             }
         }
         else if(actualPage == 1)//Page1 -> Real Time Value 
@@ -98,3 +100,24 @@ void MENU_Home()
 {
     MENU_Page(menuVoiceRTV, menuVoiceCFG);
 } 
+
+void MENU_SendValue(/*passare valori*/)
+{
+    if(posCursore == 1)
+    {
+        LCD_Send(LCD_EM ,1);
+        LCD_Write("xx");
+        LCD_Send(LCD_BD ,1);                
+        LCD_Write("xx");
+        LCD_Send(LCD_FD ,1);
+        LCD_Write("xx");
+        LCD_Send(LCD_TMP_1 ,1);
+        LCD_Write(CharToLCD());
+        LCD_Send(LCD_TMP_2 ,1);
+        LCD_Write("xx");
+        LCD_Send(LCD_TT_1 ,1);
+        LCD_Write("xx");
+        LCD_Send(LCD_TT_2 ,1);
+        LCD_Write("xx");
+    }
+}

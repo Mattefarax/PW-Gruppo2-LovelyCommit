@@ -46,11 +46,8 @@ void main(void)
     
     while(1)
     {
+        //LCD_Write(CharToLCD(),3);
         MENU_Check();
-        if ((countMilli/1000 >= sensorCheckSec))
-        {
-            SENSORS_Get();
-        }
         if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
         {
             PROTO_HandshakeReq();
@@ -64,6 +61,10 @@ void main(void)
         if ( (lastReceiveSec >= payloadValidationTimeout) && (queueElement != 0)) //Validate the queue if a time of transmission-silence occurred
         {
             PROTO_QueueChecker();
+        }
+        if ((countMilli/1000 >= sensorCheckSec))
+        {
+            SENSORS_Get();
         }
     }
     return;
@@ -89,12 +90,12 @@ void PIC_Init()
 
 char *CharToLCD (char num)
 {
-    char res[4];
-    for (char i = 0; i < 3; i++) 
+    char res[3];
+    for (char i = 0; i < 2; i++) 
     {
-        res[3 - i - 1] = (num / Power(10, i)) % 10 + '0';
+        res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
     }
-    res[3] = "\0";
+    res[2] = "\0";
     return res;
 }
 
