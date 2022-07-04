@@ -2,7 +2,7 @@
 #define LCD_h
 #include <xc.h>
 
-#define _XTAL_FREQ 20000000
+#define _XTAL_FREQ 8000000
 
 //Clear Display
 #define L_CLR 0X01
@@ -29,7 +29,6 @@
 //Pin Setup
 #define L_RS 0X04 //LCD Register Selector (Command or Character)
 #define L_EN 0X02 //LCD Enable
-//Declarations
 
 void LCD_Init(void);
 void LCD_Send(char, char);

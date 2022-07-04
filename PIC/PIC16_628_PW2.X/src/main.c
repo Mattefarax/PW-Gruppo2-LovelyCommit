@@ -20,66 +20,85 @@
 #include "UART.h"
 #include "QUEUE.h"
 #include "PROTO.h"
+#include "MENU.h"
+#include "SENSORS.h"
 
+#define preloadTMR 56
+#define baudRate 9600
 
-char UARTRead;
-#define baudRate 115200
-#define preloadTMR 131
-
+//Counters
 char count = 0;
 int countMilli = 0;
 char lastReceiveSec = 0;
 
 char *CharToLCD (char num);
 unsigned long Power(char num, char times);
+void PIC_Init(void);
 
+void main(void) 
+{
+    
+    PIC_Init();
+    UART_Init(baudRate);
+    LCD_Init();
+    MENU_Home();
+    SENSORS_Init();
+    
+    while(1)
+    {
+        //LCD_Write(CharToLCD(),3);
+        MENU_Check();
+        if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
+        {
+            PROTO_HandshakeReq();
+            countMilli = 0;
+        }
+        if ( (countMilli/1000 >= payloadSendS) && (addr != 0)) //Schedule payload transmission
+        {
+            PROTO_SendPayload(temp_1_2, temp_2_2, humidity_1_2, humidity_2_2);
+            countMilli = 0;
+        }
+        if ( (lastReceiveSec >= payloadValidationTimeout) && (queueElement != 0)) //Validate the queue if a time of transmission-silence occurred
+        {
+            PROTO_QueueChecker();
+        }
+        if ((countMilli/1000 >= sensorCheckSec))
+        {
+            SENSORS_Get();
+        }
+    }
+    return;
+}
 
-void main(void) {
+void PIC_Init()
+{
     //Interrupt configuration
     INTCON = 0x80; //GIE 
     INTCON |= 0x40; //PIEI
     INTCON |= 0x20; //TMR0IE
     
     //Value for 200us interrupt
-    OPTION_REG = 0x02; //Prescaler
+    OPTION_REG = 0x00; //Prescaler
     TMR0 = preloadTMR; //Pre Load Timer Value
             
-    TRISC = 0X80;
+    TRISB = 0X00;
+    TRISC = 0X00;
     TRISD = 0X00;
     TRISE = 0X00;
-    UART_Init(baudRate);
-    LCD_Init();
-    
-    while(1)
-    {
-        if ( (countMilli/1000 >= payloadAddrRetry) && (addr == 0)) 
-        {
-            PROTO_HandshakeReq();
-            countMilli = 0;
-        }
-        if ( (countMilli/1000 >= payloadSendSecond) && (addr != 0))
-        {
-            PROTO_SendPayload();
-            countMilli = 0;
-        }
-        if ( (lastReceiveSec >= messageOffsetTimeout) && (queueElement != 0))
-        {
-            PROTO_QueueChecker();   
-        }
-    }
-    return;
+    TRISB |= 0X07; //Buttons
 }
 
 char *CharToLCD (char num)
 {
-    char res[4];
-    for (char i = 0; i < 3; i++) 
+    char res[3];
+    for (char i = 0; i < 2; i++) 
     {
-        res[3 - i - 1] = (num / Power(10, i)) % 10 + '0';
+        res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
     }
-    res[4] = "\0";
+    res[2] = "\0";
     return res;
 }
+
 unsigned long Power(char num, char times) {
     unsigned long result = 1;
     for (char i = 0; i < times; i++) {
@@ -99,20 +118,20 @@ void __interrupt() ISR()
         {
             QUEUE_Insert(UARTRead);
         }
-        lastReceiveSec = 0;
+        lastReceiveSec = 0; //If something is received thru uart this counter is reset
     }
     if(INTCON & 0x04) //Timer 
     {
         //200us each interrupt
         count++;
-        if (count >= 5)
+        if (count >= 5) //Each ms
         {
             countMilli++;
             count = 0;
-        }
-        if (lastReceiveSec <= messageOffsetTimeout)
-        {
-            lastReceiveSec++;
+            if (lastReceiveSec <= payloadValidationTimeout) 
+            {
+                lastReceiveSec++;
+            }
         }
         
         TMR0 = preloadTMR;

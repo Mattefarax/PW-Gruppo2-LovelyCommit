@@ -27,16 +27,35 @@ void LCD_Init()
     LCD_Send(L_OFF, 1);
     LCD_Send(L_ON, 1);
     LCD_Send(L_CLR, 1);
-    LCD_Send(L_CUR, 1);
+    LCD_Send(L_NCR, 1);
     LCD_Send(L_L1_C1, 1);
 }
 void LCD_Write(char phrase[])
 {
+    
     //if(phrase[j] == '\0')
-    for(int j = 0; j < 32; j++)
+    for(int j = 0; j < 20; j++)
     {
         if(phrase[j] == '\0'){break;};
         LCD_Send(phrase[j], 0);
     }
 }
 
+char *CharToLCD (char num)
+{
+    char res[3];
+    for (char i = 0; i < 2; i++) 
+    {
+        res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
+    }
+    res[2] = "\0";
+    return res;
+}
+
+unsigned long Power(char num, char times) {
+    unsigned long result = 1;
+    for (char i = 0; i < times; i++) {
+        result *= num;
+    }
+    return result;
+}
