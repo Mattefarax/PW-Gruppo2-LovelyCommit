@@ -209,50 +209,56 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 <td></td>
 </tr>
+<!--
+EM:xx  BD:xx  FD:xx 
+-->
 <tr>
 <th><sup>2</sup></th>
-<td>T</td>
-<td>e</td>
-<td>m</td>
-<td>p</td>
-<td>°</td>
+<td>E</td>
+<td>M</td>
+<td>:</td>
+<td>x</td>
+<td>x</td>
 <td></td>
 <td></td>
+<td>B</td>
+<td>D</td>
+<td>:</td>
+<td>x</td>
+<td>x</td>
 <td></td>
 <td></td>
-<td>W</td>
-<td>N</td>
+<td>F</td>
+<td>D</td>
+<td>:</td>
+<td>x</td>
+<td>x</td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td>H</td>
-<td>u</td>
-<td>m</td>
-<td>%</td>
 </tr>
+<!--
+CT:xx,xx   TT:xx,xx
+-->
 <tr>
 <th><sup>3</sup></th>
+<td>C</td>
+<td>T</td>
+<td>:</td>
+<td>x</td>
+<td>x</td>
+<td>,</td>
+<td>x</td>
+<td>x</td>
 <td></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>T</td>
+<td>T</td>
+<td>:</td>
+<td>x</td>
+<td>x</td>
+<td>,</td>
+<td>x</td>
+<td>x</td>
 <td></td>
 </tr>
 <tr>
@@ -317,7 +323,10 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <th><sup>1</sup></th>
 <td>&gt;</td>
 <td></td>
-<td>S</td>
+<td>T</td>
+<td>a</td>
+<td>r</td>
+<td>g</td>
 <td>e</td>
 <td>t</td>
 <td></td>
@@ -330,11 +339,8 @@ To accomplished that we decided to go with a 2004 lcd display with the following
 <td></td>
 <td></td>
 <td></td>
-<td>T</td>
-<td>e</td>
-<td>m</td>
-<td>p</td>
-<td>°</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <th><sup>2</sup></th>
@@ -450,4 +456,12 @@ You will find more information [here](../Protocol/README.md).
 
 ## **Uart & Collision Detection**
 
+Due to some problems arose on the physical board we had to switch to a simulator wich has some limitation such as the possibility to receive serial message while sendig.
+
+This restriction kept us from developping a collision detection algorithm.
+
 ## **Sensors & Actuators**
+
+Switching to a simulator kept us also from implementing al the sensors and actuators that we had expected to use because it does not emulate them.
+
+We decided also to generate random value to be able to send telemtry message to the RPI and so to the Cloud.
