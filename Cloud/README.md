@@ -98,13 +98,13 @@ We split datas in 4 collection where only 2 stores data sent from and to the tra
 </table>
 </div>
 
-#### **Allarms**
+#### **Alarms**
 
 <div align="center">
 <table>
 <thead>
 
-<th align="center">id_allarm</th>
+<th align="center">id_alarm</th>
 <th align="center">id_train</th>
 <th align="center">sender</th>
 <th align="center">emergency_message</th>
