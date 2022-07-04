@@ -24,7 +24,7 @@ function sendDesired() {
         if (err) {
             console.error(err.constructor.name + ': ' + err.message);
         } else {
-            NewTimestamp = new Date().getTime();
+            NewTimestamp = new Date();
             if (isAlert==0){
             var patch = {
                 properties: {
