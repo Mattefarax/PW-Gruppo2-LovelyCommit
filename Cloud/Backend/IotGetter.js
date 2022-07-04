@@ -9,8 +9,8 @@ var registry = Registry.fromConnectionString(connectionString);
 var client = Client.fromConnectionString(connectionString);
 var deviceName = 'Rpi-train1';
 
-var LastTimestampTel = new Date().getTime();
-var LastTimestampAlert = new Date().getTime();
+var LastTimestampTel = new Date();
+var LastTimestampAlert = new Date();
 
 var LastidVagone = 0;
 var LastCurrent_Temperature = "0,00";

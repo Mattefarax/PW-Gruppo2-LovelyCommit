@@ -11,7 +11,7 @@ var deviceToReboot = 'Rpi-train1';
 
 var isAlert = 0;
 
-var NewTimestamp = new Date().getTime();
+var NewTimestamp = new Date();
 var NewIdVagone = 0;
 var NewDesired_Temperature = "0,00";
 var NewToggle_Back_Door ="\u0000";
