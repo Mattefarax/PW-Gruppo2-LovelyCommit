@@ -2,11 +2,9 @@
 
 var config = require('./config.json');
 var Registry = require('azure-iothub').Registry;
-var Client = require('azure-iothub').Client;
 
 var connectionString = config.connectionString;
 var registry = Registry.fromConnectionString(connectionString);
-var client = Client.fromConnectionString(connectionString);
 var deviceToReboot = 'Rpi-train1';
 
 var isAlert = 0;
