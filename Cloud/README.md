@@ -139,6 +139,8 @@ We split datas in 4 collection where only 2 stores data sent from and to the tra
 </table>
 </div>
 
+[Here](./Backend/MongoDb/MongoDBValidation.Json) you can find the validation schema for the collections
+
 ## **MQTT** [*Deprecated*]
 
 You will find more information [here](../MQTT/README.md).
