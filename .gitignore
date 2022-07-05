@@ -4,6 +4,8 @@ PIC/PIC16_628_PW2.X/nbproject
 PIC/PIC16_628_PW2.X/Makefile
 RPI/__pycache__
 Cloud/Backend/config.json
+Cloud/Backend/MongoDb/config.json
+
 # Logs
 logs
 *.log
