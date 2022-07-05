@@ -17,7 +17,24 @@
 
 ## **Back End**
 
+We're going to have 2 prograrm that works for the back end:
+
+* The first one that receives, through polling, new updates on the IoT Hub  for the reported values and elaborates them.   
+Through the timestamp it finds out if the reported values have already been handled or not to decide if it has to be saved as a document on Atlas.
+
+* The second one that exposes apis for the front end.  
+After receiving a get request, in ase to the access user it issues a query and gives the values in response.  
+After receiving a post it elaborates the parameters and updates the desired values according to it.
+
 ## **Front End**
+
+To display anything the front end page requires to log in.
+ 
+According to the user logged, it send a get request to the backend to receive the values to display the initial state of the page, showing also trains according to the permissions
+ 
+Cyclically performs a get request to keep updated the page with the current values on db.
+ 
+Compiling a form the user can send commands to the train through a post request issued to the back end that carries the operation, through the IoT Hub to the gateway.
 
 ## **DB**
 
