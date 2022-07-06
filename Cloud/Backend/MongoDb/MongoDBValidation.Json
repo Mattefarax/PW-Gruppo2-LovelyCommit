@@ -1,0 +1,189 @@
+
+{
+    $jsonSchema: {
+        "title": "Record of users",
+        "description": "This document records the details of all users",
+        "type": "object",
+        "properties": {
+            "username": {
+                "description": "Unique identifier for a user",
+                "type": "string"
+            },
+            "password": {
+                "description": "Password of the user",
+                "type": "string",
+                "minLength":5
+            },
+            "train_management_permission": {
+                "description": "Trains that the user is allowed to operate",
+                "type": "array"
+            },
+            "creation_date": {
+                "description": "Timestamp of the creation of the user",
+                "type": "string"
+            },
+            "last_access": {
+                "description": "Timestamp of last access of the user",
+                "type": "string",
+            }
+        },
+        "required": [
+            "username",
+            "password",
+            "train_management_permission",
+            "creation_date",
+            "last_access"
+        ],
+        "additionalProperties": false
+    }
+}
+
+//////////////////////////////////////////////////////
+
+  {
+    $jsonSchema: {
+        "title": "Record of Trains",
+        "description": "This document records the details of all trains",
+        "type": "object",
+        "properties": {
+            "id_train": {
+                "description": "Unique identifier for a Train",
+                "type": "string"
+            },
+            "number_of_wagons": {
+                "description": "Number of wagons the train has",
+                "type": "number",
+            },
+            "date_creation": {
+                "description": "Timestamp of the creation of the train",
+                "type": "string"
+            },
+            "date_last_update": {
+                "description": "Timestamp of last update of the train",
+                "type": "string",
+            }
+        },
+        "required": [
+            "id_train",
+            "number_of_wagons",
+            "date_creation",
+            "date_last_update"
+        ],
+        "additionalProperties": false
+    }
+}
+/////////////////////////////////////////////////////////////////
+
+  {
+    $jsonSchema: {
+        "title": "Record of telemetries",
+        "description": "This document records the details of all telemetries",
+        "type": "object",
+        "properties": {
+            "id_telemetry": {
+                "description": "Unique identifier for telemetries",
+                "type": "number"
+            },
+            "id_train": {
+                "description": "Unique identifier for trains",
+                "type": "string",
+                "minLength":5
+            },
+            "wagon_number": {
+                "description": "The number of wagon the telemetry comes from",
+                "type": "number"
+            },
+            "current_temperature": {
+                "description": "Current temperature inside of the wagon",
+                "type": "decimal"
+            },
+            "desired_temperature": {
+                "description": "Desired temperature setted inside of the wagon",
+                "type": "decimal"
+            },
+            "humidity": {
+                "description": "Humidity percentage inside the wagon",
+                "type": "decimal"
+            },
+            "emergency_status": {
+                "description": "0 for no emergency inside the wagon, 1 is emergency",
+                "type": "number"
+            },
+            "back_door": {
+                "description": "0 the back door is closed, 1 is open",
+                "type": "number"
+            },
+            "front_door": {
+                "description": "0 the front door is closed, 1 is open",
+                "type": "number"
+            },
+            "toilette_status": {
+                "description": "0 the toilette is being used, 1 is free",
+                "type": "number"
+            },
+            "timestamp": {
+                "description": "Timestamp of the telemetry",
+                "type": "string",
+            }
+        },
+        "required": [
+            "id_telemetry",
+            "id_train",
+            "wagon_number",
+            "current_temperature",
+            "desired_temperature",
+            "humidity",
+            "emergency_status",
+            "back_door",
+            "front_door",
+            "toilette_status",
+            "timestamp"
+        ],
+        "additionalProperties": false
+    }
+}
+
+//////////////////////////////////////////////////////////////////
+
+  {
+    $jsonSchema: {
+        "title": "Record of Alarms",
+        "description": "This document records the details of all alarms",
+        "type": "object",
+        "properties": {
+            "id_alarm": {
+                "description": "Unique identifier for alarms",
+                "type": "number"
+            },
+            "id_train": {
+                "description": "Unique identifier for trains",
+                "type": "string"
+            },
+            "sender": {
+                "description": "The sender of the alarm: -1 is from the cloud, 0 is from the user on the raspberry, 1-254 is from the pics ",
+                "type": "number"
+            },
+            "emergency_message": {
+                "description": "Emergency message",
+                "type": "string"
+            },
+            "creation_date": {
+                "description": "Timestamp of the creation of the alarm",
+                "type": "string",
+            },
+            "closing_date": {
+                "description": "Timestamp of the alarm going off",
+                "type": "string",
+            }
+        },
+        "required": [
+            "id_alarm",
+            "id_train",
+            "sender",
+            "emergency_message",
+            "creation_date",
+            "closing_date"
+        ],
+        "additionalProperties": false
+    }
+}

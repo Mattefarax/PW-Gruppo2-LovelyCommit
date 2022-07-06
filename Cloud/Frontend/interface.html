@@ -18,11 +18,11 @@
 </head>
 
 <header>
-    <nav class=" p-1 ps-4 text-white fixed-top " id="navbar">
+    <nav class=" p-2 pb-3 ps-4 text-white fixed-top " id="navbar">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="login.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="Trenitalia_Logo.png" alt="" width="300" height="auto" class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
+                    <img src="Trenitalia_Logo_White.png" alt="" width="300" height="auto" class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
                 </a>
 
                 <ul class="ps-4 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -43,24 +43,22 @@
     </div>
     <script>
         // Getting the values from the login page 
-        //const localIdUser = localStorage.getItem('idUser');
-        //const localDataSuper = localStorage.getItem('superuser');
         //const enabledPage = localStorage.getItem('enabledPage');
         //const auth = localStorage.getItem('auth');
-        //const idUser = parseInt(localIdUser);
+        //const trainIdString = localStorage.getItem('trainIdString');
 
-        const localDataSuper = 1;
+
         const auth = 1;
         const enabledPage = 1;
-        var idUser = 1;
+        const trainIdString = "IT12345,IT23456";
+        const trainNamesArray = trainIdString.split(',');
 
-        console.log("User number " + idUser);
         console.log("Is the page enabled? " + enabledPage);
 
         // This is to check if you already logged in, else it will deactivate the page and links
         function CheckAuth() {
             var linkSur = document.getElementById('linkSur')
-            if (auth == 1 && localDataSuper == 1) {
+            if (auth == 1) {
                 linkSur.href = "interface.html";
                 $("#bigWrapper").show();
                 $("#steps").show();
@@ -100,7 +98,7 @@
         var marksCanvas = [];
         var arrayCat = ["1", "2", "3", "4", "5", "6"];
         var dynamicalCanvas = [];
-        var dynamicalDiv = [];
+        var dynamicalTrainDiv = [];
         var dynamicalButtonSur = [];
         var dynamicalButtonRec = [];
         var dynamicalFacName = [];
@@ -116,6 +114,11 @@
 
         function createVariables() {
             let rowNum = 0;
+             var dynamicalTrainImg = document.createElement('img');
+             dynamicalTrainImg.setAttribute('src', "trainHead.png");
+             dynamicalTrainImg.setAttribute('width', "30%");
+             dynamicalTrainImg.setAttribute('height', "15%");
+
             for (var i = 0; i < 6; ++i) {
                 if (i % 4 == 0) {
                     rowNum = i / 4;
@@ -125,66 +128,97 @@
                 let canvasName = "marksChart" + i;
                 let divFacName = "titleDiv" + i;
                 let FacName = "factoryName" + i;
-                let divName = "chartjs-radar" + i;
-                let btnSurName = "btnsur" + i;
-                let btnRecName = "btnrec" + i;
+                let divTrainName = "TrainDiv" + i;
+                let divTrainId = "TrainId" + i;
+                let btnFront = "btnfront" + i;
+                let btnBack = "btnback" + i;
+                let btnTemp = "btntemp" + i;
+                let btnMsg = "btnmsg" + i;
+                let btnEmergency = "btnemergency" + i;
+
+                let wagonDetails = "wagondetails"+i
                 marksCanvas[i] = document.getElementById(canvasName);
 
-                dynamicalDiv[i] = document.createElement('div');
-                dynamicalDiv[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
-                dynamicalDiv[i].setAttribute('id', divName);
-                //dynamicalDiv[i].setAttribute('onclick', "showDetailButton(this.id);");
+                dynamicalTrainDiv[i] = document.createElement('div');
+                dynamicalTrainDiv[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
+                dynamicalTrainDiv[i].setAttribute('id', divTrainName);
+                dynamicalTrainDiv[i].setAttribute('onclick', "ShowTrainWagonDiv(this.id);");
 
-                dynamicalButtonSur[i] = document.createElement('button');
-                dynamicalButtonSur[i].setAttribute('type', "button");
-                dynamicalButtonSur[i].setAttribute('id', btnSurName);
-                dynamicalButtonSur[i].setAttribute('onclick', "redirect(this.id)");
+                dynamicalTrainId[i] = document.createElement('h4');
+                dynamicalTrainId[i].setAttribute('class', "text-center");
+                dynamicalTrainId[i].setAttribute('id', divTrainId);
+                document.getElementById(divTrainId).textContent = trainNamesArray[i];
 
-                dynamicalButtonRec[i] = document.createElement('button');
-                dynamicalButtonRec[i].setAttribute('type', "button");
-                dynamicalButtonRec[i].setAttribute('id', btnRecName);
-                dynamicalButtonRec[i].setAttribute('onclick', "recapRedirect(this.id)");
+                
+                dynamicalTrainWagonDiv[i] = document.createElement('div');
+                dynamicalTrainWagonDiv[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
+                dynamicalTrainWagonDiv[i].setAttribute('id', divTrainName);
+                dynamicalTrainWagonDiv[i].setAttribute('onclick', "ShowTrainWagonDiv(this.id);");
+
+                dynamicalWagonName[i] = document.createElement('h6');
+                dynamicalWagonName[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
+                dynamicalWagonName[i].setAttribute('id', "wagon" + i);
+                document.getElementById("wagon" + i).textContent = "wagon" + i ;
+
+                dynamicalWagonDetails[i] = document.createElement('p');
+                dynamicalWagonDetails[i].setAttribute('id', "text-center");
+                document.getElementById(btnSurName).textContent = array2[i];
+                
+                //DYNAMICAL ALARM
 
 
-                dynamicalCanvas[i] = document.createElement('canvas');
-                dynamicalCanvas[i].setAttribute('id', canvasName);
-                dynamicalCanvas[i].setAttribute('width', 300);
-                dynamicalCanvas[i].setAttribute('height', 200);
+                dynamicalWagonFocus[i] = document.createElement('div');
+                dynamicalWagonFocus[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
 
-                dynamicalFacName[i] = document.createElement('div');
-                dynamicalFacName[i].setAttribute('id', divFacName);
-                dynamicalFacName[i].setAttribute('class', "border text-center");
+                dynButtonFront_Door[i] = document.createElement('button');
+                dynButtonFront_Door[i].setAttribute('type', "button");
+                dynButtonFront_Door[i].setAttribute('id', btnFront);
+                dynButtonFront_Door[i].setAttribute('onclick', "sendTelemetry(this.id)");
+                document.getElementById(btnFront).textContent = "Toggle front door";
 
-                dynamicalName[i] = document.createElement('h2');
-                dynamicalName[i].setAttribute('id', FacName);
-                dynamicalName[i].setAttribute('class', "text-center");
+                dynButtonBack_Door[i] = document.createElement('button');
+                dynButtonBack_Door[i].setAttribute('type', "button");
+                dynButtonBack_Door[i].setAttribute('id', btnBack);
+                dynButtonBack_Door[i].setAttribute('onclick', "sendTelemetry(this.id)");
+                document.getElementById(btnBack).textContent = "Toggle back door";
+
+                dynButtonSetTemp[i] = document.createElement('button');
+                dynButtonSetTemp[i].setAttribute('type', "button");
+                dynButtonSetTemp[i].setAttribute('id', btnTemp);
+                dynButtonSetTemp[i].setAttribute('onclick', "sendTelemetry(this.id)");
+                document.getElementById(btnTemp).textContent ="Set new temperature";
+
+                dynButtonSendMsg[i] = document.createElement('button');
+                dynButtonSendMsg[i].setAttribute('type', "button");
+                dynButtonSendMsg[i].setAttribute('id', btnMsg);
+                dynButtonSendMsg[i].setAttribute('onclick', "sendTelemetry(this.id)");
+                document.getElementById(btnMsg).textContent = "Send message";
+
+                dynButtonSendEmergency[i] = document.createElement('button');
+                dynButtonSendEmergency[i].setAttribute('type', "button");
+                dynButtonSendEmergency[i].setAttribute('id', btnEmergency);
+                dynButtonSendEmergency[i].setAttribute('onclick', "sendEmergency(this.id)");
+                document.getElementById(btnEmergency).textContent = "Send emergency message";
 
 
                 // Append the newborn column div to the div row
-                rowDiv[rowNum].appendChild(dynamicalDiv[i]);
+                rowDiv[rowNum].appendChild(dynamicalTrainDiv[i]);
 
-                // Append the newborn canvas to the newborn div
-                dynamicalDiv[i].appendChild(dynamicalCanvas[i]);
+                dynamicalTrainDiv[i].appendChild(dynamicalTrainId[i]);
 
-                //Append the invisible buttons
-                dynamicalDiv[i].appendChild(dynamicalButtonSur[i]);
-                dynamicalDiv[i].appendChild(dynamicalButtonRec[i]);
+                dynamicalTrainWagonDiv[i].appendChild(dynamicalWagonName[i]);
+                dynamicalTrainWagonDiv[i].appendChild(dynamicalWagonDetails[i]);
 
-
-                // Append the newborn h2 title to the newborn title div
-                dynamicalFacName[i].appendChild(dynamicalName[i]);
-
-                // Append the newborn title div to the newborn div
-                dynamicalDiv[i].appendChild(dynamicalFacName[i]);
+                dynamicalWagonFocus[i].appendChild(dynamicalWagonDetails[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonFront_Door[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonBack_Door[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSetTemp[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSendMsg[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSendEmergency[i]);
 
                 // Append the new whole div as child to the parent tag
                 document.getElementById("parent").appendChild(rowDiv[rowNum]);
 
-
-                document.getElementById(FacName).textContent = facNames[i]; // Set the title of the graph
-
-                document.getElementById(btnSurName).textContent = 'Retake Survey';
-                document.getElementById(btnRecName).textContent = 'Review Survey';
             }
         }
 
@@ -193,22 +227,49 @@
             arrayIndex = btnId.replace('btnsur', '');
             console.log("arrayIndex " + arrayIndex)
 
-            idUser = usersIdArray[arrayIndex].toString();
-            console.log("idUser  " + idUser.length)
             localStorage.clear();
-            localStorage.setItem('superuser', localDataSuper);
-            localStorage.setItem('idUser', idUser);
             localStorage.setItem('disabledPage', enabledPage);
             localStorage.setItem('auth', auth);
         }
 
-        function recapRedirect(btnRecName) {
-            localStorage.clear();
-            localStorage.setItem('superuser', localDataSuper);
-            localStorage.setItem('idUser', idUser);
-            localStorage.setItem('disabledPage', enabledPage);
-            localStorage.setItem('auth', auth);
-            window.location.href = "recap.html";
+        function getTrainsData() {
+            $.ajax({
+                method: "GET",
+                url: "http://" + serverHost + ":" + serverPort + "/trainData",
+                data: {
+                    trainIds: trainIdString,
+                }
+            }).done(function(res) {
+                console.log("all three get request results");
+                array1 = res.wagonNumber; // Returns the number of wagons per train
+                console.log(array1);
+                array2 = res.trains; // Returns the values of the telemetrics of the trains
+                console.log(array2);
+                array3 = res.alarms; // Returns the name of the grades (like digital factory,factory of the future...)
+                console.log(array3);
+                sortGetInfo(); // Setting up local variables with db values
+            }).fail(function() {
+                alert("Sorry. Server unavailable. ggraphctrlinfo");
+            });
+        }
+        function postTelemetryAjax() {
+            serializedDataFactGrade = createTelemetryObjToPost();
+            // Fire off the request to update the factory data
+            $.ajax({
+                method: "POST",
+                url: "http://" + serverHost + ":" + serverPort + "/telemetry", //URGENT NEED CHANGE THINGS, BECAUSE INSIDE THE FACTORY TABLE NOW GOES THE AVG OF THE USER'S FACTORY DATA
+                data: {
+                    telemetry: serializedDataFactGrade
+                }
+                // Callback handler that will be called on success
+            }).done(function(res) {
+                console.log(res);
+                console.log(postSuccess);
+                console.log("telemetry Post success");
+                // Callback handler that will be called on failure
+            }).catch(function(res, textStatus, errorThrown) {
+                console.error("The following error occurred: " + textStatus, errorThrown);
+            });
         }
     </script>
 </body>
