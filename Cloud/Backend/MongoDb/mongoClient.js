@@ -1,5 +1,5 @@
 const { MongoClient } = require("mongodb");
-var config = require('./config.json');
+  var config = require('./config.json');
 
 const uri = config.connectionString;
 const client = new MongoClient(uri);
@@ -47,10 +47,10 @@ async function run() {
     const telemetries = database.collection('Telemetries');
     const alarms = database.collection('Alarms');
 
-    userData=JSON.stringify(JsonUsers);
-    trainData=JSON.stringify(JsonTrains);
-    telemetryData=JSON.stringify(JsonTelemetries);
-    alarmData=JSON.stringify(JsonAlarms);
+    userData=JSON.parse(JSON.stringify(JsonUsers));
+    trainData=JSON.parse(JSON.stringify(JsonTrains));
+    telemetryData=JSON.parse(JSON.stringify(JsonTelemetries));
+    alarmData=JSON.parse(JSON.stringify(JsonAlarms));
 
 
     const resultUsers = await users.insertOne(userData);
@@ -69,4 +69,34 @@ async function run() {
     await client.close();
   }
 }
-run().catch(console.dir);
+async function runQuery(){
+  try {
+    await client.connect();
+    const database = client.db('LovelyCommitTrainSystem');
+    const users = database.collection('Users');
+    const trains = database.collection('Trains');
+    const telemetries = database.collection('Telemetries');
+    const alarms = database.collection('Alarms');
+    var varUser = "bbb";
+    var varPsw = "12345";
+    var query = {
+      username: varUser,
+      password: varPsw
+    };
+   // const loginStatus = await users.find(query);
+
+    users.find().toString(function(err, result) {
+      if (err) throw err;
+      console.log(result);
+    });
+
+
+    
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+//run().catch(console.dir);
+runQuery().catch(console.dir);
+
