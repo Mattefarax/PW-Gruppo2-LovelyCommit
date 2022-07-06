@@ -13,6 +13,18 @@ def crc_calc(buff):
     list.append(hex(int(crc16%256)))
     return crc16
 
+def crc_calc1(buff):
+    cast=[]
+    # list1=[ 0xff, 0x00,0x01,0x01 ]
+    print(type(0xff))
+    for x in buff:
+        cast.append(int.from_bytes(x,'big'))
+    crc16 = libscrc.modbus(bytearray(cast))
+    list=[]
+    list.append(hex(int(crc16/256)))
+    list.append(hex(int(crc16%256)))
+    return list
+
 
 
 
