@@ -7,13 +7,14 @@ import random
 from ssl import MemoryBIO
 from time import sleep
 from unicodedata import numeric
-from numpy import broadcast
 from psycopg2 import Timestamp
 import serial
 from send import send_to_queue
 import datetime
-from protoCRC import crc_calc
+from protoCRC import crc_calc,crc_calc1
 import pika
+
+
 
 
 countId=1
@@ -23,10 +24,11 @@ oldTelemetryTimestamp=""
 zero=0
 handshakeCode=1
 broadcastCode=255
-s=serial.Serial(port='COM6',baudrate=115200, bytesize=8, parity='N', stopbits=1)
+s=serial.Serial(port='COM8',baudrate=115200, bytesize=8, parity='N', stopbits=1)
 
 ncycles=10
 myId=0
+emergencycode=19
 sendAddress=[]
 
 def send_to_pic(message):
@@ -34,6 +36,9 @@ def send_to_pic(message):
     global oldTelemetryTimestamp
     emergencyList=[]
     comandsList=[]
+    emergencyList.append(broadcastCode.to_bytes(1,'big'))
+    emergencyList.append(myId.to_bytes(1,'big'))
+    emergencyList.append(emergencycode.to_bytes(1,'big'))
     emergencyTimestamp=""
     telemetryTimestamp=""
     print(type(message))
@@ -55,7 +60,23 @@ def send_to_pic(message):
                 ciccia-=1
 
         print('nuova stringa',strCiccia)
-        emergencyList.append(bytearray(jsonMessage['Emergency_Set']['EmergencyMessage'].encode())) 
+        newByteFromString=bytearray(strCiccia, 'UTF-8')
+        #emergencyList=str.encode(strCiccia)              #bytes(strCiccia,encoding='utf8')
+        for i in strCiccia:
+            emergencyList.append(bytes(i,'utf-8'))
+        print(emergencyList)
+        CRCPorcodio=crc_calc1(emergencyList)
+        #CREARE BENE LA LISTA DA MANDARE A PIZ
+       # emergencyList.append(newByteFromString)
+        # emergencyList.append(b'\xa0')
+        # emergencyList.append(b'\xeb')
+        #print('Voglio morire',type(int(hex(CRCPorcodio[0]))))
+        emergencyList.append(int(CRCPorcodio[1],16).to_bytes(1,'big'))
+        emergencyList.append(int(CRCPorcodio[0],16).to_bytes(1,'big'))                         #bytes(CRCPorcodio[1],'ascii'))
+        # emergencyList.append((bytes(str(CRCPorcodio[1],'utf-8')).replace('0x',r'\x')))                             #bytes(CRCPorcodio[0],'ascii'))
+        sendMessage(emergencyList)
+
+        #emergencyList.append(bytearray(jsonMessage['Emergency_Set']['EmergencyMessage'].encode())) 
         print("Ciccia ultrapasticciata",emergencyList)
         #sendMessage(emergencyList)
         oldEmergencyTimestamp=emergencyTimestamp
@@ -175,22 +196,17 @@ def serial_to_amqp():
         break
 
 def amqp_to_serial():
-    connection = pika.BlockingConnection()
+    # connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    # channel = connection.channel()
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
+
+    channel.queue_declare(queue='commandQueue')
     method_frame, header_frame, body = channel.basic_get(queue='commandQueue',auto_ack=True)
     if method_frame:
           send_to_pic(body)
-    # else:
-    #     print('No message returned')
-    #Try here
-
-
+    connection.close()
 
 while 1:
     serial_to_amqp()
     amqp_to_serial()
-
-    
-
-    
-
