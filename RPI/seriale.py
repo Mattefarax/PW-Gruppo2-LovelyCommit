@@ -60,25 +60,14 @@ def send_to_pic(message):
                 ciccia-=1
 
         print('nuova stringa',strCiccia)
-        newByteFromString=bytearray(strCiccia, 'UTF-8')
-        #emergencyList=str.encode(strCiccia)              #bytes(strCiccia,encoding='utf8')
         for i in strCiccia:
             emergencyList.append(bytes(i,'utf-8'))
         print(emergencyList)
-        CRCPorcodio=crc_calc1(emergencyList)
-        #CREARE BENE LA LISTA DA MANDARE A PIZ
-       # emergencyList.append(newByteFromString)
-        # emergencyList.append(b'\xa0')
-        # emergencyList.append(b'\xeb')
-        #print('Voglio morire',type(int(hex(CRCPorcodio[0]))))
-        emergencyList.append(int(CRCPorcodio[1],16).to_bytes(1,'big'))
-        emergencyList.append(int(CRCPorcodio[0],16).to_bytes(1,'big'))                         #bytes(CRCPorcodio[1],'ascii'))
-        # emergencyList.append((bytes(str(CRCPorcodio[1],'utf-8')).replace('0x',r'\x')))                             #bytes(CRCPorcodio[0],'ascii'))
+        CRCList=crc_calc1(emergencyList)
+        emergencyList.append(int(CRCList[1],16).to_bytes(1,'big'))
+        emergencyList.append(int(CRCList[0],16).to_bytes(1,'big'))                   
         sendMessage(emergencyList)
-
-        #emergencyList.append(bytearray(jsonMessage['Emergency_Set']['EmergencyMessage'].encode())) 
         print("Ciccia ultrapasticciata",emergencyList)
-        #sendMessage(emergencyList)
         oldEmergencyTimestamp=emergencyTimestamp
     if(telemetryTimestamp!=oldTelemetryTimestamp):
         print("funzione di invio delle telemetrie")
