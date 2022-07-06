@@ -16,7 +16,7 @@ jsonMessage=""
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+channel.queue_declare(queue='telemetryQueue')
 
 
 def callback(channel, method_frame, header_frame,body): 
@@ -31,7 +31,7 @@ def callback(channel, method_frame, header_frame,body):
     asyncio.run(send())
 
 
-channel.basic_consume(queue='hello', on_message_callback=callback, auto_ack=True)
+channel.basic_consume(queue='telemetryQueue', on_message_callback=callback, auto_ack=True)
 
 async def send():
     global jsonMessage
