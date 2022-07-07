@@ -1,5 +1,6 @@
 #include "MENU.h"
 #include "LCD.h"
+#include "SENSORS.h"
 
 void drawCursore(char pos);
 
@@ -53,7 +54,16 @@ void MENU_Check()
 {
     if (!(PORTB & BTN_UP) && (!memBtnUp) && (actualPage != 1)) //Detect rising edge of the up button
     {
-        MENU_Toggle();
+        if (actualPage == 3)
+        {
+            setTemp_1_2++;
+            LCD_Send(LCD_TT_CFG ,1);
+            LCD_Write(CharToLCD(setTemp_1_2));
+        }
+        else
+        {
+            MENU_Toggle();            
+        }
     }
     memBtnUp = !(PORTB & BTN_UP);
 
@@ -72,7 +82,17 @@ void MENU_Check()
                 LCD_Write(menuVoiceRT_1);
                 LCD_Send(0x94 ,1);
                 LCD_Write(menuVoiceRT_2);
-                MENU_SendValue();
+                actualPage = 1; 
+            }
+            else if (posCursore == 2 )
+            {
+                LCD_Send(L_CLR, 1); //Clear the LCD
+                drawCursore(1); //Draw the menu pointer on the first row
+                LCD_Send(L_L1_C3, 1); 
+                LCD_Write(menuVoiceBACK);
+                LCD_Send(L_L2_C3, 1); 
+                LCD_Write(menuVoiceTT);
+                actualPage = 2;
             }
         }
         else if(actualPage == 1)//Page1 -> Real Time Value 
@@ -89,8 +109,20 @@ void MENU_Check()
             }
             else //Target Temperature
             {
-                //TARGET CHANGE IMPLEMENTATION
+                LCD_Send(LCD_TT_CFG ,1);
+                LCD_Write(CharToLCD(setTemp_1_2));
+                actualPage = 3;
             }
+        }
+        else if (actualPage == 3)
+        {
+            LCD_Send(L_CLR, 1); //Clear the LCD
+            drawCursore(2); //Draw the menu pointer on the first row
+            LCD_Send(L_L1_C3, 1); 
+            LCD_Write(menuVoiceBACK);
+            LCD_Send(L_L2_C3, 1); 
+            LCD_Write(menuVoiceTT);
+            actualPage = 2;
         }
     }
     memBtnEnter = !(PORTB & BTN_ENTER);
@@ -101,23 +133,28 @@ void MENU_Home()
     MENU_Page(menuVoiceRTV, menuVoiceCFG);
 } 
 
-void MENU_SendValue(/*passare valori*/)
+void MENU_SendValue(char temp_1_2, char temp_2_2, char setTemp_1_2, char setTemp_2_2, char protoStatusByte)
 {
-    if(posCursore == 1)
+    if(actualPage == 1)
     {
         LCD_Send(LCD_EM ,1);
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(protoStatusByte & 0x08 >> 3));
         LCD_Send(LCD_BD ,1);                
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(protoStatusByte & 0x04 >> 2));
         LCD_Send(LCD_FD ,1);
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(protoStatusByte & 0x02 >> 1));
         LCD_Send(LCD_TMP_1 ,1);
-        LCD_Write(CharToLCD());
+        LCD_Write(CharToLCD(temp_1_2));
         LCD_Send(LCD_TMP_2 ,1);
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(temp_2_2));
         LCD_Send(LCD_TT_1 ,1);
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(setTemp_1_2));
         LCD_Send(LCD_TT_2 ,1);
-        LCD_Write("xx");
+        LCD_Write(CharToLCD(setTemp_2_2));
     }
+}
+void MENU_Splash()
+{
+    LCD_Send(L_L2_C1, 1); 
+    LCD_Write(menuSplash);
 }

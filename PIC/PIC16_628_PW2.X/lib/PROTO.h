@@ -17,8 +17,7 @@ char displayText[20];
 #define TOILETTE_BIT 0X01 //High when occupied
 
 char protoStatusByte = 0x00; //X - X - X - X - EMERGENCY_BIT - BACKDOOR_BIT - FRONTDOOR_BIT - TOILETTE_BIT
-char  setTemp_1_2;
-char  setTemp_2_2;
+char wagonNumber = 0;
 
 
 void PROTO_HandshakeReq(void);

@@ -3,6 +3,7 @@
 #include "QUEUE.h"
 #include "CRC.h"
 #include "LCD.h"
+#include "SENSORS.h"
 
 void PROTO_HandshakeReq()
 {
@@ -51,8 +52,7 @@ void PROTO_QueueChecker()
             else if ((queue[2] == 0x11) && (CRC_Check(queue, 5)))
             {
                 //TARGET TEMP
-                setTemp_1_2 = queue[3];
-                setTemp_2_2 = queue[4];
+                SENSORS_SetTemp(queue[3], queue[4]);
             }
             else if ((queue[2] == 0x12) && (CRC_Check(queue, 4)))
             {
@@ -70,6 +70,11 @@ void PROTO_QueueChecker()
                 displayText[19] = '\0';
                 LCD_Send(0xD4, 1);
                 LCD_Write(displayText);
+            }
+            else if ((queue[2] == 0x14) && (CRC_Check(queue, 4)))
+            {
+                //WAGON NUMBER
+                wagonNumber = queue[3];
             }
         }
     }
