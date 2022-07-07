@@ -4,7 +4,7 @@ let logger = require('../../settings/utilities/logger');
 function getTelemetry(req, res) {
     console.log("Sending getTelemetry request");
     let id_trains = req.query.id_trains;
-    let err = null;
+    let err = null;//JWT
     if (err) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
@@ -27,7 +27,7 @@ function insertTelemetry(req, res) {
     console.log("Sending insertTelemetry request");
     let id_trains = req.query.id_trains;
     let telemetryData = req.query.telemetryData
-    let err = null;
+    let err = null;//JWT
     if (err) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
@@ -49,13 +49,14 @@ function insertTelemetry(req, res) {
 function sendMessage(req, res) {
     console.log("Sending sendMessage request");
     let id_trains = req.query.id_trains;
+    let wagon_Number = req.query.wagonNumber;
     let msg = req.query.msg;
-    let err = null;
+    let err = null;//JWT
     if (err) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
     } else {
-        model.sendMessage(id_trains, msg, (err, result) => {
+        model.sendMessage(id_trains, wagon_Number, msg, (err, result) => {
             if (err) {
                 logger.error(err);
                 res.status(500).send({ success: false, message: 'Internal server error' });
@@ -76,7 +77,7 @@ function sendEmergency(req, res) {
     let timestamp = req.query.timestamp;
     let msg = req.query.timestamp;
     let sender = -1;
-    let err = null;
+    let err = null;//JWT
     if (err) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
@@ -96,9 +97,36 @@ function sendEmergency(req, res) {
     }
 }
 
+function modifyDesired(req, res) {
+    console.log("Sending modifyDesired request");
+    let id_trains = req.query.id_trains;
+    let operation = req.query.operation;
+    let wagon_Number = req.query.wagonNumber;
+    let valueToChange = req.query.valueToChange;
+    let err = null; //JWT
+    if (err) {
+        logger.error(err);
+        res.status(401).send({ success: false, message: 'Invalid authentication token' });
+    } else {
+        model.modifyDesired(operation, valueToChange, wagon_Number, id_trains, (err, result) => {
+            if (err) {
+                logger.error(err);
+                res.status(500).send({ success: false, message: 'Internal server error' });
+            } else if (result.affectedRows == 0) {
+                console.log("Data not found ");
+                res.status(404).send({ success: false, message: 'Data not found' });
+            } else {
+                console.log("modifyDesired request successful");
+                res.status(200).send({ success: true, message: 'Desired sent' });
+            }
+        });
+    }
+}
+
 module.exports = {
     getTelemetry,
     insertTelemetry,
     sendMessage,
-    sendEmergency
+    sendEmergency,
+    modifyDesired
 };

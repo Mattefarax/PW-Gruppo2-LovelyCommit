@@ -6,5 +6,5 @@ route.get('/gtelemetry', controller.getTelemetry);
 route.post('/uptelemetry', controller.insertTelemetry);
 route.post('/upmessage', controller.sendMessage);
 route.post('/upemergency', controller.sendEmergency);
-
+route.post('/moddesired', controller.modifyDesired);
 module.exports = route;
