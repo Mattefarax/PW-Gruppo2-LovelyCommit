@@ -2,6 +2,7 @@
 
 var config = require('./config.json');
 var Registry = require('azure-iothub').Registry;
+let model = require('./MongoDb/mongoClient');
 
 var connectionString = config.connectionString;
 var registry = Registry.fromConnectionString(connectionString);
@@ -41,16 +42,56 @@ var getTwinData = function () {
                 LastFront_Door = twin.properties.reported.Telemetry.Front_Door
                 LastHumidity = twin.properties.reported.Telemetry.Humidity
                 console.log(twin.properties.reported.Telemetry)
+                var jsonToInsert = {
+                    "id_telemetry": 1,
+                    "id_train": "IT12345",
+                    "wagon_number": LastidVagone,
+                    "current_temperature": LastCurrent_Temperature,
+                    "desired_temperature": LastDesired_Temperature,
+                    "humidity": LastHumidity,
+                    "emergency_status": LastEmergency_Status,
+                    "back_door": LastBack_Door,
+                    "front_door": LastFront_Door,
+                    "toilette_status": LastToilette,
+                    "timestamp": LastTimestampTel
+                }
             }
+            model.insertTelemetry(jsonToInsert, (err, result) => {
+                if (err) {
+                    logger.error(err);
+                } else if (result.affectedRows == 0) {
+                    console.log("Data not found ");
+                } else {
+                    console.log("insertTelemetry request successful");
+                }
+            });
+
         }
+
         if (twin.properties.reported.Emergency.CreationDate != LastTimestampAlert) {
             if (err) {
                 console.error('Could not query twins: ' + err.constructor.name + ': ' + err.message);
             } else {
-            LastIdSender = twin.properties.reported.Emergency.IdSender
-            LastTimestampAlert = twin.properties.reported.Emergency.CreationDate
-            LastEmergencyMessage = twin.properties.reported.Emergency.EmergencyMessage
-            console.log(twin.properties.reported.Emergency);
+                LastIdSender = twin.properties.reported.Emergency.IdSender
+                LastTimestampAlert = twin.properties.reported.Emergency.CreationDate
+                LastEmergencyMessage = twin.properties.reported.Emergency.EmergencyMessage
+                console.log(twin.properties.reported.Emergency);
+                var jsonToInsert = {
+                    "id_alarm": 1,
+                    "id_train": "IT12345",
+                    "sender": LastIdSender,
+                    "LastIdSender": LastEmergencyMessage,
+                    "creation_date": creation_date
+                }
+                model.insertEmergency(jsonToInsert, (err, result) => {
+                    if (err) {
+                        logger.error(err);
+                    } else if (result.affectedRows == 0) {
+                        console.log("Data not found ");
+                    } else {
+                        console.log("insertEmergency request successful");
+                    }
+                });
             }
         }
     });

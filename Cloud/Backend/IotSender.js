@@ -7,8 +7,6 @@ var connectionString = config.connectionString;
 var registry = Registry.fromConnectionString(connectionString);
 var deviceToReboot = 'Rpi-train1';
 
-var isAlert = 0;
-
 var NewTimestamp = new Date();
 var NewIdVagone = 0;
 var NewDesired_Temperature = "0,00";
@@ -16,24 +14,23 @@ var NewToggle_Back_Door ="\u0000";
 var NewToggle_Front_Door ="\u0000";
 var NewText_Message ="";
 
-function sendDesired() {
+function sendDesired(isAlert, jsonModifiers) {
 
     registry.getTwin(deviceToReboot, function(err, twin){
         if (err) {
             console.error(err.constructor.name + ': ' + err.message);
         } else {
-            NewTimestamp = new Date();
             if (isAlert==0){
             var patch = {
                 properties: {
                     desired: {
                         Comands: {
-                            idVagone: NewIdVagone,
-                            Desired_Temperature: NewDesired_Temperature,
-                            Timestamp: NewTimestamp,
-                            Toggle_Back_Door: NewToggle_Back_Door,
-                            Toggle_Front_Door: NewToggle_Front_Door,
-                            Text_Message: NewText_Message
+                            idVagone: jsonModifiers.idVagone,
+                            Desired_Temperature: jsonModifiers.Desired_Temperature,
+                            Timestamp: jsonModifiers.Timestamp,
+                            Toggle_Back_Door: jsonModifiers.Toggle_Back_Door,
+                            Toggle_Front_Door: jsonModifiers.Toggle_Front_Door,
+                            Text_Message: jsonModifiers.Text_Message
                         }
                 }
                 }
@@ -43,13 +40,12 @@ function sendDesired() {
                 properties: {
                     desired: {
                         Comands: {
-                            Timestamp: NewTimestamp,
-                            EmergencyMessage: NewText_Message
+                            Timestamp: jsonModifiers.creation_date,
+                            EmergencyMessage: jsonModifiers.emergency_message
                         }
                     }
                     }
-                };x
-
+                };
         }
             twin.update(patch, function(err) {
             if (err) {
@@ -61,5 +57,3 @@ function sendDesired() {
         }
     });
 }
-
-setInterval(sendDesired, 2000);
