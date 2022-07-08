@@ -29,10 +29,9 @@
 //Counters
 char count = 0;
 int countMilli = 0;
+int countMenuMilli = 0;
 char lastReceiveSec = 0;
 
-char *CharToLCD (char num);
-unsigned long Power(char num, char times);
 void PIC_Init(void);
 
 void main(void) 
@@ -41,13 +40,16 @@ void main(void)
     PIC_Init();
     UART_Init(baudRate);
     LCD_Init();
-    MENU_Home();
+    MENU_Splash();
     SENSORS_Init();
+    __delay_ms(2000);
+    MENU_Home();
     
     while(1)
     {
         //LCD_Write(CharToLCD(),3);
         MENU_Check();
+        
         if ( (countMilli/1000 >= payloadAddrRetryMs) && (addr == 0)) //Retry handshake until address is acquired
         {
             PROTO_HandshakeReq();
@@ -62,9 +64,11 @@ void main(void)
         {
             PROTO_QueueChecker();
         }
-        if ((countMilli/1000 >= sensorCheckSec))
-        {
+        if ( countMenuMilli/1000 >= sensorCheckSec) //Retry handshake until address is acquired
+        {            
             SENSORS_Get();
+            MENU_SendValue(temp_1_2, temp_2_2, setTemp_1_2, setTemp_2_2, protoStatusByte);
+            countMenuMilli = 0;
         }
     }
     return;
@@ -88,26 +92,6 @@ void PIC_Init()
     TRISB |= 0X07; //Buttons
 }
 
-char *CharToLCD (char num)
-{
-    char res[3];
-    for (char i = 0; i < 2; i++) 
-    {
-        res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
-    }
-    res[2] = "\0";
-    return res;
-}
-
-unsigned long Power(char num, char times) {
-    unsigned long result = 1;
-    for (char i = 0; i < times; i++) {
-        result *= num;
-    }
-    return result;
-}
-
-
 void __interrupt() ISR()
 {
     if(PIR1 & 0x20) //UART Receive
@@ -126,6 +110,7 @@ void __interrupt() ISR()
         count++;
         if (count >= 5) //Each ms
         {
+            countMenuMilli++;
             countMilli++;
             count = 0;
             if (lastReceiveSec <= payloadValidationTimeout) 

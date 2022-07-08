@@ -12,11 +12,22 @@
 #define LCD_TMP_2 0x9A
 #define LCD_TT_1 0xA2
 #define LCD_TT_2 0xA5
+#define LCD_TT_CFG 0xD0
 
 
 //Buttons
 char memBtnUp = 1;
 char memBtnEnter = 1;
+
+/*
+char menuVoiceRTV[] = "";
+char menuVoiceCFG[] = "";
+char menuVoiceBACK[] = "";
+char menuVoiceTT[] = "";
+char menuVoiceRT_1[] = "";
+char menuVoiceRT_2[] = "";
+char menuSplash[] = "";
+*/
 
 char menuVoiceRTV[] = "Real Time value";
 char menuVoiceCFG[] = "Configuration";
@@ -24,12 +35,16 @@ char menuVoiceBACK[] = "Back";
 char menuVoiceTT[] = "Target Temp";
 char menuVoiceRT_1[] = "EM:    BD:    FD:";
 char menuVoiceRT_2[] = "CT:  ,     TT:  ,";
-char actualPage = 0;
+char menuSplash[] = " Lovely Commit SRL";
 
+char actualPage = 0;
 char posCursore = 0;
+
 void MENU_Page(char[], char[]);
 void MENU_Toggle(void);
 void MENU_Home(void);
 void MENU_Check(void);
+void MENU_SendValue(char, char, char, char, char);
+void MENU_Splash(void);
 
 #endif

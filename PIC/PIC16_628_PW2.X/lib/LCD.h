@@ -33,5 +33,7 @@
 void LCD_Init(void);
 void LCD_Send(char, char);
 void LCD_Write(char[]);
+char *CharToLCD (char num);
+unsigned long Power(char num, char times);
 
 #endif

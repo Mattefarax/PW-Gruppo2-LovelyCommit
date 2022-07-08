@@ -48,7 +48,7 @@ char *CharToLCD (char num)
     {
         res[2 - i - 1] = (num / Power(10, i)) % 10 + '0';
     }
-    res[2] = "\0";
+    res[2] = '\0';
     return res;
 }
 

@@ -12,17 +12,20 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <link href="interface_style.css" rel="stylesheet" type="text/css">
 </head>
-
 <header>
-    <nav class=" p-1 ps-4 text-white fixed-top " id="navbar">
+    <nav class=" p-2 pb-3 ps-4 text-white fixed-top " id="navbar">
         <div class="container-fluid">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="login.html" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                    <img src="Trenitalia_Logo.png" alt="" width="300" height="auto" class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
+                    <img src="Trenitalia_Logo_White.png" alt="" width="300" height="auto"
+                        class="d-inline-block align-text-top">&nbsp; &nbsp; &nbsp; &nbsp; Train Sensors Platform
                 </a>
 
                 <ul class="ps-4 nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -37,30 +40,28 @@
     </nav>
 </header>
 
-<body>
 
-    <div class="w-100 h-100 mt-5" id="parent">
+<body>
+    <div class="mw-100 mt-5" id="parent">
     </div>
     <script>
         // Getting the values from the login page 
-        //const localIdUser = localStorage.getItem('idUser');
-        //const localDataSuper = localStorage.getItem('superuser');
         //const enabledPage = localStorage.getItem('enabledPage');
         //const auth = localStorage.getItem('auth');
-        //const idUser = parseInt(localIdUser);
+        //const trainIdString = localStorage.getItem('trainIdString');
 
-        const localDataSuper = 1;
+
         const auth = 1;
         const enabledPage = 1;
-        var idUser = 1;
+        const trainIdString = "IT12345,IT23456";
+        const trainNamesArray = trainIdString.split(',');
 
-        console.log("User number " + idUser);
         console.log("Is the page enabled? " + enabledPage);
 
         // This is to check if you already logged in, else it will deactivate the page and links
         function CheckAuth() {
             var linkSur = document.getElementById('linkSur')
-            if (auth == 1 && localDataSuper == 1) {
+            if (auth == 1) {
                 linkSur.href = "interface.html";
                 $("#bigWrapper").show();
                 $("#steps").show();
@@ -78,137 +79,493 @@
         var serverHost;
         // Getting the values from the config file 
         function loadConfig() {
-            $.getJSON('config.json', function(data) {
+            $.getJSON('config.json', function (data) {
                 serverPort = data.serverPort;
                 serverHost = data.serverHost;
                 console.log("Config loaded")
 
-                getGraphCtrlInfo();
+                getTrainsData();
             });
         }
         loadConfig();
 
         // Initializing var used inside the various get
         var array1 = {};
-        var array2 = {};
-        var array3 = {};
-        var array4 = {};
+        var array2 = [];
 
-        var facNames = [];
-        var MedieOld = [];
-        var MedieNew = [];
-        var marksCanvas = [];
-        var arrayCat = ["1", "2", "3", "4", "5", "6"];
-        var dynamicalCanvas = [];
-        var dynamicalDiv = [];
+        var dynamicalTrainId = [];
+        var dynamicalTrainDiv = [];
         var dynamicalButtonSur = [];
         var dynamicalButtonRec = [];
         var dynamicalFacName = [];
         var dynamicalName = [];
-        var marksData = [];
-        var radarChart = [];
-        var rowDiv = [];
-        var usersIdArray = [];
-        var facIdArray = [];
+        var rowDiv1 = [];
+        var rowDiv2 = [];
+        var rowDiv3 = [];
+        var dynamicalTrainWagonDiv = [];
+        var dynamicalWagonName = [];
+        var dynamicalWagonDetails = [];
+        var dynamicalWagonFocus = [];
+        var dynButtonFront_Door = [];
+        var dynButtonBack_Door = [];
+        var dynButtonSendEmergency = [];
+        var dynButtonSendMsg = [];
+        var dynButtonSetTemp = [];
+        var dynamicalTrainImg = [];
 
+        var dynMessageForm = [];
+        var dynEmergencyForm = [];
+        var dynMessageDiv = [];
+        var dynEmergencyDiv = [];
+        var dynMessageBtn = [];
+        var dynEmergencyBtn = [];
+
+
+        var wagonNumberArray = [];
+        var toiletteArray = [];
+        var frontDoorArray = [];
+        var backDoorArray = [];
+        var emergencyArray = [];
+        var currTemperatureArray = [];
+        var desTemperatureArray = [];
+        var humidityArray = [];
+        var timestampArray = [];
+        var rowDiv1Name = "";
+        var rowDiv2Name = "";
+        var rowDiv3Name = "";
 
 
 
         function createVariables() {
             let rowNum = 0;
-            for (var i = 0; i < 6; ++i) {
+            var dynamicalTrainImg = document.createElement('img');
+            dynamicalTrainImg.setAttribute('src', "trainHead.png");
+            dynamicalTrainImg.setAttribute('class', "mx-auto");
+            dynamicalTrainImg.setAttribute('height', "50%");
+            dynamicalTrainImg.setAttribute('width', "auto");
+
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                let divTrainName = "TrainDiv" + i;
+                let divTrainId = "TrainId" + i;
+                let btnFront = "btnfront" + i;
+                let btnBack = "btnback" + i;
+                let btnTemp = "btntemp" + i;
+                let btnMsg = "btnmsg" + i;
+                let divTrainWagonName = "TrainWagonDiv" + i;
+                let btnEmergency = "btnemergency" + i;
+                let wagonDetails = "wagondetails" + i;
+                let paragraph = "para" + i;
+                let divWagonName = "wagonDiv" + i;
+                let msgFormName = "msgForm" + i;
+                let emergFormName = "emergForm" + i;
+                let msgDivName = "msgDiv" + i;
+                let emergDivName = "emergDiv" + i;
+                let msgBtnName = "msgBtn" + i;
+                let emergBtnName = "emergBtn" + i;
+
+                dynamicalTrainDiv[i] = document.createElement('div');
+                dynamicalTrainImg = document.createElement('img');
+                dynamicalTrainId[i] = document.createElement('h3');
+                dynamicalTrainWagonDiv[i] = document.createElement('div');
+                dynamicalWagonName[i] = document.createElement('h3');
+                dynamicalWagonDetails[i] = document.createElement('p');
+                dynamicalWagonFocus[i] = document.createElement('div');
+                dynButtonFront_Door[i] = document.createElement('button');
+                dynButtonBack_Door[i] = document.createElement('button');
+                dynButtonSetTemp[i] = document.createElement('button');
+                dynButtonSendMsg[i] = document.createElement('button');
+                dynButtonSendEmergency[i] = document.createElement('button');
+                dynMessageForm[i] = document.createElement('textarea');
+                dynEmergencyForm[i] = document.createElement('textarea');
+                dynMessageDiv[i] = document.createElement('div');
+                dynEmergencyDiv[i] = document.createElement('div');
+                dynMessageBtn[i] = document.createElement('button');
+                dynEmergencyBtn[i] = document.createElement('button');
+
                 if (i % 4 == 0) {
                     rowNum = i / 4;
-                    rowDiv[rowNum] = document.createElement('div');
-                    rowDiv[rowNum].setAttribute('class', "row border");
+                    rowDiv1Name = "rowdivone" + rowNum
+                    rowDiv2Name = "rowdivtwo" + rowNum
+                    rowDiv3Name = "rowdivthree" + rowNum
+
+                    rowDiv1[rowNum] = document.createElement('div');
+                    rowDiv1[rowNum].setAttribute('class', "row mx-auto");
+                    rowDiv1[rowNum].setAttribute('id', rowDiv1Name);
+
+                    rowDiv2[rowNum] = document.createElement('div');
+                    rowDiv2[rowNum].setAttribute('class', "row mx-auto");
+                    rowDiv2[rowNum].setAttribute('id', rowDiv2Name);
+
+                    rowDiv3[rowNum] = document.createElement('div');
+                    rowDiv3[rowNum].setAttribute('class', "row mx-auto");
+                    rowDiv3[rowNum].setAttribute('id', rowDiv3Name);
                 }
-                let canvasName = "marksChart" + i;
-                let divFacName = "titleDiv" + i;
-                let FacName = "factoryName" + i;
-                let divName = "chartjs-radar" + i;
-                let btnSurName = "btnsur" + i;
-                let btnRecName = "btnrec" + i;
-                marksCanvas[i] = document.getElementById(canvasName);
-
-                dynamicalDiv[i] = document.createElement('div');
-                dynamicalDiv[i].setAttribute('class', "col-md-6 col-xl-3 border-start");
-                dynamicalDiv[i].setAttribute('id', divName);
-                //dynamicalDiv[i].setAttribute('onclick', "showDetailButton(this.id);");
-
-                dynamicalButtonSur[i] = document.createElement('button');
-                dynamicalButtonSur[i].setAttribute('type', "button");
-                dynamicalButtonSur[i].setAttribute('id', btnSurName);
-                dynamicalButtonSur[i].setAttribute('onclick', "redirect(this.id)");
-
-                dynamicalButtonRec[i] = document.createElement('button');
-                dynamicalButtonRec[i].setAttribute('type', "button");
-                dynamicalButtonRec[i].setAttribute('id', btnRecName);
-                dynamicalButtonRec[i].setAttribute('onclick', "recapRedirect(this.id)");
-
-
-                dynamicalCanvas[i] = document.createElement('canvas');
-                dynamicalCanvas[i].setAttribute('id', canvasName);
-                dynamicalCanvas[i].setAttribute('width', 300);
-                dynamicalCanvas[i].setAttribute('height', 200);
-
-                dynamicalFacName[i] = document.createElement('div');
-                dynamicalFacName[i].setAttribute('id', divFacName);
-                dynamicalFacName[i].setAttribute('class', "border text-center");
-
-                dynamicalName[i] = document.createElement('h2');
-                dynamicalName[i].setAttribute('id', FacName);
-                dynamicalName[i].setAttribute('class', "text-center");
-
+               
 
                 // Append the newborn column div to the div row
-                rowDiv[rowNum].appendChild(dynamicalDiv[i]);
 
-                // Append the newborn canvas to the newborn div
-                dynamicalDiv[i].appendChild(dynamicalCanvas[i]);
+                dynamicalTrainDiv[i].appendChild(dynamicalTrainId[i]);
+                dynamicalTrainDiv[i].appendChild(dynamicalTrainImg);
 
-                //Append the invisible buttons
-                dynamicalDiv[i].appendChild(dynamicalButtonSur[i]);
-                dynamicalDiv[i].appendChild(dynamicalButtonRec[i]);
+                dynamicalTrainWagonDiv[i].appendChild(dynamicalWagonName[i]);
+                dynamicalTrainWagonDiv[i].appendChild(dynamicalWagonDetails[i]);
 
+                dynMessageDiv[i].appendChild(dynMessageForm[i]);
+                dynMessageDiv[i].appendChild(dynMessageBtn[i]);
+                dynEmergencyDiv[i].appendChild(dynEmergencyForm[i]);
+                dynEmergencyDiv[i].appendChild(dynEmergencyBtn[i]);
 
-                // Append the newborn h2 title to the newborn title div
-                dynamicalFacName[i].appendChild(dynamicalName[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonFront_Door[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonBack_Door[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSendMsg[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSetTemp[i]);
+                dynamicalWagonFocus[i].appendChild(dynButtonSendEmergency[i]);
 
-                // Append the newborn title div to the newborn div
-                dynamicalDiv[i].appendChild(dynamicalFacName[i]);
+                rowDiv1[rowNum].appendChild(dynamicalTrainDiv[i]);
+                rowDiv2[rowNum].appendChild(dynamicalTrainWagonDiv[i]);
+                rowDiv3[rowNum].appendChild(dynamicalWagonFocus[i]);
 
                 // Append the new whole div as child to the parent tag
-                document.getElementById("parent").appendChild(rowDiv[rowNum]);
+                document.getElementById("parent").appendChild(rowDiv1[rowNum]);
+                document.getElementById("parent").appendChild(rowDiv2[rowNum]);
+                document.getElementById("parent").appendChild(rowDiv3[rowNum]);
+                document.getElementById("parent").appendChild(dynMessageDiv[i]);
+                document.getElementById("parent").appendChild(dynEmergencyDiv[i]);
 
 
-                document.getElementById(FacName).textContent = facNames[i]; // Set the title of the graph
+                dynamicalTrainDiv[i].setAttribute('class', "col-md-6 col-xl-3 mx-auto");
+                dynamicalTrainDiv[i].setAttribute('id', divTrainName);
+                dynamicalTrainDiv[i].setAttribute('width', "50%");
+                dynamicalTrainDiv[i].setAttribute('onclick', "ShowTrainWagonDiv(this.id);");
 
-                document.getElementById(btnSurName).textContent = 'Retake Survey';
-                document.getElementById(btnRecName).textContent = 'Review Survey';
+                dynamicalTrainImg.setAttribute('src', "trainHead.png");
+                dynamicalTrainImg.setAttribute('height', "50%");
+                dynamicalTrainImg.setAttribute('width', "auto");
+
+                dynamicalTrainId[i].setAttribute('class', "text-center");
+                dynamicalTrainId[i].setAttribute('id', divTrainId);
+
+
+
+                dynamicalTrainWagonDiv[i].setAttribute('class', "col-md-6 col-xl-3 mx-auto ");
+                dynamicalTrainWagonDiv[i].setAttribute('id', divTrainWagonName);
+                dynamicalTrainWagonDiv[i].setAttribute('onclick', "ShowWagonDiv(this.id);");
+
+                dynamicalWagonName[i].setAttribute('class', "col-md-6 col-xl-3");
+                dynamicalWagonName[i].setAttribute('id', "wagon" + i);
+
+
+                dynamicalWagonDetails[i].setAttribute('class', "text-center");
+                dynamicalWagonDetails[i].setAttribute('id', paragraph);
+
+                //DYNAMICAL ALARM
+
+
+
+                dynamicalWagonFocus[i].setAttribute('class', "col-md-6 col-xl-3  mx-auto ");
+                dynamicalWagonFocus[i].setAttribute('id', divWagonName);
+
+                dynButtonFront_Door[i].setAttribute('type', "button");
+                dynButtonFront_Door[i].setAttribute('id', btnFront);
+                dynButtonFront_Door[i].setAttribute('class', "d-inline-flex");
+                dynButtonFront_Door[i].setAttribute('height', "200%");
+                dynButtonFront_Door[i].setAttribute('onclick', "postTelemetryAjax(this.id)");
+
+                dynButtonBack_Door[i].setAttribute('type', "button");
+                dynButtonBack_Door[i].setAttribute('id', btnBack);
+                dynButtonBack_Door[i].setAttribute('class', "d-inline-flex");
+                dynButtonBack_Door[i].setAttribute('onclick', "postTelemetryAjax(this.id)");
+
+                dynButtonSetTemp[i].setAttribute('type', "button");
+                dynButtonSetTemp[i].setAttribute('id', btnTemp);
+                dynButtonSetTemp[i].setAttribute('class', "d-inline-flex");
+                dynButtonSetTemp[i].setAttribute('onclick', "postTelemetryAjax(this.id)");
+
+                dynButtonSendMsg[i].setAttribute('type', "button");
+                dynButtonSendMsg[i].setAttribute('id', btnMsg);
+                dynButtonSendMsg[i].setAttribute('class', "d-inline-flex");
+                dynButtonSendMsg[i].setAttribute('onclick', "ShowMsgLastDiv()");
+
+                dynButtonSendEmergency[i].setAttribute('type', "button");
+                dynButtonSendEmergency[i].setAttribute('id', btnEmergency);
+                dynButtonSendEmergency[i].setAttribute('class', "d-inline-flex");
+                dynButtonSendEmergency[i].setAttribute('onclick', "postEmergencyAjax(this.id)");
+
+                dynMessageForm[i].setAttribute('id', msgFormName);
+                dynMessageForm[i].setAttribute('class', "form-control");
+                dynMessageForm[i].setAttribute('aria-label', "Write the message");
+
+                dynEmergencyForm[i].setAttribute('id', emergFormName);
+                dynEmergencyForm[i].setAttribute('class', "form-control");
+                dynEmergencyForm[i].setAttribute('aria-label', "Write the emergency message");
+
+                dynMessageDiv[i].setAttribute('id', msgDivName);
+                dynMessageDiv[i].setAttribute('class', "position-absolute top-50 start-50 translate-middle");
+
+                dynEmergencyDiv[i].setAttribute('id', emergDivName);
+                dynEmergencyDiv[i].setAttribute('class', "position-absolute top-50 start-50 translate-middle");
+
+                dynMessageBtn[i].setAttribute('id', msgBtnName);
+                dynMessageBtn[i].setAttribute('type', "button");
+                dynMessageBtn[i].setAttribute('class', "d-inline-flex");
+                dynMessageBtn[i].setAttribute('onclick', "postEmergencyAjax(this.id)");
+
+                dynEmergencyBtn[i].setAttribute('id', emergBtnName);
+                dynEmergencyBtn[i].setAttribute('type', "button");
+                dynEmergencyBtn[i].setAttribute('class', "d-inline-flex");
+                dynEmergencyBtn[i].setAttribute('onclick', "ShowEmeLastDiv(this.id)");
+
+
+
+                document.getElementById(divTrainId).innerHTML = trainNamesArray[i];
+                document.getElementById(btnEmergency).innerHTML = "Send emergency message";
+               // $(btnMsg).html("Send message");
+                //$(btnTemp).html("Set new temperature");
+                //$(btnBack).html("Toggle back door");
+                //$(btnFront).html("Toggle front door");
+
+                document.getElementById(btnMsg).innerHTML = "Send message";
+                document.getElementById(btnTemp).innerHTML = "Set new temperature";
+                document.getElementById(btnBack).innerHTML = "Toggle back door";
+                document.getElementById(btnFront).innerHTML = "Toggle front door";
+                document.getElementById("wagon" + i).innerHTML = "wagon" + i;
+                document.getElementById(paragraph).innerHTML = array2[i];
+               
+
+                document.getElementById(rowDiv2Name).style.display = "none";  //hide
+                document.getElementById(rowDiv3Name).style.display = "none";  //hide 
+                document.getElementById(msgDivName).style.display = "none";  //hide
+                document.getElementById(emergDivName).style.display = "none";  //hide
+
+               
+            }
+        }
+        function ShowTrainWagonDiv(idDiv) {
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                let msgDivName = "msgDiv" + i;
+                let emergDivName = "emergDiv" + i;
+                document.getElementById(msgDivName).style.display = "none";  //hide
+                document.getElementById(emergDivName).style.display = "none";  //hide
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    let rowDiv1Name = "rowdivone" + rowNum
+                    let rowDiv2Name = "rowdivtwo" + rowNum
+                    let rowDiv3Name = "rowdivthree" + rowNum
+                    document.getElementById(rowDiv1Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv3Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv2Name).style.display = "";  //unhide
+                }
             }
         }
 
+        function ShowWagonDiv(idDiv) {
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                let msgDivName = "msgDiv" + i;
+                let emergDivName = "emergDiv" + i;
+                document.getElementById(msgDivName).style.display = "none";  //hide
+                document.getElementById(emergDivName).style.display = "none";  //hide
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    let rowDiv1Name = "rowdivone" + rowNum
+                    let rowDiv2Name = "rowdivtwo" + rowNum
+                    let rowDiv3Name = "rowdivthree" + rowNum
+                    document.getElementById(rowDiv1Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv2Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv3Name).style.display = "";  //unhide
+                }
+            }
+        }
 
+        function ShowTrainDiv(idDiv) {
+            let msgDivName = "msgDiv" + i;
+            let emergDivName = "emergDiv" + i;
+            document.getElementById(msgDivName).style.display = "none";  //hide
+            document.getElementById(emergDivName).style.display = "none";  //hide
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    let rowDiv1Name = "rowdivone" + rowNum
+                    let rowDiv2Name = "rowdivtwo" + rowNum
+                    let rowDiv3Name = "rowdivthree" + rowNum
+                    document.getElementById(rowDiv3Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv2Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv1Name).style.display = "";  //unhide
+                }
+            }
+        }
+
+        function ShowEmeLastDiv(idDiv) {
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                let msgDivName = "msgDiv" + i;
+                let emergDivName = "emergDiv" + i;
+                document.getElementById(msgDivName).style.display = "none";  //hide
+                document.getElementById(emergDivName).style.display = "";  //unhide
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    let rowDiv1Name = "rowdivone" + rowNum
+                    let rowDiv2Name = "rowdivtwo" + rowNum
+                    let rowDiv3Name = "rowdivthree" + rowNum
+                    document.getElementById(rowDiv3Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv2Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv1Name).style.display = "none";  //hide
+                }
+            }
+        }
+
+        function ShowMsgLastDiv(idDiv) {
+            for (var i = 0; i < trainNamesArray.length; ++i) {
+                let msgDivName = "msgDiv" + i;
+                let emergDivName = "emergDiv" + i;
+                document.getElementById(msgDivName).style.display = "";  //unhide
+                document.getElementById(emergDivName).style.display = "none";  //hide
+                if (i % 4 == 0) {
+                    rowNum = i / 4;
+                    let rowDiv1Name = "rowdivone" + rowNum
+                    let rowDiv2Name = "rowdivtwo" + rowNum
+                    let rowDiv3Name = "rowdivthree" + rowNum
+                    document.getElementById(rowDiv3Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv2Name).style.display = "none";  //hide
+                    document.getElementById(rowDiv1Name).style.display = "none";  //hide
+                }
+            }
+        }
+
+        async function sortGetInfo(array1) {
+            console.log(array1[0])
+            objNumber = Object.keys(array1).length;
+            for (var i = 0; i < objNumber; ++i) {
+                console.log("i " +i);
+                console.log(array1[i][0].wagon_number);
+                wagonNumberArray.push(array1[i][0].wagon_number);
+                const myTimeout1 = setTimeout(populate(i),30000);  
+            }
+            const myTimeout2 = setTimeout(createVariables(), 150000);
+        }
+       
+        function populate(i){
+            console.log(typeof(wagonNumberArray[i]))
+                for (var j = 0; j < wagonNumberArray[i]; ++j) {
+                    console.log("j" +j)
+                    if (i == 0) {
+                        cursor = j
+                    } else {
+                        cursor = j + wagonNumberArray[(i - 1)]
+                    }
+                    if (array1[cursor][0].toilette_status == 0) { toiletteArray.push("Libera") }
+                    else { toiletteArray.push("Occupata") }
+                    if (array1[cursor][0].front_door == 0) { frontDoorArray.push("Aperta") }
+                    else { frontDoorArray.push("Chiusa") }
+                    if (array1[cursor][0].back_door == 0) { backDoorArray.push("Aperta") }
+                    else { backDoorArray.push("Chiusa") }
+                    if (array1[cursor][0].emergency_status == 1) { emergencyArray.push("Si") }
+                    else { emergencyArray.push("No") }
+                    currTemperatureArray.push(array1[cursor][0].current_temperature);
+                    desTemperatureArray.push(array1[cursor][0].desired_temperature);
+                    humidityArray.push(array1[cursor][0].humidity);
+                    timestampArray.push(array1[cursor][0].timestamp);
+
+                   let mockup =( 'Temperatura corrente: ' + currTemperatureArray[cursor]+ ' C <br> Temperatura settata: ' + desTemperatureArray[cursor]+ ' C <br> Umidità: ' + humidityArray[cursor]+ ' % <br> In stato di emergenza ? ' + emergencyArray[cursor]+ ' <br> Porta davanti: ' + frontDoorArray[cursor]+ '  <br> Porta dietro: ' + backDoorArray[cursor]+ '  <br> Stato Toilette: ' + toiletteArray[cursor]+ '  <br> Ultimo aggiornamento dati: ' + timestampArray[cursor]);
+                   //let mockup =  ('Temperatura corrente: ' + currTemperatureArray[cursor]) 
+                   console.log(mockup);
+                    array2.push(mockup);
+                    console.log(array2[cursor]);
+                }
+        }
         function redirect(btnId) {
             arrayIndex = btnId.replace('btnsur', '');
             console.log("arrayIndex " + arrayIndex)
 
-            idUser = usersIdArray[arrayIndex].toString();
-            console.log("idUser  " + idUser.length)
             localStorage.clear();
-            localStorage.setItem('superuser', localDataSuper);
-            localStorage.setItem('idUser', idUser);
             localStorage.setItem('disabledPage', enabledPage);
             localStorage.setItem('auth', auth);
         }
 
-        function recapRedirect(btnRecName) {
-            localStorage.clear();
-            localStorage.setItem('superuser', localDataSuper);
-            localStorage.setItem('idUser', idUser);
-            localStorage.setItem('disabledPage', enabledPage);
-            localStorage.setItem('auth', auth);
-            window.location.href = "recap.html";
+        function getTrainsData() {
+            $.ajax({
+                method: "GET",
+                url: "http://" + serverHost + ":" + serverPort + "/interface/gtelemetry",
+                data: {
+                    trainIds: trainIdString,
+                }
+            }).done(function (res) {
+                console.log("get request results");
+                console.log(res);
+                array1 = res.telemetries.obj2; // Returns the number of wagons per train
+                console.log(array1);
+                sortGetInfo(array1); // Setting up local variables with db values
+            }).fail(function () {
+                alert("Sorry. Server unavailable. getTrainsData");
+            });
+        }
+
+        function postTelemetryAjax(train_id) {
+            serializedDataFactGrade = createTelemetryObjToPost();
+            // Fire off the request to update the factory data
+            $.ajax({
+                method: "POST",
+                url: "http://" + serverHost + ":" + serverPort + "/interface/uptelemetry", 
+                data: {
+                    id_trains: trainNamesArray[i],
+                    telemetryData: serializedDataFactGrade
+                }
+                // Callback handler that will be called on success
+            }).done(function (res) {
+                console.log(res);
+                console.log(postSuccess);
+                console.log("telemetry Post success");
+                // Callback handler that will be called on failure
+            }).catch(function (res, textStatus, errorThrown) {
+                console.error("The following error occurred: " + textStatus, errorThrown);
+            });
+        }
+
+        function postMessageAjax(train_id) {
+            i= 1;
+            let msgDivName = "msgDiv" + i;
+            let msg = document.getElementById(msgDivName).value;
+            // Fire off the request to update the factory data
+            $.ajax({
+                method: "POST",
+                url: "http://" + serverHost + ":" + serverPort + "/interface/upmessage", 
+                data: {
+                    id_trains:trainNamesArray[i],
+                    wagon_Number: i,
+                    msg: msg                }
+                // Callback handler that will be called on success
+            }).done(function (res) {
+                console.log(res);
+                console.log(postSuccess);
+                console.log("Message Post success");
+                // Callback handler that will be called on failure
+            }).catch(function (res, textStatus, errorThrown) {
+                console.error("The following error occurred: " + textStatus, errorThrown);
+            });
+        }
+
+        function postEmergencyAjax() {
+            i= 1;
+            let emergDivName = "emergDiv" + i;
+            let emerMsg = document.getElementById(emergDivName).value;
+            var NewTimestamp = new Date();
+
+            // Fire off the request to update the factory data
+            $.ajax({
+                method: "POST",
+                url: "http://" + serverHost + ":" + serverPort + "/interface/upemergency", 
+                data: {
+                    id_trains:trainNamesArray[i],
+                    timestamp:NewTimestamp,
+                    msg: emerMsg
+                }
+                // Callback handler that will be called on success
+            }).done(function (res) {
+                console.log(res);
+                console.log(postSuccess);
+                console.log("emergency Post success");
+                // Callback handler that will be called on failure
+            }).catch(function (res, textStatus, errorThrown) {
+                console.error("The following error occurred: " + textStatus, errorThrown);
+            });
         }
     </script>
 </body>
