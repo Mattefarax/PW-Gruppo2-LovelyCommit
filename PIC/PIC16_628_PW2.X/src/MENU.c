@@ -138,11 +138,11 @@ void MENU_SendValue(char temp_1_2, char temp_2_2, char setTemp_1_2, char setTemp
     if(actualPage == 1)
     {
         LCD_Send(LCD_EM ,1);
-        LCD_Write(CharToLCD(protoStatusByte & 0x08 >> 3));
+        LCD_Write(CharToLCD((protoStatusByte & 0x08) >> 3));
         LCD_Send(LCD_BD ,1);                
-        LCD_Write(CharToLCD(protoStatusByte & 0x04 >> 2));
+        LCD_Write(CharToLCD((protoStatusByte & 0x04) >> 2));
         LCD_Send(LCD_FD ,1);
-        LCD_Write(CharToLCD(protoStatusByte & 0x02 >> 1));
+        LCD_Write(CharToLCD((protoStatusByte & 0x02) >> 1));
         LCD_Send(LCD_TMP_1 ,1);
         LCD_Write(CharToLCD(temp_1_2));
         LCD_Send(LCD_TMP_2 ,1);
