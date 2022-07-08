@@ -1,5 +1,3 @@
-from ast import Bytes
-from doctest import ELLIPSIS_MARKER
 import json
 from logging import raiseExceptions
 from multiprocessing.reduction import send_handle
@@ -21,6 +19,7 @@ countId=1
 
 oldEmergencyTimestamp=""
 oldTelemetryTimestamp=""
+oldEmergencyResetTimestamp=""
 zero=0
 handshakeCode=1
 broadcastCode=255
@@ -28,17 +27,24 @@ s=serial.Serial(port='COM8',baudrate=115200, bytesize=8, parity='N', stopbits=1)
 
 ncycles=10
 myId=0
-emergencycode=19
+payloademergencycode=19
+resetEmergencycode=16
+targetTemperaturecode=17
+doorscode=18
 sendAddress=[]
 
 def send_to_pic(message):
     global oldEmergencyTimestamp
     global oldTelemetryTimestamp
+    global oldEmergencyResetTimestamp
     emergencyList=[]
-    comandsList=[]
+    commandTempList=[]
+    commandDoorList=[]
+    resetList=[]
+    statusEmergencyList=[]
     emergencyList.append(broadcastCode.to_bytes(1,'big'))
     emergencyList.append(myId.to_bytes(1,'big'))
-    emergencyList.append(emergencycode.to_bytes(1,'big'))
+    emergencyList.append(payloademergencycode.to_bytes(1,'big'))
     emergencyTimestamp=""
     telemetryTimestamp=""
     print(type(message))
@@ -46,31 +52,98 @@ def send_to_pic(message):
     print(type(strMessage))
     print("Messaggio da mandare al Pic",strMessage)
     jsonMessage=json.loads(strMessage)
+    idPic=jsonMessage["Comands"]["IdVagone"]
     emergencyTimestamp=jsonMessage["Emergency_Set"]["Timestamp"]
+    emergencyResetTimestamp=jsonMessage["Emergency_Reset"]["Timestamp"]
     telemetryTimestamp=jsonMessage["Comands"]["Timestamp"]
     if(emergencyTimestamp!=oldEmergencyTimestamp):
         print("funzione di invio delle emergenze")
-        strCiccia=jsonMessage['Emergency_Set']['EmergencyMessage']
-        print('cicciata',strCiccia)
-        print(type(strCiccia))
-        if(len(strCiccia)<20):
-            ciccia=20-len(strCiccia)
-            while(ciccia):
-                strCiccia=strCiccia+' '
-                ciccia-=1
+        strDecode=jsonMessage['Emergency_Set']['EmergencyMessage']
+        print('cicciata',strDecode)
+        print(type(strDecode))
+        if(len(strDecode)<20):
+            lenMessage=20-len(strDecode)
+            while(lenMessage):
+                strDecode=strDecode+' '
+                lenMessage-=1
 
-        print('nuova stringa',strCiccia)
-        for i in strCiccia:
+        print('nuova stringa',strDecode)
+        for i in strDecode:
             emergencyList.append(bytes(i,'utf-8'))
         print(emergencyList)
         CRCList=crc_calc1(emergencyList)
         emergencyList.append(int(CRCList[1],16).to_bytes(1,'big'))
-        emergencyList.append(int(CRCList[0],16).to_bytes(1,'big'))                   
+        emergencyList.append(int(CRCList[0],16).to_bytes(1,'big'))
+        sleep(0.06)                   
         sendMessage(emergencyList)
-        print("Ciccia ultrapasticciata",emergencyList)
+
+        statusEmergencyList.append(int(idPic).to_bytes(1,'big'))
+        statusEmergencyList.append(myId.to_bytes(1,'big'))
+        statusEmergencyList.append(resetEmergencycode.to_bytes(1,'big'))
+        statusEmergencyList.append(b'\x01')
+        CRCSetList=[]
+        CRCSetList=crc_calc1(statusEmergencyList)
+        statusEmergencyList.append(int(CRCSetList[1],16).to_bytes(1,'big'))
+        statusEmergencyList.append(int(CRCSetList[0],16).to_bytes(1,'big')) 
+
+        sleep(0.06)                   
+        sendMessage(statusEmergencyList)
+
         oldEmergencyTimestamp=emergencyTimestamp
+    
+    if(emergencyResetTimestamp!=oldEmergencyResetTimestamp):
+        print("funzione invio reset emergenze")
+        resetList.append(int(idPic).to_bytes(1,'big'))
+        resetList.append(myId.to_bytes(1,'big'))
+        resetList.append(resetEmergencycode.to_bytes(1,'big'))
+        resetList.append(b'\x02')
+        CRCResetList=crc_calc1(resetList)
+        resetList.append(int(CRCResetList[1],16).to_bytes(1,'big'))
+        resetList.append(int(CRCResetList[0],16).to_bytes(1,'big')) 
+        sleep(0.06)  
+        sendMessage(resetList)
+
+        oldEmergencyResetTimestamp=emergencyResetTimestamp
+
+
     if(telemetryTimestamp!=oldTelemetryTimestamp):
         print("funzione di invio delle telemetrie")
+        commandDoorList.append((int(idPic).to_bytes(1,'big')))
+        commandTempList.append((int(idPic).to_bytes(1,'big')))
+        commandTempList.append(myId.to_bytes(1,'big'))
+        commandDoorList.append(myId.to_bytes(1,'big'))
+        commandTempList.append(targetTemperaturecode.to_bytes(1,'big'))
+        commandDoorList.append(doorscode.to_bytes(1,'big'))
+        targetTemp=jsonMessage["Comands"]["Desired_Temperature"]
+        backDoor=jsonMessage["Comands"]["Toggle_Back_Door"]
+        frontDoor=jsonMessage["Comands"]["Toggle_Front_Door"]
+        targetTempSplit=str(targetTemp).split(',')
+        targetTempInt=int(targetTempSplit[0])
+        targetTempDec=int(targetTempSplit[1])
+        commandTempList.append(targetTempInt.to_bytes(1,'big'))
+        commandTempList.append(targetTempDec.to_bytes(1,'big'))
+        commandTempCRC=crc_calc1(commandTempList)
+        commandTempList.append(int(commandTempCRC[1],16).to_bytes(1,'big'))
+        commandTempList.append(int(commandTempCRC[0],16).to_bytes(1,'big'))
+        print("messaggio desired temperature", commandTempList)
+        sleep(0.06)
+        sendMessage(commandTempList)
+
+        if(backDoor==True and frontDoor==True):
+            commandDoorList.append(b'\x03')
+        if(backDoor==True and frontDoor==False):
+            commandDoorList.append(b'\x02')
+        if(backDoor==False and frontDoor==True):
+            commandDoorList.append(b'\x01')
+        commandDoorCRC=crc_calc1(commandDoorList)
+        commandDoorList.append(int(commandDoorCRC[1],16).to_bytes(1,'big'))
+        commandDoorList.append(int(commandDoorCRC[0],16).to_bytes(1,'big'))
+
+        print("messaggio di invio delle porte",commandDoorList)
+        sleep(0.06)
+        sendMessage(commandDoorList)
+
+
         oldTelemetryTimestamp=telemetryTimestamp
 
 
@@ -82,7 +155,9 @@ def create_Json(list):
 
     return jsonfile
 def sendMessage(list):
+    #sleep(2)
     for x in list:
+        
         s.write(x)
 def getIdPic(list):
     return int(list[3])
@@ -185,8 +260,6 @@ def serial_to_amqp():
         break
 
 def amqp_to_serial():
-    # connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-    # channel = connection.channel()
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
 
