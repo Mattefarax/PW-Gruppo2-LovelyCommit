@@ -1,6 +1,7 @@
 const { MongoClient } = require("mongodb");
 var config = require('./config.json');
 let model = require('../IotSender');
+const fs = require('fs');
 
 
 const uri = config.connectionString;
@@ -80,15 +81,16 @@ async function getTelemetry(id_trains, callback) {
     const alarms = database.collection('Alarms');
 
     var alarmIndexNumber = 0;
-    //var availableTrains = ["IT12345", "IT23456"];
-    var availableTrains = id_trains
-    var trainInfos = []
-    var trainAlarms = []
+    var availableTrains = ["IT12345", "IT23456"];
+    //var availableTrains = id_trains;
+    var trainInfos = [];
+    var trainAlarms = [];
     for (let i = 0; i < availableTrains.length; i++) {
       trainInfos[i] = await telemetries.find({
         id_train: availableTrains[i]
       }).limit(1).toArray();
-      if ((trainInfos[i].emergency_status).toString() == "1") {
+      var alarm = trainInfos[i][0].emergency_status;
+      if (alarm == 1) {
         trainAlarms[alarmIndexNumber] = await alarms.find({
           id_train: availableTrains[i]
         }).limit(1).toArray();
@@ -102,11 +104,11 @@ async function getTelemetry(id_trains, callback) {
       obj1,
       obj2
     };
-    return callback(null, trainTelAlarm);
+    return [null, trainTelAlarm];
   } catch (err) {
     console.log("An error has occurred");
     console.log(err)
-    return callback(err);
+    return (err);
   } finally {
     // Ensures that the client will close when you finish/error
     await client.close();
@@ -315,7 +317,7 @@ async function modifyDesired(operation, valueToChange, wagon_Number, id_trains, 
     return callback(err);
   }
 }
-
+getTelemetry(1);
 module.exports = {
   getLoginConfirmation,
   getTelemetry,

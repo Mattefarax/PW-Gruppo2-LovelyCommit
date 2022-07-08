@@ -1,5 +1,5 @@
 ﻿let model = require('../MongoDb/mongoClient');
-let logger = require('../../settings/utilities/logger');
+let logger = require('./settings/utilities/logger');
 
 function getLoginConfirmation(req, res) {
     let mail = req.body.mail;

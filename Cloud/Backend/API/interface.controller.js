@@ -1,25 +1,30 @@
 ﻿let model = require('../MongoDb/mongoClient');
-let logger = require('../../settings/utilities/logger');
+let logger = require('./settings/utilities/logger');
 
-function getTelemetry(req, res) {
+async function getTelemetry(req, res) {
     console.log("Sending getTelemetry request");
-    let id_trains = req.query.id_trains;
+    let id_trains = req.query.trainIds;
     let err = null;//JWT
     if (err) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
     } else {
-        model.getTelemetry(id_trains, (err, result) => {
+       // model.getTelemetry(id_trains, (err, result) => {
+        var arrayResult = await model.getTelemetry(id_trains) 
+        console.log(arrayResult);
+        err = arrayResult[0];
+        result = arrayResult[1];
+        console.log(result.obj2)
             if (err) {
                 logger.error(err);
+                console.log(1);
                 res.status(500).send({ success: false, message: 'Internal server error' });
-            } else if (!result.length) {
-                res.status(404).send({ success: false, message: 'Not found' });
+            
             } else {
                 console.log("getTelemetry request successful");
                 res.status(200).send({ success: true, telemetries: result });
             }
-        });
+       // });
     }
 }
 
@@ -32,7 +37,11 @@ function insertTelemetry(req, res) {
         logger.error(err);
         res.status(401).send({ success: false, message: 'Invalid authentication token' });
     } else {
-        model.insertTelemetry(id_trains, telemetryData, (err, result) => {
+        //model.insertTelemetry(id_trains, telemetryData, (err, result) => {
+        var arrayResult = model.insertTelemetry(id_trains, telemetryData) 
+        err = arrayResult(0);
+        res = arrayResult(0)
+        
             if (err) {
                 logger.error(err);
                 res.status(500).send({ success: false, message: 'Internal server error' });
@@ -43,7 +52,7 @@ function insertTelemetry(req, res) {
                 console.log("insertTelemetry request successful");
                 res.status(200).send({ success: true, message: 'Telemetries Updated YAY!' });
             }
-        });
+       // });
     }
 }
 function sendMessage(req, res) {

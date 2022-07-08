@@ -1,5 +1,5 @@
 ﻿let express = require('express');
-let controller = require('../interface.controller');
+let controller = require('./interface.controller');
 let route = express.Router();
 route.get('/gtelemetry', controller.getTelemetry);
 

@@ -33,7 +33,6 @@
                 <ul class="ps-4 nav col-12 col-lg-auto  me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li><a href="login.html" class="pe-2 nav-link px-2 text-secondary">Login Page</a></li>
                     <li><a href="interface.html" id="linkSur" class="pe-2 nav-link px-2 text-white">Interface</a></li>
-                    <li><a href="options.html" id="linkRec" class="nav-link px-2 text-white">Options</a></li>
                 </ul>
 
             </div>
@@ -85,10 +84,8 @@
             var linkRec = document.getElementById('linkRec')
             if (auth == 1) {
                 linkSur.href = "interface.html";
-                linkRec.href = "options.html";
             } else {
                 linkSur.href = "javascript:";
-                linkRec.href = "javascript:";
             }
         }
         CheckAuth();
