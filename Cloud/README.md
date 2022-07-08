@@ -36,6 +36,13 @@ Cyclically performs a get request to keep updated the page with the current valu
  
 Compiling a form the user can send commands to the train through a post request issued to the back end that carries the operation, through the IoT Hub to the gateway.
 
+Here you can see some screens of the web app:
+
+|![Log-In page](../Images/WhatsApp%20Image%202022-07-08%20at%2015.11.19.jpeg)|
+|-|
+|![Home page](../Images/WhatsApp%20Image%202022-07-08%20at%2015.07.25%20(1).jpeg)|
+|![Detail page](../Images/WhatsApp%20Image%202022-07-08%20at%2015.07.25.jpeg)|
+
 ## **DB**
 
 We decided to use a non-relational documental database for its flexibility: it will allow future implementation of different data.
