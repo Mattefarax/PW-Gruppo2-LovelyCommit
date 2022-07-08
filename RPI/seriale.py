@@ -74,7 +74,8 @@ def send_to_pic(message):
         CRCList=crc_calc1(emergencyList)
         emergencyList.append(int(CRCList[1],16).to_bytes(1,'big'))
         emergencyList.append(int(CRCList[0],16).to_bytes(1,'big'))
-        sleep(0.06)                   
+    
+        sleep(0.5)                   
         sendMessage(emergencyList)
 
         statusEmergencyList.append(int(idPic).to_bytes(1,'big'))
@@ -85,8 +86,8 @@ def send_to_pic(message):
         CRCSetList=crc_calc1(statusEmergencyList)
         statusEmergencyList.append(int(CRCSetList[1],16).to_bytes(1,'big'))
         statusEmergencyList.append(int(CRCSetList[0],16).to_bytes(1,'big')) 
-
-        sleep(0.06)                   
+        print("Messaggio dello stato delle emergenze", statusEmergencyList)
+        sleep(0.12)                  
         sendMessage(statusEmergencyList)
 
         oldEmergencyTimestamp=emergencyTimestamp
@@ -100,7 +101,7 @@ def send_to_pic(message):
         CRCResetList=crc_calc1(resetList)
         resetList.append(int(CRCResetList[1],16).to_bytes(1,'big'))
         resetList.append(int(CRCResetList[0],16).to_bytes(1,'big')) 
-        sleep(0.06)  
+        sleep(0.12)  
         sendMessage(resetList)
 
         oldEmergencyResetTimestamp=emergencyResetTimestamp
@@ -126,7 +127,7 @@ def send_to_pic(message):
         commandTempList.append(int(commandTempCRC[1],16).to_bytes(1,'big'))
         commandTempList.append(int(commandTempCRC[0],16).to_bytes(1,'big'))
         print("messaggio desired temperature", commandTempList)
-        sleep(0.06)
+        sleep(0.12) 
         sendMessage(commandTempList)
 
         if(backDoor==True and frontDoor==True):
@@ -140,7 +141,7 @@ def send_to_pic(message):
         commandDoorList.append(int(commandDoorCRC[0],16).to_bytes(1,'big'))
 
         print("messaggio di invio delle porte",commandDoorList)
-        sleep(0.06)
+        sleep(0.12) 
         sendMessage(commandDoorList)
 
 
