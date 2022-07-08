@@ -87,7 +87,7 @@ height="auto" />
 </td>
 
 <td align="center" valign="center">
-<img src="./Images/StructureSchema.jpg " 
+<img src="./Images/StructureSchemaIoT.jpg " 
 alt="Structure Schema"
 width="400" 
 height="auto" />

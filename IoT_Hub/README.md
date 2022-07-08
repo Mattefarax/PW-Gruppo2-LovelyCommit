@@ -25,7 +25,7 @@ Every train will have it's own twin configuration where you'll find wevry teleme
 ``` JSON
 {
     "deviceId": "rpiPW2Ciccia",
-    "etag": "AAAAAAAAAAc=",
+    "etag": "AAAAAAAAAEE=",
     "deviceEtag": "ODc1MTI5NzIx",
     "status": "enabled",
     "statusUpdateTime": "0001-01-01T00:00:00Z",
@@ -38,79 +38,90 @@ Every train will have it's own twin configuration where you'll find wevry teleme
         "secondaryThumbprint": null
     },
     "modelId": "",
-    "version": 28,
+    "version": 328,
     "properties": {
         "desired": {
             "Comands": {
                 "IdVagone": 1,
-                "Desired_Temperature": "28,5",
-                "Timestamp": "2022-06-29 15:16:28.042769",
+                "Desired_Temperature": "31,5",
+                "Timestamp": "2022-07-06 15:41:58.042769",
                 "Toggle_Back_Door": false,
                 "Toggle_Front_Door": false,
                 "Text_Message": "Prova 1 2 3 Prova"
             },
             "Emergency_Set": {
-                "Timestamp": "2022-06-29 15:16:28.042769",
-                "EmergencyMessage": "Generic Error"
+                "Timestamp": "2022-07-06 15:48:28.042769",
+                "EmergencyMessage": "Ciccio pasticcio"
+            },
+            "Emergency_Reset": {
+                "Timestamp": "2022-06-29 15:16:28.042769"
             },
             "$metadata": {
-                "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                "$lastUpdatedVersion": 7,
+                "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                "$lastUpdatedVersion": 65,
                 "Comands": {
-                    "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                    "$lastUpdatedVersion": 7,
+                    "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                    "$lastUpdatedVersion": 65,
                     "IdVagone": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "Desired_Temperature": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "Timestamp": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "Toggle_Back_Door": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "Toggle_Front_Door": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "Text_Message": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     }
                 },
                 "Emergency_Set": {
-                    "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                    "$lastUpdatedVersion": 7,
+                    "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                    "$lastUpdatedVersion": 65,
                     "Timestamp": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     },
                     "EmergencyMessage": {
-                        "$lastUpdated": "2022-07-01T08:51:16.9517118Z",
-                        "$lastUpdatedVersion": 7
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
+                    }
+                },
+                "Emergency_Reset": {
+                    "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                    "$lastUpdatedVersion": 65,
+                    "Timestamp": {
+                        "$lastUpdated": "2022-07-08T07:45:16.4684061Z",
+                        "$lastUpdatedVersion": 65
                     }
                 }
             },
-            "$version": 7
+            "$version": 65
         },
         "reported": {
             "temperature": "null",
             "Telemetry": {
                 "idVagone": 1,
-                "Current_Temperature": "27,3",
-                "Toilette": "\u0001",
-                "Timestamp": "2022-07-01 10:51:08.085507",
-                "Desired_Temperature": "28,5",
+                "Current_Temperature": "132,44",
+                "Toilette": "\u0000",
+                "Timestamp": "2022-07-06 17:20:36.559501",
+                "Desired_Temperature": "0,0",
                 "Emergency_Status": "\u0000",
                 "Back_Door": "\u0000",
-                "Front_Door": "\u0001",
-                "Humidity": "30,5"
+                "Front_Door": "\u0000",
+                "Humidity": "84,93"
             },
             "Emergency": {
                 "IdSender": 1,
@@ -118,38 +129,38 @@ Every train will have it's own twin configuration where you'll find wevry teleme
                 "EmergencyMessage": "Generic Error"
             },
             "$metadata": {
-                "$lastUpdated": "2022-07-01T08:51:06.5992083Z",
+                "$lastUpdated": "2022-07-06T15:20:36.4556256Z",
                 "temperature": {
                     "$lastUpdated": "2022-07-01T07:54:51.0925442Z"
                 },
                 "Telemetry": {
-                    "$lastUpdated": "2022-07-01T08:51:06.5992083Z",
+                    "$lastUpdated": "2022-07-06T15:20:36.4556256Z",
                     "idVagone": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Current_Temperature": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Toilette": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Timestamp": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Desired_Temperature": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Emergency_Status": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Back_Door": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Front_Door": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     },
                     "Humidity": {
-                        "$lastUpdated": "2022-07-01T08:51:06.5992083Z"
+                        "$lastUpdated": "2022-07-06T15:20:36.4556256Z"
                     }
                 },
                 "Emergency": {
@@ -165,7 +176,7 @@ Every train will have it's own twin configuration where you'll find wevry teleme
                     }
                 }
             },
-            "$version": 21
+            "$version": 263
         }
     },
     "capabilities": {
