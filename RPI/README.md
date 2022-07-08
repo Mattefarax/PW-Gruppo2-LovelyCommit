@@ -107,6 +107,9 @@ We used also a queue called "commandQueue" where travels a JSON formatted like t
     "Emergency_Set": {
         "Timestamp": "2022-06-29 15:16:28.042769",
         "EmergencyMessage": "Generic Error"
+    },
+    "Emergency_Reset": {
+        "Timestamp": "2022-06-29 15:16:28.042769"
     }
 }
 ```
